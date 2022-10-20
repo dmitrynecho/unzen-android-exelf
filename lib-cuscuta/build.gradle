@@ -1,13 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
+    namespace 'unzen.exelf.cuscuta'
     compileSdkVersion exelfCompileSdkVersion
     ndkVersion exelfNdkVersion
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion exelfTargetSdkVersion
-        versionCode 1
-        versionName "1.0"
         externalNativeBuild {
             ndkBuild {
                 targets 'jnifoo', 'exebar', 'exebaz'
@@ -17,14 +16,12 @@ android {
     buildTypes {
         debug {
             jniDebuggable true
-            debuggable = true
             ndk {
                 abiFilters = baseAbis
             }
         }
         release {
             jniDebuggable false
-            debuggable = false
             ndk {
                 abiFilters = baseAbis
             }
@@ -38,18 +35,14 @@ android {
 }
 
 android.libraryVariants.all { variant ->
-    // 1. Android Gradle builder gather solibs in merged_native_libs dir and then
+    // AGP gather solibs from all modules in merged_native_libs dir of app module and then
     // performs stripping on them that places stripped solibs in stripped_native_libs.
     // You can see this by search in task execution log for forementioned dirs and
-    // see that stripping task runs after merge task.
-    // 2. When project contains modules, they responsible for stripping their solibs
-    // on their own. You can search app build dir for solib names and you'll see that
-    // it contains only already stripped versions of solibs from modules that app
-    // depends on. However, strippend solibs from modules are copied in app's
-    // merged_native_libs dir, so app will redurantly run stripping on them second time.
+    // see that stripping task runs after merge task. In AGP 7.3.1, when project contains
+    // modules, stripping performed only once in app module, modules that app depends on
+    // no more perform redurant solib stripping.
     def variantName = variant.name.capitalize()
     def defMergeJniTask = project.tasks["merge${variantName}NativeLibs"]
-    def defStripTask = project.tasks["strip${variantName}DebugSymbols"]
     def intermedDirPath = "$project.buildDir.absolutePath/intermediates"
     // <module>/build/intermediates/ndkBuild/debug/obj/local
     def objDirPath = "$intermedDirPath/ndkBuild/$variant.dirName/obj/local"
@@ -66,13 +59,11 @@ android.libraryVariants.all { variant ->
             include "$abi/exebaz"
         }
         // On debug app builds Android OS installs from APK arbitrary named binaries,
-        // but on release build it ignores everything except files named like SO libs.
+        // but on release build it ignores everything except files named like solibs.
         rename '(.+)', 'lib$1.so'
         includeEmptyDirs = false
     }
-    // Without dependency defMergeJniTask will overwrite our work in mergedDirPath
-    copyExesTask.dependsOn defMergeJniTask
-    defStripTask.dependsOn copyExesTask
+    defMergeJniTask.finalizedBy(copyExesTask)
 }
 
 task cppVersions {

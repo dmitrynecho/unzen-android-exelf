@@ -43,8 +43,8 @@ public class MainActivity extends Activity {
     static private final String BAZ_NAME = "exebaz";
     static public final String BAZ = fullSoName(BAZ_NAME);
     static public final String QUX = "qux.sh";
-    static private Set<String> MIN_EXES = new HashSet<>(Arrays.asList(FOO, BAR, BAZ));
-    static private Set<String> APK_EXES = new HashSet<>(Arrays.asList(FOO, QUX, BAR, BAZ));
+    static private final Set<String> MIN_EXES = new HashSet<>(Arrays.asList(FOO, BAR, BAZ));
+    static private final Set<String> APK_EXES = new HashSet<>(Arrays.asList(FOO, QUX, BAR, BAZ));
 
     static private class Report {
 
