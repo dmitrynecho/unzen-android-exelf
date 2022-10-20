@@ -42,7 +42,6 @@ android.libraryVariants.all { variant ->
     // modules, stripping performed only once in app module, modules that app depends on
     // no more perform redurant solib stripping.
     def variantName = variant.name.capitalize()
-    def defMergeJniTask = project.tasks["merge${variantName}NativeLibs"]
     def intermedDirPath = "$project.buildDir.absolutePath/intermediates"
     // <module>/build/intermediates/ndkBuild/debug/obj/local
     def objDirPath = "$intermedDirPath/ndkBuild/$variant.dirName/obj/local"
@@ -63,7 +62,15 @@ android.libraryVariants.all { variant ->
         rename '(.+)', 'lib$1.so'
         includeEmptyDirs = false
     }
-    defMergeJniTask.finalizedBy(copyExesTask)
+    project.tasks["merge${variantName}NativeLibs"].finalizedBy(copyExesTask)
+    // Have no idea what "copy${variantName}JniLibsProjectOnly" is doing, but assume next
+    // dependency based on intuition to resolve warning "Execution optimizations have been
+    // disabled for task ':lib-cuscuta:copyDebugJniLibsProjectOnly' to ensure correctness
+    // due to the following reasons: Task ':lib-cuscuta:copyDebugJniLibsProjectOnly' uses
+    // this output of task ':lib-cuscuta:unzenCopyExesForStripDebug' without declaring an
+    // explicit or implicit dependency. This can lead to incorrect results being produced,
+    // depending on what order the tasks are executed".
+    project.tasks["copy${variantName}JniLibsProjectOnly"].dependsOn(copyExesTask)
 }
 
 task cppVersions {
