@@ -31,6 +31,20 @@ When Android OS installs debug app builds it process arbitrary named binaries
 from APK, but on release app build it ignores everything except files named
 like solibs, i.e. "libname.so".
 
+\* \* \*
+
+Android 10 W^X policy related links:
+* https://github.com/termux/termux-packages/wiki/Termux-and-Android-10
+* https://developer.android.com/about/versions/10/behavior-changes-10#execute-permission
+* https://issuetracker.google.com/issues/128554619
+* https://developer.android.com/ndk/guides/wrap-script
+
+\* \* \*
+
+Looks like creating hard links without root was disabled since Android 6:
+* https://seandroid-list.tycho.nsa.narkive.com/r5ZNxgkh/selinux-hardlink-brain-damage-in-android-m
+* https://code.google.com/archive/p/android-developer-preview/issues/3150
+
 ### Contacts
 
 dmitryratty@gmail.com
