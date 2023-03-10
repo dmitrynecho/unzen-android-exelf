@@ -247,16 +247,16 @@ public class MainActivity extends Activity {
                 assertTrue(BuildConfig.VERSION_CODE == BuildConfig.BASE_VERSION_CODE + 4);
             }
         }
+        String runBuildTypeWarn = "That's may be due to build performed by"
+                + " Android Studio's \"Run\" action, that makes new build"
+                + " only for ABI of the \"Run\" target's device. May be"
+                + " resolved by \"Build\" -> \"Make Project\".";
         if (!jniReport.versInSync(BuildConfig.BASE_VERSION_CODE)) {
-            warn("Versions between ABIs doesn't match. That's may be due to build performed by"
-                    + " Android Studio's \"Run\" action, that makes new build only for ABI of"
-                    + " the \"Run\" target's device.");
+            warn("Versions between ABIs doesn't match. " + runBuildTypeWarn);
         }
         if (BuildConfig.FLAVOR.equals("fat") && jniReport.abisToVers.size() != 4) {
-            warn("Flavor \"fat\" has only %d ABIs, expected 4 ABIs. That's may be due to"
-                            + " build performed by Android Studio's \"Run\" action, that makes"
-                            + " new build only for ABI of the \"Run\" target's device.",
-                    jniReport.abisToVers.size());
+            warn("Flavor \"fat\" has only %d ABIs, expected 4 ABIs. "
+                            + runBuildTypeWarn, jniReport.abisToVers.size());
         }
     }
 
