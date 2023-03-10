@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Set installLocation="internalOnly" because app SO libs will be without X permission
-    if installed on external storage. -->
+<!-- Set installLocation="internalOnly" because app SO libs will be without
+X permission if installed on external storage. -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:installLocation="internalOnly">
