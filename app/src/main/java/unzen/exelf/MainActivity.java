@@ -28,6 +28,8 @@ import static unzen.exelf.Utils.getExeOutput;
 import static unzen.exelf.Utils.parseVerFromFile;
 import static unzen.exelf.Utils.parseVerFromOutput;
 
+import androidx.annotation.NonNull;
+
 /**
  * Android 10 W^X policy:
  *  https://issuetracker.google.com/issues/128554619
@@ -77,7 +79,7 @@ public class MainActivity extends Activity {
             return Utils.shortenAbisNames(result.toString());
         }
 
-        @Override
+        @Override @NonNull
         public String toString() {
             return header() + "\n" + body();
         }
@@ -265,7 +267,7 @@ public class MainActivity extends Activity {
         header.add(format("Java v%s, Cpp v%d", BuildConfig.VERSION_NAME, BuildConfig.BASE_VERSION_CODE));
         header.add("\n" + jniReport.toString());
         if (exeReport != null) {
-            header.add("\n" + exeReport.toString());
+            header.add("\n" + exeReport);
         }
         if (!messages.isEmpty()) {
             header.add("\n");

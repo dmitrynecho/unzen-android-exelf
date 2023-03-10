@@ -57,7 +57,7 @@ public class FileUtils {
         return file.exists();
     }
 
-    public static boolean existsNoFollowLinks(File file) throws IOException {
+    public static boolean existsNoFollowLinks(File file) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return Files.exists(file.toPath(), LinkOption.NOFOLLOW_LINKS);
         }
@@ -65,7 +65,7 @@ public class FileUtils {
         if (res) {
             return true;
         }
-        return fileListedInDir(file.getParentFile(), file);
+        return fileListedInDir(Objects.requireNonNull(file.getParentFile()), file);
     }
 
     static public boolean fileListedInDir(File dir, File file) {

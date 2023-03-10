@@ -155,6 +155,7 @@ assemble.finalizedBy alephCopyApks
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':lib-cuscuta')
+    implementation 'androidx.annotation:annotation:1.6.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test:runner:1.5.2'
