@@ -5,6 +5,9 @@ alongside with standard JNI shared libraries and package those executables
 into APK. Supports build of multiple APKs, splitted by ABI, via build
 flavors mechanics. Supports Android 10 with W^X SELinux policy.
 
+* GitLab address: https://gitlab.com/dmitryratty/unzen-android-exelf
+* GitHub address: https://github.com/dmitryratty/unzen-android-exelf
+
 ### Notes
 
 AGP 4.1.2 and AGP 7.3.1 binary stripping details.
