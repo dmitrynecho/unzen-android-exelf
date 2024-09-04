@@ -1,0 +1,76 @@
+def tasksToStrings = new LinkedHashMap<String, String>()
+String genTasksGraphTaskNameAssemble = "alephTasksGraphAssemble"
+String genTasksGraphTaskNameBundle = "alephTasksGraphBundle"
+File reportAssemble = file("$rootDir/docs/tasks-graph-assemble.txt")
+File reportBundle = file("$rootDir/docs/tasks-graph-bundle.txt")
+
+static String taskToString(Task task) {
+    StringBuffer taskInfo = new StringBuffer()
+    taskInfo << task.path
+    def dependsOnList = new LinkedList<String>()
+    task.dependsOn.forEach { dep ->
+        //dependsOnList.add("D: " + dep)
+    }
+    if (!dependsOnList.isEmpty()) {
+        taskInfo << "\n" << dependsOnList.sort().join("\n")
+    }
+    task.inputs.eachWithIndex { it, i ->
+        if (it instanceof File) {
+            taskInfo << "\nI: ${it.absolutePath}"
+        } else {
+            String input = it.toString()
+            if (!input.startsWith("org.gradle.api.internal.tasks.DefaultTaskInputs")) {
+                taskInfo << "\nI: $input"
+            }
+        }
+    }
+    task.outputs.files.eachWithIndex { File file, i ->
+        taskInfo << "\nO: ${file.absolutePath}"
+    }
+    return taskInfo.toString()
+}
+
+afterEvaluate { Project project ->
+    gradle.taskGraph.whenReady { TaskExecutionGraph taskExecutionGraph ->
+        tasksToStrings.clear()
+        File reportFile = null
+        taskExecutionGraph.getAllTasks().each { Task task ->
+            String taskAsString = taskToString(task)
+            tasksToStrings.put(task.path, taskAsString)
+            if (task.name == genTasksGraphTaskNameAssemble) {
+                reportFile = reportAssemble
+            } else if (task.name == genTasksGraphTaskNameBundle) {
+                reportFile = reportBundle
+            }
+        }
+        if (reportFile != null) {
+            if (!reportFile.exists()) {
+                throw new GradleException()
+            }
+            reportFile.text = tasksToStrings.values().join("\n")
+        }
+    }
+}
+
+tasks.register(genTasksGraphTaskNameAssemble) {
+    group = "aleph"
+    dependsOn tasks.named("assemble")
+}
+
+tasks.register(genTasksGraphTaskNameBundle) {
+    group = "aleph"
+    dependsOn tasks.named("bundle")
+}
+
+//noinspection GrDeprecatedAPIUsage TODO: delete.
+gradle.taskGraph.afterTask { Task task ->
+    //noinspection GroovyConstantIfStatement
+    if (true) {
+        //return
+    }
+    String taskAsString = taskToString(task)
+    String expected = tasksToStrings.get(task.path)
+    if (taskAsString != expected) {
+        throw new GradleException(task.path)
+    }
+}

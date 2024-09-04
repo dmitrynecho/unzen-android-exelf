@@ -1,7 +1,6 @@
 package unzen.exelf;
 
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.TextView;
@@ -30,12 +29,6 @@ import static unzen.exelf.Utils.parseVerFromOutput;
 
 import androidx.annotation.NonNull;
 
-/**
- * Android 10 W^X policy:
- *  https://issuetracker.google.com/issues/128554619
- *  https://developer.android.com/ndk/guides/wrap-script
- *  https://github.com/termux/termux-packages/wiki/Termux-and-Android-10
- */
 public class MainActivity extends Activity {
 
     static private final String FOO_NAME = "jnifoo";
@@ -44,9 +37,8 @@ public class MainActivity extends Activity {
     static public final String BAR = fullSoName(BAR_NAME);
     static private final String BAZ_NAME = "exebaz";
     static public final String BAZ = fullSoName(BAZ_NAME);
-    static public final String QUX = "qux.sh";
-    static private final Set<String> MIN_EXES = new HashSet<>(Arrays.asList(FOO, BAR, BAZ));
-    static private final Set<String> APK_EXES = new HashSet<>(Arrays.asList(FOO, QUX, BAR, BAZ));
+    static private final Set<String> APK_EXES
+            = new HashSet<>(Arrays.asList(FOO, BAR, BAZ));
 
     static private class Report {
 
@@ -74,7 +66,9 @@ public class MainActivity extends Activity {
                 if (result.length() > 0) {
                     result.append(", ");
                 }
-                result.append(entry.getKey()).append(" ").append("v").append(entry.getValue());
+                result.append(entry.getKey());
+                result.append(" ").append("v");
+                result.append(entry.getValue());
             }
             return Utils.shortenAbisNames(result.toString());
         }
@@ -84,7 +78,8 @@ public class MainActivity extends Activity {
             return header() + "\n" + body();
         }
 
-        private Report(String name, Map<String, Integer> abisToVers, long size, int verFromOutput) {
+        private Report(String name, Map<String, Integer> abisToVers,
+                long size, int verFromOutput) {
             this.name = name;
             this.abisToVers = abisToVers;
             this.totalSize = size;
@@ -115,7 +110,8 @@ public class MainActivity extends Activity {
         return new Report(FOO, abisToVers, totalSize, parseVerFromOutput(output));
     }
 
-    private int exesVerFromOutput(File exesDir, boolean fullName, boolean setExec) throws IOException {
+    private int exesVerFromOutput(File exesDir, boolean fullName, boolean setExec)
+            throws IOException {
         File barExe = new File(exesDir, fullName ? BAR : BAR_NAME);
         assertTrue(!setExec || barExe.setExecutable(true));
         String barOut = getExeOutput(barExe);
@@ -163,10 +159,8 @@ public class MainActivity extends Activity {
         Map<String, Integer> abisToVers = new HashMap<>();
         long totalSize = 0;
         for (File abiDir : Objects.requireNonNull(apkLibsDir.listFiles())) {
-            Set<String> names = new HashSet<>(Arrays.asList(Objects.requireNonNull(abiDir.list())));
-            if (names.size() == 1 && names.contains(QUX)) {
-                continue;
-            }
+            String[] filesNames = Objects.requireNonNull(abiDir.list());
+            Set<String> names = new HashSet<>(Arrays.asList(filesNames));
             if (!names.contains(BAR) && !names.contains(BAZ)) {
                 error("APK missing ELFs.%n%s", names);
                 return null;
@@ -189,7 +183,8 @@ public class MainActivity extends Activity {
         if (executeFromAppFiles()) {
             for (String abi : Utils.getSupportedAbis()) {
                 if (abisToVers.containsKey(abi)) {
-                    int ver = exesVerFromOutput(new File(apkLibsDir, abi), true, true);
+                    File execDir = new File(apkLibsDir, abi);
+                    int ver = exesVerFromOutput(execDir, true, true);
                     assertTrue(ver == verFromOutput);
                     break;
                 }
@@ -206,6 +201,7 @@ public class MainActivity extends Activity {
         messages.add(m);
     }
 
+    /** @noinspection unused*/
     private void message(String format, Object... args) {
         message(format(format, args));
     }
@@ -222,6 +218,7 @@ public class MainActivity extends Activity {
         errors.add(m);
     }
 
+    /** @noinspection SameParameterValue*/
     private void error(String format, Object... args) {
         error(format(format, args));
     }
@@ -264,7 +261,8 @@ public class MainActivity extends Activity {
 
     private void displayReport(Report jniReport, Report exeReport, TextView textView) {
         ArrayList<String> header = new ArrayList<>();
-        header.add(format("Java v%s, Cpp v%d", BuildConfig.VERSION_NAME, BuildConfig.BASE_VERSION_CODE));
+        header.add(format("Java v%s, Cpp v%d",
+                BuildConfig.VERSION_NAME, BuildConfig.BASE_VERSION_CODE));
         header.add("\n" + jniReport.toString());
         if (exeReport != null) {
             header.add("\n" + exeReport);
@@ -291,19 +289,19 @@ public class MainActivity extends Activity {
         }
     }
 
-    private Set<String> getExpectedInstalledExes() {
-        // https://developer.android.com/ndk/guides/wrap-script
-        if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            return APK_EXES;
+    private boolean isSymlinkInPath(File file) throws IOException {
+        if (FileUtils.isSymlink(file)) {
+            return true;
         }
-        return MIN_EXES;
+        return !file.getAbsolutePath().equals(file.getCanonicalPath());
     }
 
-    private String nativeLibraryDirMessage(File dir, Set<String> elfs) throws IOException {
+    private String nativeLibraryDirMessage(File dir, Set<String> elfs)
+            throws IOException {
         String message = "getApplicationInfo().nativeLibraryDir";
         message += "\n" + elfs.toString();
         message += "\n" + getApplicationInfo().nativeLibraryDir;
-        if (FileUtils.isSymlink(dir) || !dir.getAbsolutePath().equals(dir.getCanonicalPath())) {
+        if (isSymlinkInPath(dir)) {
             message += "\n" + FileUtils.readSymlink(dir);
         }
         return message;
@@ -311,9 +309,10 @@ public class MainActivity extends Activity {
 
     private void nativeLibraryDirReport() throws IOException {
         File dir = new File(getApplicationInfo().nativeLibraryDir);
-        Set<String> elfs = new HashSet<>(Arrays.asList(Objects.requireNonNull(dir.list())));
-        if (elfs.equals(getExpectedInstalledExes())) {
-            if (FileUtils.isSymlink(dir) || !dir.getAbsolutePath().equals(dir.getCanonicalPath())) {
+        String[] fileNames = Objects.requireNonNull(dir.list());
+        Set<String> elfs = new HashSet<>(Arrays.asList(fileNames));
+        if (elfs.equals(APK_EXES)) {
+            if (isSymlinkInPath(dir)) {
                 message(nativeLibraryDirMessage(dir, elfs));
             }
         } else {

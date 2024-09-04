@@ -7,12 +7,12 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
-/.idea/compiler.xml
-/.idea/deploymentTargetDropDown.xml
 .DS_Store
 /build
 /captures
+.externalNativeBuild
 .cxx
+local.properties
 
 Thumbs.db
 .directory

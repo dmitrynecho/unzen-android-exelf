@@ -1,12 +1,14 @@
 apply plugin: 'com.android.application'
 
+apply from: 'build-utils.gradle'
+
 android {
     namespace 'unzen.exelf'
-    compileSdkVersion exelfCompileSdkVersion
     ndkVersion exelfNdkVersion
     defaultConfig {
         applicationId "unzen.exelf"
         minSdkVersion 16
+        compileSdk exelfCompileSdkVersion
         targetSdkVersion exelfTargetSdkVersion
         versionCode baseVersion
         versionName "$baseVersion"
@@ -28,7 +30,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
+    // Warning is inconsistent with current official docs and fixing this
+    // warning creates other errors.
+    // - https://developer.android.com/build/build-variants#product-flavors
+    //noinspection GrDeprecatedAPIUsage
     flavorDimensions "abi"
 
     productFlavors {
@@ -46,6 +51,7 @@ android {
             versionCode 3 + android.defaultConfig.versionCode
             versionName "$versionCode+X32"
             ndk {
+                //noinspection ChromeOsAbiSupport
                 abiFilters "x86"
             }
             ext {
@@ -56,6 +62,7 @@ android {
             versionCode 2 + android.defaultConfig.versionCode
             versionName "$versionCode+A64"
             ndk {
+                //noinspection ChromeOsAbiSupport
                 abiFilters "arm64-v8a"
             }
             ext {
@@ -66,6 +73,7 @@ android {
             versionCode 1 + android.defaultConfig.versionCode
             versionName "$versionCode+A32"
             ndk {
+                //noinspection ChromeOsAbiSupport
                 abiFilters "armeabi-v7a"
             }
             ext {
@@ -76,6 +84,7 @@ android {
             versionCode android.defaultConfig.versionCode
             versionName "$versionCode+FAT"
             ndk {
+                //noinspection ChromeOsAbiSupport
                 abiFilters = baseAbis
             }
             ext {
@@ -83,63 +92,24 @@ android {
             }
         }
     }
+    // Warning is inconsistent with current official docs.
+    // - https://developer.android.com/build/build-variants#filter-variants
+    //noinspection GrDeprecatedAPIUsage
     variantFilter { variant ->
-        def names = variant.flavors*.name
+        ArrayList<String> names = variant.flavors*.name
         if (variant.buildType.name != "release" && !names.contains("fat")) {
             setIgnore(true)
         }
     }
 }
 
-android.applicationVariants.all { variant ->
-    variant.outputs.all { output ->
+android.applicationVariants.configureEach { variant ->
+    variant.outputs.configureEach { output ->
         outputFileName = "unzen-exelf-${variant.versionName}.apk"
     }
 }
 
-gradle.taskGraph.afterTask { task ->
-    // Prints all tasks info, inputs and outputs
-    if (true) {
-        return
-    }
-    // Allows to print only tasks that match some criteria
-    boolean hit = true
-    StringBuffer taskInfo = new StringBuffer()
-    boolean verbose = false
-    if (verbose) {
-        taskInfo << "Unzen task info:"
-        taskInfo << " $task.name, $task.group, $task.description"
-        taskInfo << ", $task.convention.plugins"
-    }
-    task.dependsOn.forEach { dep ->
-        taskInfo << "\nD: " + dep
-    }
-    task.inputs.eachWithIndex { it, i ->
-        if (it instanceof File) {
-            if (it.absolutePath.contains("java_res")) {
-                hit = true
-            }
-            taskInfo << "\nI: ${it.absolutePath}"
-        } else {
-            taskInfo << "\nI: ${it}"
-        }
-    }
-    task.outputs.files.eachWithIndex { it, i ->
-        if (it instanceof File) {
-            if (it.absolutePath.contains("java_res")) {
-                hit = true
-            }
-            taskInfo << "\nO: ${it.absolutePath}"
-        } else {
-            taskInfo << "\nO: ${it}"
-        }
-    }
-    if (hit) {
-        println taskInfo
-    }
-}
-
-task alephCopyApks(type: Copy) {
+tasks.register('alephCopyApks', Copy) {
     group = "aleph"
     from "build/outputs/apk/fat/debug"
     from "build/outputs/apk/fat/release"
@@ -155,8 +125,10 @@ assemble.finalizedBy alephCopyApks
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':lib-cuscuta')
-    implementation 'androidx.annotation:annotation:1.6.0'
+    implementation 'androidx.annotation:annotation:1.8.2'
     testImplementation 'junit:junit:4.13.2'
+    //noinspection GradleDependency - update requires minSdkVersion 19
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    //noinspection GradleDependency - update requires minSdkVersion 19
     androidTestImplementation 'androidx.test:runner:1.5.2'
 }

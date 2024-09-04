@@ -2,7 +2,7 @@
 
 buildscript {
     ext {
-        baseVersion = 1040
+        baseVersion = 1060
         baseAbis = ['armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64']
         exelfTargetSdkVersion = 33
         exelfCompileSdkVersion = 33
@@ -13,7 +13,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:7.4.2'
     }
 }
 
@@ -24,6 +24,6 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }

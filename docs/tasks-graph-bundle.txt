@@ -1,0 +1,851 @@
+:app:preBuild
+:app:preA32ReleaseBuild
+:lib-cuscuta:cppVersions
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/src/main/cpp/global_version.h
+:lib-cuscuta:preBuild
+:lib-cuscuta:preReleaseBuild
+:lib-cuscuta:packageReleaseRenderscript
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/renderscript_headers/release/out
+:app:compileA32ReleaseRenderscript
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/renderscript_lib/a32Release/lib
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/rs/a32/release/obj
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/rs/a32/release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/renderscript_source_output_dir/a32Release/out
+:app:generateA32ReleaseResValues
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/resValues/a32/release
+:lib-cuscuta:compileReleaseRenderscript
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/renderscript_lib/release/lib
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/rs/release/obj
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/res/rs/release
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/renderscript_source_output_dir/release/out
+:lib-cuscuta:generateReleaseResValues
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/res/resValues/release
+:lib-cuscuta:generateReleaseResources
+:lib-cuscuta:packageReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/data_binding_layout_info_type_package/release/out
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/res/pngs/release
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/incremental/release/packageReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/packaged_res/release
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/public_res/release/public.txt
+:app:mapA32ReleaseSourceSetPaths
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/source_set_path_map/a32Release/file-map.txt
+:app:generateA32ReleaseResources
+:app:mergeA32ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_res_blame_folder/a32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/data_binding_layout_info_type_merge/a32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/pngs/a32/release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/a32Release/mergeA32ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_res/a32Release
+:app:createA32ReleaseCompatibleScreenManifests
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/compatible_screen_manifest/a32Release
+:app:extractDeepLinksA32Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/navigation_json/a32Release/navigation.json
+:lib-cuscuta:extractDeepLinksRelease
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/navigation_json/release/navigation.json
+:lib-cuscuta:processReleaseManifest
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/aapt_friendly_merged_manifests/release/aapt
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_manifest/release/AndroidManifest.xml
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/manifest_merge_blame_file/release/manifest-merger-blame-release-report.txt
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/packaged_manifests/release
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/outputs/logs/manifest-merger-release-report.txt
+:app:processA32ReleaseMainManifest
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/manifest_merge_blame_file/a32Release/manifest-merger-blame-a32-release-report.txt
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_manifest/a32Release/AndroidManifest.xml
+O: /home/unzen/code-android/unzen-android-exelf/app/build/outputs/logs/manifest-merger-a32-release-report.txt
+:app:processA32ReleaseManifest
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_manifests/a32Release
+:app:processApplicationManifestA32ReleaseForBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_manifest/a32Release/AndroidManifest.xml
+:lib-cuscuta:compileReleaseLibraryResources
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/compiled_local_resources/release/out
+:app:bundleA32ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/linked_res_for_bundle/a32Release/bundled-res.ap_
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/bundleA32ReleaseResources
+:app:mergeA32ReleaseShaders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_shaders/a32Release/out
+:app:compileA32ReleaseShaders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/shader_assets/a32Release/out
+:app:generateA32ReleaseAssets
+:lib-cuscuta:mergeReleaseShaders
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_shaders/release/out
+:lib-cuscuta:compileReleaseShaders
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/shader_assets/release/out
+:lib-cuscuta:generateReleaseAssets
+:lib-cuscuta:packageReleaseAssets
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/library_assets/release/out
+:app:mergeA32ReleaseAssets
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/assets/a32Release
+:app:processA32ReleaseJavaRes
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/java_res/a32Release/out
+:lib-cuscuta:processReleaseJavaRes
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/java_res/release/out
+:lib-cuscuta:bundleLibResRelease
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/library_java_res/release/res.jar
+:app:mergeA32ReleaseJavaResource
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/a32Release-mergeJavaRes/zip-cache
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_java_res/a32Release/base.jar
+:app:checkA32ReleaseDuplicateClasses
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/duplicate_classes_check/a32Release
+:lib-cuscuta:compileReleaseAidl
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/aidl_parcelable/release/out
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/aidl_source_output_dir/release/out
+:lib-cuscuta:generateReleaseBuildConfig
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/source/buildConfig/release
+:lib-cuscuta:parseReleaseLocalResources
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/local_only_symbol_list/release/R-def.txt
+:lib-cuscuta:generateReleaseRFile
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/compile_r_class_jar/release/R.jar
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/symbol_list_with_package_name/release/package-aware-r.txt
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/compile_symbol_list/release/R.txt
+:lib-cuscuta:javaPreCompileRelease
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/annotation_processor_list/release/annotationProcessors.json
+:lib-cuscuta:compileReleaseJavaWithJavac
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/javac/release/classes
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/ap_generated_sources/release/out
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/tmp/compileReleaseJavaWithJavac/previous-compilation-data.bin
+:lib-cuscuta:bundleLibRuntimeToJarRelease
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/runtime_library_classes_jar/release/classes.jar
+:app:compileA32ReleaseAidl
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/aidl_source_output_dir/a32Release/out
+:app:generateA32ReleaseBuildConfig
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/source/buildConfig/a32/release
+:app:javaPreCompileA32Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/annotation_processor_list/a32Release/annotationProcessors.json
+:lib-cuscuta:writeReleaseAarMetadata
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/aar_metadata/release/aar-metadata.properties
+:app:checkA32ReleaseAarMetadata
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/aar_metadata_check/a32Release
+:app:processA32ReleaseManifestForPackage
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/packaged_manifests/a32Release
+:app:processA32ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/a32Release/R.jar
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/processed_res/a32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/symbol_list_with_package_name/a32Release/package-aware-r.txt
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/runtime_symbol_list/a32Release/R.txt
+:lib-cuscuta:bundleLibCompileToJarRelease
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/compile_library_classes_jar/release/classes.jar
+:app:compileA32ReleaseJavaWithJavac
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/javac/a32Release/classes
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/ap_generated_sources/a32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/tmp/compileA32ReleaseJavaWithJavac/previous-compilation-data.bin
+:app:dexBuilderA32Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex_archive_with_artifact_transforms/a32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex_archive/a32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/mixed_scope_dex_archive/a32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/project_dex_archive/a32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/sub_project_dex_archive/a32Release/out
+:app:desugarA32ReleaseFileDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_file_lib_dex_archives/a32Release
+:app:mergeExtDexA32Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex/a32Release/mergeExtDexA32Release
+:app:mergeDexA32Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/dex/a32Release/mergeDexA32Release
+:app:mergeA32ReleaseJniLibFolders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_jni_libs/a32Release/out
+:lib-cuscuta:configureNdkBuildRelease[arm64-v8a]
+:lib-cuscuta:buildNdkBuildRelease[arm64-v8a][exebar,exebaz,etc]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/3u5o6q6i/obj/local/arm64-v8a
+:lib-cuscuta:configureNdkBuildRelease[armeabi-v7a]
+:lib-cuscuta:buildNdkBuildRelease[armeabi-v7a][exebar,exebaz,etc]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/3u5o6q6i/obj/local/armeabi-v7a
+:lib-cuscuta:configureNdkBuildRelease[x86]
+:lib-cuscuta:buildNdkBuildRelease[x86][exebar,exebaz,etc]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/3u5o6q6i/obj/local/x86
+:lib-cuscuta:configureNdkBuildRelease[x86_64]
+:lib-cuscuta:buildNdkBuildRelease[x86_64][exebar,exebaz,etc]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/3u5o6q6i/obj/local/x86_64
+:lib-cuscuta:externalNativeBuildRelease
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/3u5o6q6i
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/ndkBuild/release/obj/local
+:lib-cuscuta:mergeReleaseJniLibFolders
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_jni_libs/release/out
+:lib-cuscuta:mergeReleaseNativeLibs
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/release/out
+:lib-cuscuta:unzenCopyExesForStripRelease
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/release/out/lib
+:lib-cuscuta:copyReleaseJniLibsProjectOnly
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/library_jni/release/jni
+:app:mergeA32ReleaseNativeLibs
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_native_libs/a32Release/out
+:app:stripA32ReleaseDebugSymbols
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/stripped_native_libs/a32Release/out
+:app:writeA32ReleaseAppMetadata
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/app_metadata/a32Release/app-metadata.properties
+:app:buildA32ReleasePreBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/module_bundle/a32Release
+:lib-cuscuta:prepareReleaseArtProfile
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/library_art_profile/release/baseline-prof.txt
+:app:mergeA32ReleaseArtProfile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_art_profile/a32Release/baseline-prof.txt
+:app:compileA32ReleaseArtProfile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/binary_art_profile/a32Release/baseline.prof
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/binary_art_profile_metadata/a32Release/baseline.profm
+:app:collectA32ReleaseDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/metadata_library_dependencies_report/a32Release/dependencies.pb
+:app:configureA32ReleaseDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_dependency_report/a32Release/dependencies.pb
+:app:extractA32ReleaseNativeSymbolTables
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/native_symbol_tables/a32Release/out
+:app:parseA32ReleaseIntegrityConfig
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/app_integrity_config/a32Release/AppIntegrityConfig.pb
+:app:packageA32ReleaseBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/intermediary_bundle/a32Release/intermediary-bundle.aab
+:app:writeA32ReleaseApplicationId
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/metadata_application_id/a32Release/application-id.txt
+:app:analyticsRecordingA32Release
+:app:validateSigningA32Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/validate_signing_config/a32Release
+:app:signA32ReleaseBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/outputs/bundle/a32Release/app-a32-release.aab
+:app:produceA32ReleaseBundleIdeListingFile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_ide_model/a32Release/output-metadata.json
+:app:createA32ReleaseBundleListingFileRedirect
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_ide_redirect_file/a32Release/redirect.txt
+:app:bundleA32Release
+:app:bundleA32
+:app:preA64ReleaseBuild
+:app:compileA64ReleaseRenderscript
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/renderscript_lib/a64Release/lib
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/rs/a64/release/obj
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/rs/a64/release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/renderscript_source_output_dir/a64Release/out
+:app:generateA64ReleaseResValues
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/resValues/a64/release
+:app:mapA64ReleaseSourceSetPaths
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/source_set_path_map/a64Release/file-map.txt
+:app:generateA64ReleaseResources
+:app:mergeA64ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_res_blame_folder/a64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/data_binding_layout_info_type_merge/a64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/pngs/a64/release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/a64Release/mergeA64ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_res/a64Release
+:app:createA64ReleaseCompatibleScreenManifests
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/compatible_screen_manifest/a64Release
+:app:extractDeepLinksA64Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/navigation_json/a64Release/navigation.json
+:app:processA64ReleaseMainManifest
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/manifest_merge_blame_file/a64Release/manifest-merger-blame-a64-release-report.txt
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_manifest/a64Release/AndroidManifest.xml
+O: /home/unzen/code-android/unzen-android-exelf/app/build/outputs/logs/manifest-merger-a64-release-report.txt
+:app:processA64ReleaseManifest
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_manifests/a64Release
+:app:processApplicationManifestA64ReleaseForBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_manifest/a64Release/AndroidManifest.xml
+:app:bundleA64ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/linked_res_for_bundle/a64Release/bundled-res.ap_
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/bundleA64ReleaseResources
+:app:mergeA64ReleaseShaders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_shaders/a64Release/out
+:app:compileA64ReleaseShaders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/shader_assets/a64Release/out
+:app:generateA64ReleaseAssets
+:app:mergeA64ReleaseAssets
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/assets/a64Release
+:app:processA64ReleaseJavaRes
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/java_res/a64Release/out
+:app:mergeA64ReleaseJavaResource
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/a64Release-mergeJavaRes/zip-cache
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_java_res/a64Release/base.jar
+:app:checkA64ReleaseDuplicateClasses
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/duplicate_classes_check/a64Release
+:app:compileA64ReleaseAidl
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/aidl_source_output_dir/a64Release/out
+:app:generateA64ReleaseBuildConfig
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/source/buildConfig/a64/release
+:app:javaPreCompileA64Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/annotation_processor_list/a64Release/annotationProcessors.json
+:app:checkA64ReleaseAarMetadata
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/aar_metadata_check/a64Release
+:app:processA64ReleaseManifestForPackage
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/packaged_manifests/a64Release
+:app:processA64ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/a64Release/R.jar
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/processed_res/a64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/symbol_list_with_package_name/a64Release/package-aware-r.txt
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/runtime_symbol_list/a64Release/R.txt
+:app:compileA64ReleaseJavaWithJavac
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/javac/a64Release/classes
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/ap_generated_sources/a64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/tmp/compileA64ReleaseJavaWithJavac/previous-compilation-data.bin
+:app:dexBuilderA64Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex_archive_with_artifact_transforms/a64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex_archive/a64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/mixed_scope_dex_archive/a64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/project_dex_archive/a64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/sub_project_dex_archive/a64Release/out
+:app:desugarA64ReleaseFileDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_file_lib_dex_archives/a64Release
+:app:mergeExtDexA64Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex/a64Release/mergeExtDexA64Release
+:app:mergeDexA64Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/dex/a64Release/mergeDexA64Release
+:app:mergeA64ReleaseJniLibFolders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_jni_libs/a64Release/out
+:app:mergeA64ReleaseNativeLibs
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_native_libs/a64Release/out
+:app:stripA64ReleaseDebugSymbols
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/stripped_native_libs/a64Release/out
+:app:writeA64ReleaseAppMetadata
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/app_metadata/a64Release/app-metadata.properties
+:app:buildA64ReleasePreBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/module_bundle/a64Release
+:app:mergeA64ReleaseArtProfile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_art_profile/a64Release/baseline-prof.txt
+:app:compileA64ReleaseArtProfile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/binary_art_profile/a64Release/baseline.prof
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/binary_art_profile_metadata/a64Release/baseline.profm
+:app:collectA64ReleaseDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/metadata_library_dependencies_report/a64Release/dependencies.pb
+:app:configureA64ReleaseDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_dependency_report/a64Release/dependencies.pb
+:app:extractA64ReleaseNativeSymbolTables
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/native_symbol_tables/a64Release/out
+:app:parseA64ReleaseIntegrityConfig
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/app_integrity_config/a64Release/AppIntegrityConfig.pb
+:app:packageA64ReleaseBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/intermediary_bundle/a64Release/intermediary-bundle.aab
+:app:writeA64ReleaseApplicationId
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/metadata_application_id/a64Release/application-id.txt
+:app:analyticsRecordingA64Release
+:app:validateSigningA64Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/validate_signing_config/a64Release
+:app:signA64ReleaseBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/outputs/bundle/a64Release/app-a64-release.aab
+:app:produceA64ReleaseBundleIdeListingFile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_ide_model/a64Release/output-metadata.json
+:app:createA64ReleaseBundleListingFileRedirect
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_ide_redirect_file/a64Release/redirect.txt
+:app:bundleA64Release
+:app:bundleA64
+:app:preFatDebugBuild
+:lib-cuscuta:preDebugBuild
+:lib-cuscuta:packageDebugRenderscript
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/renderscript_headers/debug/out
+:app:compileFatDebugRenderscript
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/renderscript_lib/fatDebug/lib
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/rs/fat/debug/obj
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/rs/fat/debug
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/renderscript_source_output_dir/fatDebug/out
+:app:generateFatDebugResValues
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/resValues/fat/debug
+:lib-cuscuta:compileDebugRenderscript
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/renderscript_lib/debug/lib
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/rs/debug/obj
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/res/rs/debug
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/renderscript_source_output_dir/debug/out
+:lib-cuscuta:generateDebugResValues
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/res/resValues/debug
+:lib-cuscuta:generateDebugResources
+:lib-cuscuta:packageDebugResources
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/data_binding_layout_info_type_package/debug/out
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/res/pngs/debug
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/incremental/debug/packageDebugResources
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/packaged_res/debug
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/public_res/debug/public.txt
+:app:mapFatDebugSourceSetPaths
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/source_set_path_map/fatDebug/file-map.txt
+:app:generateFatDebugResources
+:app:mergeFatDebugResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_res_blame_folder/fatDebug/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/data_binding_layout_info_type_merge/fatDebug/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/pngs/fat/debug
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/fatDebug/mergeFatDebugResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_res/fatDebug
+:app:createFatDebugCompatibleScreenManifests
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/compatible_screen_manifest/fatDebug
+:app:extractDeepLinksFatDebug
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/navigation_json/fatDebug/navigation.json
+:lib-cuscuta:extractDeepLinksDebug
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/navigation_json/debug/navigation.json
+:lib-cuscuta:processDebugManifest
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/aapt_friendly_merged_manifests/debug/aapt
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_manifest/debug/AndroidManifest.xml
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/packaged_manifests/debug
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/outputs/logs/manifest-merger-debug-report.txt
+:app:processFatDebugMainManifest
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/manifest_merge_blame_file/fatDebug/manifest-merger-blame-fat-debug-report.txt
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_manifest/fatDebug/AndroidManifest.xml
+O: /home/unzen/code-android/unzen-android-exelf/app/build/outputs/logs/manifest-merger-fat-debug-report.txt
+:app:processFatDebugManifest
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_manifests/fatDebug
+:app:processApplicationManifestFatDebugForBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_manifest/fatDebug/AndroidManifest.xml
+:lib-cuscuta:compileDebugLibraryResources
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/compiled_local_resources/debug/out
+:app:bundleFatDebugResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/linked_res_for_bundle/fatDebug/bundled-res.ap_
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/bundleFatDebugResources
+:app:checkFatDebugDuplicateClasses
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/duplicate_classes_check/fatDebug
+:lib-cuscuta:compileDebugAidl
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/aidl_parcelable/debug/out
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/aidl_source_output_dir/debug/out
+:lib-cuscuta:generateDebugBuildConfig
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/source/buildConfig/debug
+:lib-cuscuta:parseDebugLocalResources
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/local_only_symbol_list/debug/R-def.txt
+:lib-cuscuta:generateDebugRFile
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/compile_r_class_jar/debug/R.jar
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/compile_symbol_list/debug/R.txt
+:lib-cuscuta:javaPreCompileDebug
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/annotation_processor_list/debug/annotationProcessors.json
+:lib-cuscuta:compileDebugJavaWithJavac
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/javac/debug/classes
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/ap_generated_sources/debug/out
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin
+:lib-cuscuta:bundleLibRuntimeToJarDebug
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/runtime_library_classes_jar/debug/classes.jar
+:app:compileFatDebugAidl
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/aidl_source_output_dir/fatDebug/out
+:app:generateFatDebugBuildConfig
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/source/buildConfig/fat/debug
+:app:javaPreCompileFatDebug
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/annotation_processor_list/fatDebug/annotationProcessors.json
+:lib-cuscuta:writeDebugAarMetadata
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/aar_metadata/debug/aar-metadata.properties
+:app:checkFatDebugAarMetadata
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/aar_metadata_check/fatDebug
+:app:processFatDebugManifestForPackage
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/packaged_manifests/fatDebug
+:app:processFatDebugResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/fatDebug/R.jar
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/processed_res/fatDebug/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/symbol_list_with_package_name/fatDebug/package-aware-r.txt
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/runtime_symbol_list/fatDebug/R.txt
+:lib-cuscuta:bundleLibCompileToJarDebug
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/compile_library_classes_jar/debug/classes.jar
+:app:compileFatDebugJavaWithJavac
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/javac/fatDebug/classes
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/ap_generated_sources/fatDebug/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/tmp/compileFatDebugJavaWithJavac/previous-compilation-data.bin
+:app:dexBuilderFatDebug
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex_archive_with_artifact_transforms/fatDebug/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex_archive/fatDebug/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/mixed_scope_dex_archive/fatDebug/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/project_dex_archive/fatDebug/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/sub_project_dex_archive/fatDebug/out
+:app:desugarFatDebugFileDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_file_lib_dex_archives/fatDebug
+:app:mergeExtDexFatDebug
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex/fatDebug/mergeExtDexFatDebug
+:app:mergeDexFatDebug
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/dex/fatDebug/mergeDexFatDebug
+:app:mergeFatDebugShaders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_shaders/fatDebug/out
+:app:compileFatDebugShaders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/shader_assets/fatDebug/out
+:app:generateFatDebugAssets
+:lib-cuscuta:mergeDebugShaders
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_shaders/debug/out
+:lib-cuscuta:compileDebugShaders
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/shader_assets/debug/out
+:lib-cuscuta:generateDebugAssets
+:lib-cuscuta:packageDebugAssets
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/library_assets/debug/out
+:app:mergeFatDebugAssets
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/assets/fatDebug
+:app:processFatDebugJavaRes
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/java_res/fatDebug/out
+:lib-cuscuta:processDebugJavaRes
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/java_res/debug/out
+:lib-cuscuta:bundleLibResDebug
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/library_java_res/debug/res.jar
+:app:mergeFatDebugJavaResource
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/fatDebug-mergeJavaRes/zip-cache
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_java_res/fatDebug/base.jar
+:app:mergeFatDebugJniLibFolders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_jni_libs/fatDebug/out
+:lib-cuscuta:configureNdkBuildDebug[arm64-v8a]
+:lib-cuscuta:buildNdkBuildDebug[arm64-v8a][exebar,exebaz,etc]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/2e5k2p95/obj/local/arm64-v8a
+:lib-cuscuta:configureNdkBuildDebug[armeabi-v7a]
+:lib-cuscuta:buildNdkBuildDebug[armeabi-v7a][exebar,exebaz,etc]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/2e5k2p95/obj/local/armeabi-v7a
+:lib-cuscuta:configureNdkBuildDebug[x86]
+:lib-cuscuta:buildNdkBuildDebug[x86][exebar,exebaz,etc]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/2e5k2p95/obj/local/x86
+:lib-cuscuta:configureNdkBuildDebug[x86_64]
+:lib-cuscuta:buildNdkBuildDebug[x86_64][exebar,exebaz,etc]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/2e5k2p95/obj/local/x86_64
+:lib-cuscuta:externalNativeBuildDebug
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/2e5k2p95
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/ndkBuild/debug/obj/local
+:lib-cuscuta:mergeDebugJniLibFolders
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_jni_libs/debug/out
+:lib-cuscuta:mergeDebugNativeLibs
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/debug/out
+:lib-cuscuta:unzenCopyExesForStripDebug
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/debug/out/lib
+:lib-cuscuta:copyDebugJniLibsProjectOnly
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/library_jni/debug/jni
+:app:mergeFatDebugNativeLibs
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_native_libs/fatDebug/out
+:app:stripFatDebugDebugSymbols
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/stripped_native_libs/fatDebug/out
+:app:writeFatDebugAppMetadata
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/app_metadata/fatDebug/app-metadata.properties
+:app:buildFatDebugPreBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/module_bundle/fatDebug
+:app:parseFatDebugIntegrityConfig
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/app_integrity_config/fatDebug/AppIntegrityConfig.pb
+:app:packageFatDebugBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/intermediary_bundle/fatDebug/intermediary-bundle.aab
+:app:signFatDebugBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/outputs/bundle/fatDebug/app-fat-debug.aab
+:app:produceFatDebugBundleIdeListingFile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_ide_model/fatDebug/output-metadata.json
+:app:createFatDebugBundleListingFileRedirect
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_ide_redirect_file/fatDebug/redirect.txt
+:app:bundleFatDebug
+:app:bundleDebug
+:app:preFatReleaseBuild
+:app:compileFatReleaseRenderscript
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/renderscript_lib/fatRelease/lib
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/rs/fat/release/obj
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/rs/fat/release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/renderscript_source_output_dir/fatRelease/out
+:app:generateFatReleaseResValues
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/resValues/fat/release
+:app:mapFatReleaseSourceSetPaths
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/source_set_path_map/fatRelease/file-map.txt
+:app:generateFatReleaseResources
+:app:mergeFatReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_res_blame_folder/fatRelease/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/data_binding_layout_info_type_merge/fatRelease/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/pngs/fat/release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/fatRelease/mergeFatReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_res/fatRelease
+:app:createFatReleaseCompatibleScreenManifests
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/compatible_screen_manifest/fatRelease
+:app:extractDeepLinksFatRelease
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/navigation_json/fatRelease/navigation.json
+:app:processFatReleaseMainManifest
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/manifest_merge_blame_file/fatRelease/manifest-merger-blame-fat-release-report.txt
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_manifest/fatRelease/AndroidManifest.xml
+O: /home/unzen/code-android/unzen-android-exelf/app/build/outputs/logs/manifest-merger-fat-release-report.txt
+:app:processFatReleaseManifest
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_manifests/fatRelease
+:app:processApplicationManifestFatReleaseForBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_manifest/fatRelease/AndroidManifest.xml
+:app:bundleFatReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/linked_res_for_bundle/fatRelease/bundled-res.ap_
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/bundleFatReleaseResources
+:app:checkFatReleaseDuplicateClasses
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/duplicate_classes_check/fatRelease
+:app:compileFatReleaseAidl
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/aidl_source_output_dir/fatRelease/out
+:app:generateFatReleaseBuildConfig
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/source/buildConfig/fat/release
+:app:javaPreCompileFatRelease
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/annotation_processor_list/fatRelease/annotationProcessors.json
+:app:checkFatReleaseAarMetadata
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/aar_metadata_check/fatRelease
+:app:processFatReleaseManifestForPackage
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/packaged_manifests/fatRelease
+:app:processFatReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/fatRelease/R.jar
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/processed_res/fatRelease/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/symbol_list_with_package_name/fatRelease/package-aware-r.txt
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/runtime_symbol_list/fatRelease/R.txt
+:app:compileFatReleaseJavaWithJavac
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/javac/fatRelease/classes
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/ap_generated_sources/fatRelease/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/tmp/compileFatReleaseJavaWithJavac/previous-compilation-data.bin
+:app:dexBuilderFatRelease
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex_archive_with_artifact_transforms/fatRelease/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex_archive/fatRelease/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/mixed_scope_dex_archive/fatRelease/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/project_dex_archive/fatRelease/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/sub_project_dex_archive/fatRelease/out
+:app:desugarFatReleaseFileDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_file_lib_dex_archives/fatRelease
+:app:mergeExtDexFatRelease
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex/fatRelease/mergeExtDexFatRelease
+:app:mergeDexFatRelease
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/dex/fatRelease/mergeDexFatRelease
+:app:mergeFatReleaseShaders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_shaders/fatRelease/out
+:app:compileFatReleaseShaders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/shader_assets/fatRelease/out
+:app:generateFatReleaseAssets
+:app:mergeFatReleaseAssets
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/assets/fatRelease
+:app:processFatReleaseJavaRes
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/java_res/fatRelease/out
+:app:mergeFatReleaseJavaResource
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/fatRelease-mergeJavaRes/zip-cache
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_java_res/fatRelease/base.jar
+:app:mergeFatReleaseJniLibFolders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_jni_libs/fatRelease/out
+:app:mergeFatReleaseNativeLibs
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_native_libs/fatRelease/out
+:app:stripFatReleaseDebugSymbols
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/stripped_native_libs/fatRelease/out
+:app:writeFatReleaseAppMetadata
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/app_metadata/fatRelease/app-metadata.properties
+:app:buildFatReleasePreBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/module_bundle/fatRelease
+:app:mergeFatReleaseArtProfile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_art_profile/fatRelease/baseline-prof.txt
+:app:compileFatReleaseArtProfile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/binary_art_profile/fatRelease/baseline.prof
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/binary_art_profile_metadata/fatRelease/baseline.profm
+:app:collectFatReleaseDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/metadata_library_dependencies_report/fatRelease/dependencies.pb
+:app:configureFatReleaseDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_dependency_report/fatRelease/dependencies.pb
+:app:extractFatReleaseNativeSymbolTables
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/native_symbol_tables/fatRelease/out
+:app:parseFatReleaseIntegrityConfig
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/app_integrity_config/fatRelease/AppIntegrityConfig.pb
+:app:packageFatReleaseBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/intermediary_bundle/fatRelease/intermediary-bundle.aab
+:app:writeFatReleaseApplicationId
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/metadata_application_id/fatRelease/application-id.txt
+:app:analyticsRecordingFatRelease
+:app:validateSigningFatRelease
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/validate_signing_config/fatRelease
+:app:signFatReleaseBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/outputs/bundle/fatRelease/app-fat-release.aab
+:app:produceFatReleaseBundleIdeListingFile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_ide_model/fatRelease/output-metadata.json
+:app:createFatReleaseBundleListingFileRedirect
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_ide_redirect_file/fatRelease/redirect.txt
+:app:bundleFatRelease
+:app:bundleFat
+:app:preX32ReleaseBuild
+:app:compileX32ReleaseRenderscript
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/renderscript_lib/x32Release/lib
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/rs/x32/release/obj
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/rs/x32/release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/renderscript_source_output_dir/x32Release/out
+:app:generateX32ReleaseResValues
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/resValues/x32/release
+:app:mapX32ReleaseSourceSetPaths
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/source_set_path_map/x32Release/file-map.txt
+:app:generateX32ReleaseResources
+:app:mergeX32ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_res_blame_folder/x32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/data_binding_layout_info_type_merge/x32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/pngs/x32/release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/x32Release/mergeX32ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_res/x32Release
+:app:createX32ReleaseCompatibleScreenManifests
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/compatible_screen_manifest/x32Release
+:app:extractDeepLinksX32Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/navigation_json/x32Release/navigation.json
+:app:processX32ReleaseMainManifest
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/manifest_merge_blame_file/x32Release/manifest-merger-blame-x32-release-report.txt
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_manifest/x32Release/AndroidManifest.xml
+O: /home/unzen/code-android/unzen-android-exelf/app/build/outputs/logs/manifest-merger-x32-release-report.txt
+:app:processX32ReleaseManifest
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_manifests/x32Release
+:app:processApplicationManifestX32ReleaseForBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_manifest/x32Release/AndroidManifest.xml
+:app:bundleX32ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/linked_res_for_bundle/x32Release/bundled-res.ap_
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/bundleX32ReleaseResources
+:app:checkX32ReleaseDuplicateClasses
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/duplicate_classes_check/x32Release
+:app:compileX32ReleaseAidl
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/aidl_source_output_dir/x32Release/out
+:app:generateX32ReleaseBuildConfig
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/source/buildConfig/x32/release
+:app:javaPreCompileX32Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/annotation_processor_list/x32Release/annotationProcessors.json
+:app:checkX32ReleaseAarMetadata
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/aar_metadata_check/x32Release
+:app:processX32ReleaseManifestForPackage
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/packaged_manifests/x32Release
+:app:processX32ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/x32Release/R.jar
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/processed_res/x32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/symbol_list_with_package_name/x32Release/package-aware-r.txt
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/runtime_symbol_list/x32Release/R.txt
+:app:compileX32ReleaseJavaWithJavac
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/javac/x32Release/classes
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/ap_generated_sources/x32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/tmp/compileX32ReleaseJavaWithJavac/previous-compilation-data.bin
+:app:dexBuilderX32Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex_archive_with_artifact_transforms/x32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex_archive/x32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/mixed_scope_dex_archive/x32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/project_dex_archive/x32Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/sub_project_dex_archive/x32Release/out
+:app:desugarX32ReleaseFileDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_file_lib_dex_archives/x32Release
+:app:mergeExtDexX32Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex/x32Release/mergeExtDexX32Release
+:app:mergeDexX32Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/dex/x32Release/mergeDexX32Release
+:app:mergeX32ReleaseShaders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_shaders/x32Release/out
+:app:compileX32ReleaseShaders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/shader_assets/x32Release/out
+:app:generateX32ReleaseAssets
+:app:mergeX32ReleaseAssets
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/assets/x32Release
+:app:processX32ReleaseJavaRes
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/java_res/x32Release/out
+:app:mergeX32ReleaseJavaResource
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/x32Release-mergeJavaRes/zip-cache
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_java_res/x32Release/base.jar
+:app:mergeX32ReleaseJniLibFolders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_jni_libs/x32Release/out
+:app:mergeX32ReleaseNativeLibs
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_native_libs/x32Release/out
+:app:stripX32ReleaseDebugSymbols
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/stripped_native_libs/x32Release/out
+:app:writeX32ReleaseAppMetadata
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/app_metadata/x32Release/app-metadata.properties
+:app:buildX32ReleasePreBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/module_bundle/x32Release
+:app:mergeX32ReleaseArtProfile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_art_profile/x32Release/baseline-prof.txt
+:app:compileX32ReleaseArtProfile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/binary_art_profile/x32Release/baseline.prof
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/binary_art_profile_metadata/x32Release/baseline.profm
+:app:collectX32ReleaseDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/metadata_library_dependencies_report/x32Release/dependencies.pb
+:app:configureX32ReleaseDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_dependency_report/x32Release/dependencies.pb
+:app:extractX32ReleaseNativeSymbolTables
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/native_symbol_tables/x32Release/out
+:app:parseX32ReleaseIntegrityConfig
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/app_integrity_config/x32Release/AppIntegrityConfig.pb
+:app:packageX32ReleaseBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/intermediary_bundle/x32Release/intermediary-bundle.aab
+:app:writeX32ReleaseApplicationId
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/metadata_application_id/x32Release/application-id.txt
+:app:analyticsRecordingX32Release
+:app:validateSigningX32Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/validate_signing_config/x32Release
+:app:signX32ReleaseBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/outputs/bundle/x32Release/app-x32-release.aab
+:app:produceX32ReleaseBundleIdeListingFile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_ide_model/x32Release/output-metadata.json
+:app:createX32ReleaseBundleListingFileRedirect
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_ide_redirect_file/x32Release/redirect.txt
+:app:bundleX32Release
+:app:preX64ReleaseBuild
+:app:compileX64ReleaseRenderscript
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/renderscript_lib/x64Release/lib
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/rs/x64/release/obj
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/rs/x64/release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/renderscript_source_output_dir/x64Release/out
+:app:generateX64ReleaseResValues
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/resValues/x64/release
+:app:mapX64ReleaseSourceSetPaths
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/source_set_path_map/x64Release/file-map.txt
+:app:generateX64ReleaseResources
+:app:mergeX64ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_res_blame_folder/x64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/data_binding_layout_info_type_merge/x64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/res/pngs/x64/release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/x64Release/mergeX64ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_res/x64Release
+:app:createX64ReleaseCompatibleScreenManifests
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/compatible_screen_manifest/x64Release
+:app:extractDeepLinksX64Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/navigation_json/x64Release/navigation.json
+:app:processX64ReleaseMainManifest
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/manifest_merge_blame_file/x64Release/manifest-merger-blame-x64-release-report.txt
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_manifest/x64Release/AndroidManifest.xml
+O: /home/unzen/code-android/unzen-android-exelf/app/build/outputs/logs/manifest-merger-x64-release-report.txt
+:app:processX64ReleaseManifest
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_manifests/x64Release
+:app:processApplicationManifestX64ReleaseForBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_manifest/x64Release/AndroidManifest.xml
+:app:bundleX64ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/linked_res_for_bundle/x64Release/bundled-res.ap_
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/bundleX64ReleaseResources
+:app:checkX64ReleaseDuplicateClasses
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/duplicate_classes_check/x64Release
+:app:compileX64ReleaseAidl
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/aidl_source_output_dir/x64Release/out
+:app:generateX64ReleaseBuildConfig
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/source/buildConfig/x64/release
+:app:javaPreCompileX64Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/annotation_processor_list/x64Release/annotationProcessors.json
+:app:checkX64ReleaseAarMetadata
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/aar_metadata_check/x64Release
+:app:processX64ReleaseManifestForPackage
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/packaged_manifests/x64Release
+:app:processX64ReleaseResources
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/x64Release/R.jar
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/processed_res/x64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/symbol_list_with_package_name/x64Release/package-aware-r.txt
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/runtime_symbol_list/x64Release/R.txt
+:app:compileX64ReleaseJavaWithJavac
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/javac/x64Release/classes
+O: /home/unzen/code-android/unzen-android-exelf/app/build/generated/ap_generated_sources/x64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/tmp/compileX64ReleaseJavaWithJavac/previous-compilation-data.bin
+:app:dexBuilderX64Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex_archive_with_artifact_transforms/x64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex_archive/x64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/mixed_scope_dex_archive/x64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/project_dex_archive/x64Release/out
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/sub_project_dex_archive/x64Release/out
+:app:desugarX64ReleaseFileDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_file_lib_dex_archives/x64Release
+:app:mergeExtDexX64Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/external_libs_dex/x64Release/mergeExtDexX64Release
+:app:mergeDexX64Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/dex/x64Release/mergeDexX64Release
+:app:mergeX64ReleaseShaders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_shaders/x64Release/out
+:app:compileX64ReleaseShaders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/shader_assets/x64Release/out
+:app:generateX64ReleaseAssets
+:app:mergeX64ReleaseAssets
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/assets/x64Release
+:app:processX64ReleaseJavaRes
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/java_res/x64Release/out
+:app:mergeX64ReleaseJavaResource
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/x64Release-mergeJavaRes/zip-cache
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_java_res/x64Release/base.jar
+:app:mergeX64ReleaseJniLibFolders
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_jni_libs/x64Release/out
+:app:mergeX64ReleaseNativeLibs
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_native_libs/x64Release/out
+:app:stripX64ReleaseDebugSymbols
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/stripped_native_libs/x64Release/out
+:app:writeX64ReleaseAppMetadata
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/app_metadata/x64Release/app-metadata.properties
+:app:buildX64ReleasePreBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/module_bundle/x64Release
+:app:mergeX64ReleaseArtProfile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_art_profile/x64Release/baseline-prof.txt
+:app:compileX64ReleaseArtProfile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/binary_art_profile/x64Release/baseline.prof
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/binary_art_profile_metadata/x64Release/baseline.profm
+:app:collectX64ReleaseDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/metadata_library_dependencies_report/x64Release/dependencies.pb
+:app:configureX64ReleaseDependencies
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_dependency_report/x64Release/dependencies.pb
+:app:extractX64ReleaseNativeSymbolTables
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/native_symbol_tables/x64Release/out
+:app:parseX64ReleaseIntegrityConfig
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/app_integrity_config/x64Release/AppIntegrityConfig.pb
+:app:packageX64ReleaseBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/intermediary_bundle/x64Release/intermediary-bundle.aab
+:app:writeX64ReleaseApplicationId
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/metadata_application_id/x64Release/application-id.txt
+:app:analyticsRecordingX64Release
+:app:validateSigningX64Release
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/validate_signing_config/x64Release
+:app:signX64ReleaseBundle
+O: /home/unzen/code-android/unzen-android-exelf/app/build/outputs/bundle/x64Release/app-x64-release.aab
+:app:produceX64ReleaseBundleIdeListingFile
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_ide_model/x64Release/output-metadata.json
+:app:createX64ReleaseBundleListingFileRedirect
+O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/bundle_ide_redirect_file/x64Release/redirect.txt
+:app:bundleX64Release
+:app:bundleRelease
+:app:bundleX32
+:app:bundleX64
+:app:bundle
+:app:alephTasksGraphBundle
