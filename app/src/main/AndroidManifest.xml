@@ -10,7 +10,6 @@ X permission if installed on external storage. -->
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:extractNativeLibs="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name="unzen.exelf.MainActivity"

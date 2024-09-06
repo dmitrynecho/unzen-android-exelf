@@ -101,6 +101,11 @@ android {
             setIgnore(true)
         }
     }
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
 }
 
 android.applicationVariants.configureEach { variant ->
