@@ -91,8 +91,6 @@ O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/
 :app:mergeA32ReleaseJavaResource
 O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/a32Release-mergeJavaRes/zip-cache
 O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_java_res/a32Release/mergeA32ReleaseJavaResource/base.jar
-:lib-cuscuta:generateReleaseBuildConfig
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/source/buildConfig/release
 :lib-cuscuta:javaPreCompileRelease
 O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/annotation_processor_list/release/javaPreCompileRelease/annotationProcessors.json
 :lib-cuscuta:compileReleaseJavaWithJavac
@@ -136,28 +134,34 @@ O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/dex/a32R
 :app:mergeA32ReleaseJniLibFolders
 O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_jni_libs/a32Release/mergeA32ReleaseJniLibFolders/out
 :lib-cuscuta:configureNdkBuildRelease[arm64-v8a]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/5s6v3v5k/logs/arm64-v8a
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/<hash>/logs/arm64-v8a
 :lib-cuscuta:buildNdkBuildRelease[arm64-v8a][exebar,exebaz,etc]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/5s6v3v5k/obj/local/arm64-v8a
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/<hash>/obj/local/arm64-v8a
 :lib-cuscuta:configureNdkBuildRelease[armeabi-v7a]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/5s6v3v5k/logs/armeabi-v7a
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/<hash>/logs/armeabi-v7a
 :lib-cuscuta:buildNdkBuildRelease[armeabi-v7a][exebar,exebaz,etc]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/5s6v3v5k/obj/local/armeabi-v7a
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/<hash>/obj/local/armeabi-v7a
 :lib-cuscuta:configureNdkBuildRelease[x86]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/5s6v3v5k/logs/x86
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/<hash>/logs/x86
 :lib-cuscuta:buildNdkBuildRelease[x86][exebar,exebaz,etc]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/5s6v3v5k/obj/local/x86
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/<hash>/obj/local/x86
 :lib-cuscuta:configureNdkBuildRelease[x86_64]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/5s6v3v5k/logs/x86_64
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/<hash>/logs/x86_64
 :lib-cuscuta:buildNdkBuildRelease[x86_64][exebar,exebaz,etc]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/5s6v3v5k/obj/local/x86_64
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Release/<hash>/obj/local/x86_64
 :lib-cuscuta:mergeReleaseJniLibFolders
 O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_jni_libs/release/mergeReleaseJniLibFolders/out
 :lib-cuscuta:mergeReleaseNativeLibs
 O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out
 O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_test_only_native_libs/release/mergeReleaseNativeLibs/out
-:lib-cuscuta:unzenCopyExesForStripRelease
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/release/out/lib
+:lib-cuscuta:unzenCopyExesForStripRelease[arm64-v8a]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib
+:lib-cuscuta:unzenCopyExesForStripRelease[armeabi-v7a]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib
+:lib-cuscuta:unzenCopyExesForStripRelease[x86]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib
+:lib-cuscuta:unzenCopyExesForStripRelease[x86_64]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib
 :lib-cuscuta:copyReleaseJniLibsProjectOnly
 O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/library_jni/release/copyReleaseJniLibsProjectOnly/jni
 :app:mergeA32ReleaseNativeLibs
@@ -384,8 +388,6 @@ O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/runtime_
 :app:bundleFatDebugResources
 O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/incremental/bundleFatDebugResources
 O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/linked_resources_for_bundle_proto_format/fatDebug/bundleFatDebugResources/linked-resources-proto-format.ap_
-:lib-cuscuta:generateDebugBuildConfig
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/generated/source/buildConfig/debug
 :lib-cuscuta:javaPreCompileDebug
 O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
 :lib-cuscuta:compileDebugJavaWithJavac
@@ -442,28 +444,34 @@ O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_j
 :app:mergeFatDebugJniLibFolders
 O: /home/unzen/code-android/unzen-android-exelf/app/build/intermediates/merged_jni_libs/fatDebug/mergeFatDebugJniLibFolders/out
 :lib-cuscuta:configureNdkBuildDebug[arm64-v8a]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/3q19342g/logs/arm64-v8a
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/<hash>/logs/arm64-v8a
 :lib-cuscuta:buildNdkBuildDebug[arm64-v8a][exebar,exebaz,etc]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/3q19342g/obj/local/arm64-v8a
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/<hash>/obj/local/arm64-v8a
 :lib-cuscuta:configureNdkBuildDebug[armeabi-v7a]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/3q19342g/logs/armeabi-v7a
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/<hash>/logs/armeabi-v7a
 :lib-cuscuta:buildNdkBuildDebug[armeabi-v7a][exebar,exebaz,etc]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/3q19342g/obj/local/armeabi-v7a
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/<hash>/obj/local/armeabi-v7a
 :lib-cuscuta:configureNdkBuildDebug[x86]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/3q19342g/logs/x86
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/<hash>/logs/x86
 :lib-cuscuta:buildNdkBuildDebug[x86][exebar,exebaz,etc]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/3q19342g/obj/local/x86
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/<hash>/obj/local/x86
 :lib-cuscuta:configureNdkBuildDebug[x86_64]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/3q19342g/logs/x86_64
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/<hash>/logs/x86_64
 :lib-cuscuta:buildNdkBuildDebug[x86_64][exebar,exebaz,etc]
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/3q19342g/obj/local/x86_64
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/cxx/Debug/<hash>/obj/local/x86_64
 :lib-cuscuta:mergeDebugJniLibFolders
 O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_jni_libs/debug/mergeDebugJniLibFolders/out
 :lib-cuscuta:mergeDebugNativeLibs
 O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out
 O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_test_only_native_libs/debug/mergeDebugNativeLibs/out
-:lib-cuscuta:unzenCopyExesForStripDebug
-O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/debug/out/lib
+:lib-cuscuta:unzenCopyExesForStripDebug[arm64-v8a]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib
+:lib-cuscuta:unzenCopyExesForStripDebug[armeabi-v7a]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib
+:lib-cuscuta:unzenCopyExesForStripDebug[x86]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib
+:lib-cuscuta:unzenCopyExesForStripDebug[x86_64]
+O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib
 :lib-cuscuta:copyDebugJniLibsProjectOnly
 O: /home/unzen/code-android/unzen-android-exelf/lib-cuscuta/build/intermediates/library_jni/debug/copyDebugJniLibsProjectOnly/jni
 :app:mergeFatDebugNativeLibs

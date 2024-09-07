@@ -1,10 +1,26 @@
+import java.util.regex.Pattern
+
 def tasksToStrings = new LinkedHashMap<String, String>()
 String genTasksGraphTaskNameAssemble = "alephTasksGraphAssemble"
 String genTasksGraphTaskNameBundle = "alephTasksGraphBundle"
 File reportAssemble = file("$rootDir/docs/tasks-graph-assemble.txt")
 File reportBundle = file("$rootDir/docs/tasks-graph-bundle.txt")
 
-static String taskToString(Task task) {
+ext.stabilizePathsPattern = Pattern.compile(
+        "(.+)(/build/intermediates/cxx/)(.+)(/.{8}/)(logs|obj/local)(.+)")
+
+@SuppressWarnings('GrMethodMayBeStatic')
+String stabilizePaths(String output) {
+    if (!output.contains("/build/intermediates/cxx/")) {
+        return output
+    }
+    // /build/intermediates/cxx/Release/5h6q5c2l/logs/arm64-v8a
+    // /build/intermediates/cxx/Release/5h6q5c2l/obj/local/arm64-v8a
+    output = output.replaceAll(stabilizePathsPattern, "\$1\$2\$3/<hash>/\$5\$6")
+    return output
+}
+
+String taskToString(Task task) {
     StringBuffer taskInfo = new StringBuffer()
     taskInfo << task.path
     def dependsOnList = new LinkedList<String>()
@@ -25,7 +41,7 @@ static String taskToString(Task task) {
         }
     }
     task.outputs.files.eachWithIndex { File file, i ->
-        taskInfo << "\nO: ${file.absolutePath}"
+        taskInfo << "\nO: ${stabilizePaths(file.absolutePath)}"
     }
     return taskInfo.toString()
 }
