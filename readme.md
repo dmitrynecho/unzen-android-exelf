@@ -12,16 +12,16 @@ flavors mechanics. Supports Android 10 with W^X SELinux policy.
 
 AGP 4.1.2 and AGP 7.3.1 binary stripping details.
 
-AGP 4.1.2 and AGP 7.3.1 gather solibs from all modules in merged_native_libs dir
-of app module and then performs stripping on them that places stripped solibs
-in stripped_native_libs. You can see this by search in task execution log
-for forementioned dirs and see that stripping task runs after merge task.
+AGP 4.1.2 and AGP 7.3.1 gather solibs from all modules in "merged_native_libs"
+dir of app module and then performs stripping on them that places stripped
+solibs in "stripped_native_libs". You can see this by search in task execution
+log for forementioned dirs and see that stripping task runs after merge task.
 
 In AGP 4.1.2, when project contains modules, they responsible for stripping
 their solibs on their own. You can search app build dir for solib names and
 you'll see that it contains only already stripped versions of solibs from
 modules that app depends on. However, strippend solibs from modules are
-copied in app's merged_native_libs dir, so app will redurantly run stripping
+copied in app's "merged_native_libs" dir, so app will redurantly run stripping
 on them second time.
 
 In AGP 7.3.1, when project contains modules, stripping performed only once

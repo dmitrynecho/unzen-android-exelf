@@ -1,3 +1,5 @@
+import org.gradle.api.internal.tasks.DefaultTaskInputs
+
 import java.util.regex.Pattern
 
 def tasksToStrings = new LinkedHashMap<String, String>()
@@ -6,21 +8,40 @@ String genTasksGraphTaskNameBundle = "alephTasksGraphBundle"
 File reportAssemble = file("$rootDir/docs/tasks-graph-assemble.txt")
 File reportBundle = file("$rootDir/docs/tasks-graph-bundle.txt")
 
+ext.rootDirAbsolutePathLength = rootDir.absolutePath.length()
+
+@SuppressWarnings('GrMethodMayBeStatic')
+String beautifyInputOutput(String path) {
+    path = path.substring(rootDirAbsolutePathLength + 1)
+    if (path.startsWith("app/build/")) {
+        path = path.replaceFirst("app/build", "<app>")
+    } else if (path.startsWith("lib-cuscuta/build/")) {
+        path = path.replaceFirst("lib-cuscuta/build", "<lib>")
+    }
+    return path
+}
+
+String beautifyInput(String input) {
+    return beautifyInputOutput(input)
+}
+
+// /path/to/module/build/intermediates/cxx/Release/6h6q3c2l/logs/arm64-v8a
+// /path/to/module/build/intermediates/cxx/Release/6h6q3c2l/obj/local/arm64-v8a
 ext.stabilizePathsPattern = Pattern.compile(
         "(.+)(/build/intermediates/cxx/)(.+)(/.{8}/)(logs|obj/local)(.+)")
 
 @SuppressWarnings('GrMethodMayBeStatic')
-String stabilizePaths(String output) {
+String beautifyOutput(String output) {
     if (!output.contains("/build/intermediates/cxx/")) {
-        return output
+        return beautifyInputOutput(output)
     }
-    // /build/intermediates/cxx/Release/5h6q5c2l/logs/arm64-v8a
-    // /build/intermediates/cxx/Release/5h6q5c2l/obj/local/arm64-v8a
+    String copy = output
     output = output.replaceAll(stabilizePathsPattern, "\$1\$2\$3/<hash>/\$5\$6")
-    return output
+    return beautifyInputOutput(output)
 }
 
 String taskToString(Task task) {
+    String inputIgnore = "org.gradle.api.internal.tasks.DefaultTaskInputs"
     StringBuffer taskInfo = new StringBuffer()
     taskInfo << task.path
     def dependsOnList = new LinkedList<String>()
@@ -32,16 +53,22 @@ String taskToString(Task task) {
     }
     task.inputs.eachWithIndex { it, i ->
         if (it instanceof File) {
-            taskInfo << "\nI: ${it.absolutePath}"
+            taskInfo << "\nI: ${beautifyInput(it.absolutePath)}"
+        } else if (it instanceof DefaultTaskInputs) {
+            ((DefaultTaskInputs) it).sourceFiles.forEach { file ->
+                if (file instanceof File) {
+                    taskInfo << "\nI: ${beautifyInput(file.absolutePath)}"
+                }
+            }
         } else {
             String input = it.toString()
-            if (!input.startsWith("org.gradle.api.internal.tasks.DefaultTaskInputs")) {
-                taskInfo << "\nI: $input"
+            if (!input.startsWith(inputIgnore)) {
+                taskInfo << "\nI: ${beautifyInput(input)}"
             }
         }
     }
     task.outputs.files.eachWithIndex { File file, i ->
-        taskInfo << "\nO: ${stabilizePaths(file.absolutePath)}"
+        taskInfo << "\nO: ${beautifyOutput(file.absolutePath)}"
     }
     return taskInfo.toString()
 }
@@ -50,9 +77,8 @@ afterEvaluate { Project project ->
     gradle.taskGraph.whenReady { TaskExecutionGraph taskExecutionGraph ->
         tasksToStrings.clear()
         File reportFile = null
-        taskExecutionGraph.getAllTasks().each { Task task ->
-            String taskAsString = taskToString(task)
-            tasksToStrings.put(task.path, taskAsString)
+        taskExecutionGraph.getAllTasks().eachWithIndex{ Task task, int i ->
+            tasksToStrings.put(task.path, taskToString(task))
             if (task.name == genTasksGraphTaskNameAssemble) {
                 reportFile = reportAssemble
             } else if (task.name == genTasksGraphTaskNameBundle) {
@@ -63,7 +89,14 @@ afterEvaluate { Project project ->
             if (!reportFile.exists()) {
                 throw new GradleException()
             }
-            reportFile.text = tasksToStrings.values().join("\n")
+            StringBuilder report = new StringBuilder()
+            tasksToStrings.values().eachWithIndex { String task, int i ->
+                if (report.length() > 0) {
+                    report.append("\n\n")
+                }
+                report.append(i).append(" ").append(task)
+            }
+            reportFile.text = report.toString()
         }
     }
 }
@@ -76,17 +109,4 @@ tasks.register(genTasksGraphTaskNameAssemble) {
 tasks.register(genTasksGraphTaskNameBundle) {
     group = "aleph"
     dependsOn tasks.named("bundle")
-}
-
-//noinspection GrDeprecatedAPIUsage TODO: delete.
-gradle.taskGraph.afterTask { Task task ->
-    //noinspection GroovyConstantIfStatement
-    if (true) {
-        //return
-    }
-    String taskAsString = taskToString(task)
-    String expected = tasksToStrings.get(task.path)
-    if (taskAsString != expected) {
-        throw new GradleException(task.path)
-    }
 }
