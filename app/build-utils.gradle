@@ -35,7 +35,6 @@ String beautifyOutput(String output) {
     if (!output.contains("/build/intermediates/cxx/")) {
         return beautifyInputOutput(output)
     }
-    String copy = output
     output = output.replaceAll(stabilizePathsPattern, "\$1\$2\$3/<hash>/\$5\$6")
     return beautifyInputOutput(output)
 }
@@ -101,12 +100,25 @@ afterEvaluate { Project project ->
     }
 }
 
+// TODO. Tasks graph instability.
 tasks.register(genTasksGraphTaskNameAssemble) {
     group = "aleph"
     dependsOn tasks.named("assemble")
 }
 
+// TODO. Tasks graph instability.
 tasks.register(genTasksGraphTaskNameBundle) {
     group = "aleph"
     dependsOn tasks.named("bundle")
 }
+
+// TODO. Tasks graph instability.
+// Tasks graph differs depending on whether we executed Android Studio "Build"
+// action after last clean or not. Android Studio "Build" action may be next
+// list of tasks.
+//  :app:assembleFatDebug,
+//  :app:assembleFatDebugUnitTest,
+//  :lib-cuscuta:assembleDebug,
+//  :lib-cuscuta:assembleDebugUnitTest,
+//  :lib-cuscuta:assembleDebugAndroidTest,
+//  :app:assembleFatDebugAndroidTest
