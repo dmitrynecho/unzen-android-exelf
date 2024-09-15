@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply from: 'zen-pack-elfs.gradle'
+def soNames = ['jnifoo']
+def elfsNames = ['exebar', 'exebaz']
 
 android {
     namespace 'unzen.exelf.cuscuta'
@@ -9,7 +12,7 @@ android {
         targetSdkVersion exelfTargetSdkVersion
         externalNativeBuild {
             ndkBuild {
-                targets 'jnifoo', 'exebar', 'exebaz'
+                targets = soNames + elfsNames
             }
         }
     }
@@ -34,65 +37,8 @@ android {
             path "src/main/cpp/Android.mk"
         }
     }
-}
-
-String getSrcElfsDir(String variant, String abi) {
-    // 204 :lib-cuscuta:buildNdkBuildDebug[<abi>][exebar,exebaz,etc]
-    // O: <lib>/intermediates/cxx/Debug/<hash>/obj/local/<abi>
-    String taskName = "buildNdkBuild$variant[$abi][exebar,exebaz,etc]"
-    try {
-        TaskProvider<Task> provider = tasks.named(taskName)
-        return provider.get().outputs.files.getSingleFile().absolutePath
-    } catch (UnknownTaskException ignored) {
-        // Task not found.
-        return null
-    }
-}
-
-String getDstElfsDir(String variant, String abi) {
-    String intermediatesPath = intermediatesPath()
-    GString merged = "$intermediatesPath/merged_native_libs/${variant.toLowerCase()}"
-    return "${merged}/merge${variant}NativeLibs/out/lib/${abi}"
-}
-
-String intermediatesPath() {
-    DirectoryProperty buildDir = project.getLayout().getBuildDirectory()
-    return buildDir.file("intermediates").get().asFile.absolutePath
-}
-
-void copyElfsTask(String variant, String abi) {
-    String srcElfsDir = getSrcElfsDir(variant, abi)
-    if (srcElfsDir == null) {
-        return
-    }
-    String copyElfsTaskName = "unzenCopyElfs$variant[$abi]"
-    TaskProvider<Copy> copyElfsTask = tasks.register(copyElfsTaskName, Copy) {
-        from srcElfsDir
-        into getDstElfsDir(variant, abi)
-        // AGP is ignoring subdirs inside ABI dirs, don't use them.
-        include "exebar"
-        include "exebaz"
-        // On debug app builds Android OS installs from APK arbitrary named
-        // binaries, but on release build it ignores everything except files
-        // named like solibs.
-        rename '(.+)', 'lib$1.so'
-        includeEmptyDirs = false
-    }
-    tasks.named("merge${variant}NativeLibs") {
-        finalizedBy(copyElfsTask)
-    }
-    tasks.named("copy${variant}JniLibsProjectOnly") {
-        dependsOn(copyElfsTask)
-    }
-    tasks.named("strip${variant}DebugSymbols") {
-        dependsOn(copyElfsTask)
-    }
-}
-
-android.libraryVariants.configureEach { variant ->
-    baseAbis.each { abi ->
-        copyElfsTask(variant.name.capitalize(), abi)
-    }
+    ext.zenPackElfsList = elfsNames
+    ext.zenPackSosList = soNames
 }
 
 tasks.register('cppVersions') {

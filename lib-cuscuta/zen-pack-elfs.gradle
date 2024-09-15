@@ -1,0 +1,70 @@
+String getSrcElfsDir(String variant, String abi, ArrayList<String> elfs) {
+    // 204 :lib:buildNdkBuildDebug[<abi>][elfbar,elfbaz,etc]
+    // O: <lib>/intermediates/cxx/Debug/<hash>/obj/local/<abi>
+    elfs = elfs.sort()
+    // TODO. Check task naming when SO are at first or second place.
+    // TODO. Check task naming when only 2 ELF and only 1 ELF.
+    StringBuilder namePart = new StringBuilder()
+    namePart.append(elfs[0])
+    if (elfs.size() > 1) {
+        namePart.append(',').append(elfs[1])
+    }
+    namePart.append(',etc')
+    String taskName = "buildNdkBuild$variant[$abi][$namePart]"
+    try {
+        TaskProvider<Task> provider = tasks.named(taskName)
+        return provider.get().outputs.files.getSingleFile().absolutePath
+    } catch (UnknownTaskException ignored) {
+        // Task not found.
+        return null
+    }
+}
+
+String getDstElfsDir(String variant, String abi) {
+    String intermediatesPath = intermediatesPath()
+    GString merged = "$intermediatesPath/merged_native_libs/${variant.toLowerCase()}"
+    return "${merged}/merge${variant}NativeLibs/out/lib/${abi}"
+}
+
+String intermediatesPath() {
+    DirectoryProperty buildDir = project.getLayout().getBuildDirectory()
+    return buildDir.file("intermediates").get().asFile.absolutePath
+}
+
+void zenPackElfsTask(String variant, String abi) {
+    ArrayList<String> elfs = android.zenPackElfsList
+    ArrayList<String> sos = android.zenPackSosList
+    String srcElfsDir = getSrcElfsDir(variant, abi, elfs + sos)
+    if (srcElfsDir == null) {
+        return
+    }
+    String copyElfsTaskName = "zenPackElfs$variant[$abi]"
+    TaskProvider<Copy> copyElfsTask = tasks.register(copyElfsTaskName, Copy) {
+        from srcElfsDir
+        into getDstElfsDir(variant, abi)
+        // AGP is ignoring subdirs inside ABI dirs, don't use them.
+        elfs.each { elf ->
+            include elf
+        }
+        // On debug app builds Android OS installs from APK arbitrary named
+        // binaries, but on release build it ignores everything except files
+        // named like solibs.
+        rename '(.+)', 'lib$1.so'
+        includeEmptyDirs = false
+    }
+    tasks.named("merge${variant}NativeLibs") {
+        finalizedBy(copyElfsTask)
+    }
+    tasks.named("copy${variant}JniLibsProjectOnly") {
+        dependsOn(copyElfsTask)
+    }
+    tasks.named("strip${variant}DebugSymbols") {
+        dependsOn(copyElfsTask)
+    }
+}
+
+android.libraryVariants.configureEach { variant ->
+    baseAbis.each { abi ->
+        zenPackElfsTask(variant.name.capitalize(), abi)
+    }
+}

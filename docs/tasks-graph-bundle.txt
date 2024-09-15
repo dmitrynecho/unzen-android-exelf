@@ -228,22 +228,22 @@ I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/x86_64/libjnifoo.so
 O: <lib>/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out
 O: <lib>/intermediates/merged_test_only_native_libs/release/mergeReleaseNativeLibs/out
 
-63 :lib-cuscuta:unzenCopyElfsRelease[arm64-v8a]
+63 :lib-cuscuta:zenPackElfsRelease[arm64-v8a]
 I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/arm64-v8a/exebar
 I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/arm64-v8a/exebaz
 O: <lib>/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib/arm64-v8a
 
-64 :lib-cuscuta:unzenCopyElfsRelease[armeabi-v7a]
+64 :lib-cuscuta:zenPackElfsRelease[armeabi-v7a]
 I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/armeabi-v7a/exebar
 I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/armeabi-v7a/exebaz
 O: <lib>/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib/armeabi-v7a
 
-65 :lib-cuscuta:unzenCopyElfsRelease[x86]
+65 :lib-cuscuta:zenPackElfsRelease[x86]
 I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/x86/exebar
 I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/x86/exebaz
 O: <lib>/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib/x86
 
-66 :lib-cuscuta:unzenCopyElfsRelease[x86_64]
+66 :lib-cuscuta:zenPackElfsRelease[x86_64]
 I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/x86_64/exebar
 I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/x86_64/exebaz
 O: <lib>/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib/x86_64
@@ -742,22 +742,22 @@ I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/x86_64/libjnifoo.so
 O: <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out
 O: <lib>/intermediates/merged_test_only_native_libs/debug/mergeDebugNativeLibs/out
 
-192 :lib-cuscuta:unzenCopyElfsDebug[arm64-v8a]
+192 :lib-cuscuta:zenPackElfsDebug[arm64-v8a]
 I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/arm64-v8a/exebar
 I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/arm64-v8a/exebaz
 O: <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/arm64-v8a
 
-193 :lib-cuscuta:unzenCopyElfsDebug[armeabi-v7a]
+193 :lib-cuscuta:zenPackElfsDebug[armeabi-v7a]
 I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/armeabi-v7a/exebar
 I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/armeabi-v7a/exebaz
 O: <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/armeabi-v7a
 
-194 :lib-cuscuta:unzenCopyElfsDebug[x86]
+194 :lib-cuscuta:zenPackElfsDebug[x86]
 I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/x86/exebar
 I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/x86/exebaz
 O: <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/x86
 
-195 :lib-cuscuta:unzenCopyElfsDebug[x86_64]
+195 :lib-cuscuta:zenPackElfsDebug[x86_64]
 I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/x86_64/exebar
 I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/x86_64/exebaz
 O: <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/x86_64
