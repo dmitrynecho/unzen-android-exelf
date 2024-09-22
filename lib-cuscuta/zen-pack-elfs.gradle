@@ -38,6 +38,9 @@ void zenPackElfsTask(String variant, String abi) {
     if (srcElfsDir == null) {
         return
     }
+    if (srcElfsDir.contains("intermediates/cxx/Release")) {
+        project.ext.cppSymbolsDir = file(srcElfsDir).getParentFile()
+    }
     String copyElfsTaskName = "zenPackElfs$variant[$abi]"
     TaskProvider<Copy> copyElfsTask = tasks.register(copyElfsTaskName, Copy) {
         from srcElfsDir
