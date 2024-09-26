@@ -31,10 +31,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    // Warning is inconsistent with current official docs and fixing this
-    // warning creates other errors.
-    // - https://developer.android.com/build/build-variants#product-flavors
-    //noinspection GrDeprecatedAPIUsage
+
+    //noinspection GrDeprecatedAPIUsage TAG3
     flavorDimensions "abi"
 
     productFlavors {
@@ -93,9 +91,8 @@ android {
             }
         }
     }
-    // Warning is inconsistent with current official docs.
-    // - https://developer.android.com/build/build-variants#filter-variants
-    //noinspection GrDeprecatedAPIUsage
+
+    //noinspection GrDeprecatedAPIUsage TAG4
     variantFilter { variant ->
         ArrayList<String> names = variant.flavors*.name
         if (variant.buildType.name != "release" && !names.contains("fat")) {

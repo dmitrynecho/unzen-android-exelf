@@ -1,0 +1,9 @@
+TAG3. Warning is inconsistent with current official docs and fixing this warning creates other errors.
+- https://developer.android.com/build/build-variants#product-flavors
+- //noinspection GrDeprecatedAPIUsage
+- flavorDimensions "tier", "service", "country"
+
+TAG4. Warning is inconsistent with current official docs.
+- https://developer.android.com/build/build-variants#filter-variants
+- //noinspection GrDeprecatedAPIUsage
+- variantFilter { variant ->
