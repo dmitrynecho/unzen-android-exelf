@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 
-apply from: 'build-utils.gradle'
+apply from: 'tasks-graph.gradle'
 
 android {
     namespace 'unzen.exelf'
@@ -124,6 +124,16 @@ tasks.register('alephCopyApks', Copy) {
     into "$rootDir.absolutePath/apks"
 }
 assemble.finalizedBy alephCopyApks
+
+tasks.register("zenPackApks") {
+    group = "aleph"
+    dependsOn tasks.named("assemble")
+}
+
+tasks.register("zenPackBundes") {
+    group = "aleph"
+    dependsOn tasks.named("bundle")
+}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
