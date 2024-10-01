@@ -1,0 +1,6 @@
+1727808565499 56908 <lib>/intermediates/cxx/Release/<hash>/obj/local/x86/libjnifoo.so
+1727808565868 56908 <lib>/intermediates/library_jni/release/copyReleaseJniLibsProjectOnly/jni/x86/libjnifoo.so
+1727808565868 56908 <lib>/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib/x86/libjnifoo.so
+1727808565948 56908 <app>/intermediates/merged_native_libs/fatRelease/mergeFatReleaseNativeLibs/out/lib/x86/libjnifoo.so
+1727808566023 5564 <app>/intermediates/stripped_native_libs/fatRelease/stripFatReleaseDebugSymbols/out/lib/x86/libjnifoo.so
+1727808566118 6568 <app>/intermediates/native_symbol_tables/fatRelease/extractFatReleaseNativeSymbolTables/out/x86/libjnifoo.so.sym

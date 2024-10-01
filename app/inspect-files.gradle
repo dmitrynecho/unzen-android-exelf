@@ -1,14 +1,35 @@
+import static groovy.io.FileType.FILES
+
 apply from: 'print-path-utils.gradle'
 
 @SuppressWarnings('GrMethodMayBeStatic')
-void processDir(File dir) {
-    println(beautifyInputOutput(dir.absolutePath))
+TreeSet<String> processDir(File dir) {
+    TreeSet<String> found = new TreeSet<>()
+    def abisIgnore = ['armeabi-v7a', 'arm64-v8a', 'x86_64']
+    file(dir).traverse(type: FILES) {
+        if (it.name.contains("jnifoo")) {
+            if (!it.name.endsWith(".o") && !it.name.endsWith(".o.d")) {
+                if (!abisIgnore.contains(it.parentFile.name)) {
+                    long modified = it.lastModified()
+                    long size = it.size()
+                    String path = beautifyInputOutput(it.absolutePath)
+                    found.add("$modified $size $path")
+                }
+            }
+        }
+    }
+    return found
 }
 
 tasks.register("inspectBuildDirs") {
     group = "aleph"
     doLast {
-        processDir(file(project.rootDir.absolutePath + "/app/build"))
-        processDir(file(project.rootDir.absolutePath + "/lib-cuscuta/build"))
+        String rootPath = project.rootDir.absolutePath
+        TreeSet<String> found = new TreeSet<>()
+        found.addAll(processDir(file("$rootPath/app/build")))
+        found.addAll(processDir(file("$rootPath/lib-cuscuta/build")))
+        found.sort()
+        File report = file("$rootDir/docs/inspect-build-dirs.txt")
+        report.text = String.join("\n", found)
     }
 }
