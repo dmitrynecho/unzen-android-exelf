@@ -3,8 +3,8 @@ import org.gradle.api.internal.tasks.DefaultTaskInputs
 import java.util.regex.Pattern
 
 def tasksToStrings = new LinkedHashMap<String, String>()
-String genTasksGraphTaskNameAssemble = "alephTasksGraphAssemble"
-String genTasksGraphTaskNameBundle = "alephTasksGraphBundle"
+String genTasksGraphTaskNameAssemble = "tasksGraphAssemble"
+String genTasksGraphTaskNameBundle = "tasksGraphBundle"
 File reportAssemble = file("$rootDir/docs/tasks-graph-assemble.txt")
 File reportBundle = file("$rootDir/docs/tasks-graph-bundle.txt")
 

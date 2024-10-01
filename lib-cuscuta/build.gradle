@@ -1,7 +1,5 @@
 apply plugin: 'com.android.library'
 apply from: 'zen-pack-elfs.gradle'
-def soNames = ['jnifoo']
-def elfsNames = ['exebar', 'exebaz']
 
 android {
     namespace 'unzen.exelf.cuscuta'
@@ -12,7 +10,7 @@ android {
         targetSdkVersion exelfTargetSdkVersion
         externalNativeBuild {
             ndkBuild {
-                targets = soNames + elfsNames
+                targets = zenPackSosList + zenPackElfsList
             }
         }
     }
@@ -37,8 +35,6 @@ android {
             path "src/main/cpp/Android.mk"
         }
     }
-    ext.zenPackElfsList = elfsNames
-    ext.zenPackSosList = soNames
 }
 
 tasks.register('cppVersions') {

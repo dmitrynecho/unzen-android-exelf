@@ -1,0 +1,21 @@
+zenPackApksTaskName = "zenPackBundes"
+
+String alephCopyApksTaskName = "alephCopyApks"
+tasks.register(alephCopyApksTaskName, Copy) {
+    group = "aleph"
+    from "build/outputs/apk/fat/debug"
+    from "build/outputs/apk/fat/release"
+    from "build/outputs/apk/a32/release"
+    from "build/outputs/apk/a64/release"
+    from "build/outputs/apk/x32/release"
+    from "build/outputs/apk/x64/release"
+    include "*.apk"
+    into "$zenPackReleaseDir/apks"
+    dependsOn tasks.named("assemble")
+}
+
+tasks.register("zenPackApks") {
+    group = "aleph"
+    description = "Public APKs build."
+    dependsOn tasks.named(alephCopyApksTaskName)
+}

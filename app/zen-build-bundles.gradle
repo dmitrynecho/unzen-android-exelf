@@ -1,0 +1,40 @@
+String projectName = "lib-cuscuta"
+
+tasks.register(zenPackBundlesTaskName, Zip) {
+    archiveFileName = "symbols.zip"
+    destinationDirectory = file("$zenPackReleaseDir")
+    from project(":$projectName").cppSymbolsDir
+    baseAbis.each { abi ->
+        zenPackSosList.each { prog ->
+            include "$abi/lib${prog}.so"
+        }
+    }
+    doFirst {
+        delete(file("$zenPackReleaseDir/symbols.zip"))
+        delete(file("$zenPackReleaseDir/ndk-stack"))
+    }
+    doLast {
+        if (rootProject.verboseLogs) {
+            String tag = "zenPackElfs ndk-stack"
+            if (project(":$projectName").hasProperty("cppSymbolsDir")) {
+                println("$tag ${project(":$projectName").cppSymbolsDir}")
+            } else {
+                println("$tag project(:$projectName).cppSymbolsDir null")
+            }
+        }
+        baseAbis.each { abi ->
+            copy {
+                from project(":$projectName").cppSymbolsDir
+                into file("$zenPackReleaseDir/ndk-stack")
+                zenPackSosList.each { prog ->
+                    include "$abi/lib${prog}.so"
+                }
+                zenPackElfsList.each { prog ->
+                    include abi + '/' + prog
+                }
+            }
+        }
+    }
+    dependsOn tasks.named("bundle")
+    outputs.upToDateWhen { false }
+}

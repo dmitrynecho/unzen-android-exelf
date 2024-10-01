@@ -2,9 +2,13 @@ buildscript {
     ext {
         baseVersion = 1080
         baseAbis = ['armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64']
+        zenPackSosList = ['jnifoo']
+        zenPackElfsList = ['exebar', 'exebaz']
         exelfTargetSdkVersion = 34
         exelfCompileSdkVersion = 34
         exelfNdkVersion = '21.3.6528147'
+        zenPackBundlesTaskName = "zenPackBundes"
+        zenPackReleaseDir = "$rootDir.absolutePath/release"
         verboseLogs = true
     }
     repositories {

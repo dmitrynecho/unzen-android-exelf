@@ -43,8 +43,8 @@ ext.srcElfsDirPathMatch = buildPath("intermediates/cxx/Release")
 
 void zenPackElfsTask(String variant, String abi) {
     String copyElfsTaskName = "zenPackElfs$variant[$abi]"
-    ArrayList<String> elfs = android.zenPackElfsList
-    ArrayList<String> sos = android.zenPackSosList
+    ArrayList<String> elfs = zenPackElfsList
+    ArrayList<String> sos = zenPackSosList
     String srcElfsDir = getSrcElfsDir(variant, abi, elfs + sos)
     if (rootProject.verboseLogs) {
         println("$copyElfsTaskName srcElfsDir: ${beautifyPath(srcElfsDir)}")
