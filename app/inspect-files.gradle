@@ -33,3 +33,12 @@ tasks.register("inspectBuildDirs") {
         report.text = String.join("\n", found)
     }
 }
+
+tasks.register("inspectBuildDirsClean") {
+    group = "aleph"
+    doLast {
+        String rootPath = project.rootDir.absolutePath
+        delete(file("$rootPath/app/build"))
+        delete(file("$rootPath/lib-cuscuta/build"))
+    }
+}

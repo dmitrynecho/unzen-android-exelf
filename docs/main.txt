@@ -63,3 +63,7 @@ AGP 4.1.2 and AGP 7.3.1 gather solibs from all modules in "merged_native_libs" d
 In AGP 4.1.2, when project contains modules, they responsible for stripping their solibs on their own. You can search app build dir for solib names and you'll see that it contains only already stripped versions of solibs from modules that app depends on. However, strippend solibs from modules are copied in app's "merged_native_libs" dir, so app will redurantly run stripping on them second time.
 
 In AGP 7.3.1, when project contains modules, stripping performed only once in app module, modules that app depends on no more perform redurant solib stripping.
+
+* * *
+
+Option "ndk.debugSymbolLevel" has no effect in library's "build.gradle", works only in application's "build.gradle".

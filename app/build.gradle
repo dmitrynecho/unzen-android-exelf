@@ -26,6 +26,7 @@ android {
         release {
             versionNameSuffix "R"
             minifyEnabled false
+            ndk.debugSymbolLevel = 'full'
         }
     }
     buildFeatures.buildConfig = true
