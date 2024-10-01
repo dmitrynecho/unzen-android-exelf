@@ -169,31 +169,31 @@ O: <lib>/intermediates/cxx/Release/<hash>/obj/local/x86_64
 O: <lib>/intermediates/merged_jni_libs/release/mergeReleaseJniLibFolders/out
 
 48 :lib-cuscuta:mergeReleaseNativeLibs
-I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/armeabi-v7a/libjnifoo.so
-I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/arm64-v8a/libjnifoo.so
-I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/x86/libjnifoo.so
-I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/x86_64/libjnifoo.so
+I: <lib>/intermediates/cxx/Release/<hash>/obj/local/armeabi-v7a/libjnifoo.so
+I: <lib>/intermediates/cxx/Release/<hash>/obj/local/arm64-v8a/libjnifoo.so
+I: <lib>/intermediates/cxx/Release/<hash>/obj/local/x86/libjnifoo.so
+I: <lib>/intermediates/cxx/Release/<hash>/obj/local/x86_64/libjnifoo.so
 O: <lib>/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out
 O: <lib>/intermediates/merged_test_only_native_libs/release/mergeReleaseNativeLibs/out
 
 49 :lib-cuscuta:zenPackElfsRelease[arm64-v8a]
-I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/arm64-v8a/exebar
-I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/arm64-v8a/exebaz
+I: <lib>/intermediates/cxx/Release/<hash>/obj/local/arm64-v8a/exebar
+I: <lib>/intermediates/cxx/Release/<hash>/obj/local/arm64-v8a/exebaz
 O: <lib>/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib/arm64-v8a
 
 50 :lib-cuscuta:zenPackElfsRelease[armeabi-v7a]
-I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/armeabi-v7a/exebar
-I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/armeabi-v7a/exebaz
+I: <lib>/intermediates/cxx/Release/<hash>/obj/local/armeabi-v7a/exebar
+I: <lib>/intermediates/cxx/Release/<hash>/obj/local/armeabi-v7a/exebaz
 O: <lib>/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib/armeabi-v7a
 
 51 :lib-cuscuta:zenPackElfsRelease[x86]
-I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/x86/exebar
-I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/x86/exebaz
+I: <lib>/intermediates/cxx/Release/<hash>/obj/local/x86/exebar
+I: <lib>/intermediates/cxx/Release/<hash>/obj/local/x86/exebaz
 O: <lib>/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib/x86
 
 52 :lib-cuscuta:zenPackElfsRelease[x86_64]
-I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/x86_64/exebar
-I: <lib>/intermediates/cxx/Release/5h6q5c2l/obj/local/x86_64/exebaz
+I: <lib>/intermediates/cxx/Release/<hash>/obj/local/x86_64/exebar
+I: <lib>/intermediates/cxx/Release/<hash>/obj/local/x86_64/exebaz
 O: <lib>/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib/x86_64
 
 53 :lib-cuscuta:stripReleaseDebugSymbols
@@ -859,31 +859,31 @@ O: <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86_64
 O: <lib>/intermediates/merged_jni_libs/debug/mergeDebugJniLibFolders/out
 
 212 :lib-cuscuta:mergeDebugNativeLibs
-I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/armeabi-v7a/libjnifoo.so
-I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/arm64-v8a/libjnifoo.so
-I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/x86/libjnifoo.so
-I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/x86_64/libjnifoo.so
+I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/armeabi-v7a/libjnifoo.so
+I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/arm64-v8a/libjnifoo.so
+I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86/libjnifoo.so
+I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86_64/libjnifoo.so
 O: <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out
 O: <lib>/intermediates/merged_test_only_native_libs/debug/mergeDebugNativeLibs/out
 
 213 :lib-cuscuta:zenPackElfsDebug[arm64-v8a]
-I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/arm64-v8a/exebar
-I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/arm64-v8a/exebaz
+I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/arm64-v8a/exebar
+I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/arm64-v8a/exebaz
 O: <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/arm64-v8a
 
 214 :lib-cuscuta:zenPackElfsDebug[armeabi-v7a]
-I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/armeabi-v7a/exebar
-I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/armeabi-v7a/exebaz
+I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/armeabi-v7a/exebar
+I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/armeabi-v7a/exebaz
 O: <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/armeabi-v7a
 
 215 :lib-cuscuta:zenPackElfsDebug[x86]
-I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/x86/exebar
-I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/x86/exebaz
+I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86/exebar
+I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86/exebaz
 O: <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/x86
 
 216 :lib-cuscuta:zenPackElfsDebug[x86_64]
-I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/x86_64/exebar
-I: <lib>/intermediates/cxx/Debug/3o5x166y/obj/local/x86_64/exebaz
+I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86_64/exebar
+I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86_64/exebaz
 O: <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/x86_64
 
 217 :lib-cuscuta:copyDebugJniLibsProjectOnly
@@ -1591,13 +1591,4 @@ O: <app>/intermediates/apk_ide_redirect_file/x64Release/createX64ReleaseApkListi
 
 378 :app:assemble
 
-379 :app:alephCopyApks
-I: <app>/outputs/apk/fat/debug/unzen-exelf-1070+FATD.apk
-I: <app>/outputs/apk/fat/release/unzen-exelf-1070+FATR.apk
-I: <app>/outputs/apk/a32/release/unzen-exelf-1071+A32R.apk
-I: <app>/outputs/apk/a64/release/unzen-exelf-1072+A64R.apk
-I: <app>/outputs/apk/x32/release/unzen-exelf-1073+X32R.apk
-I: <app>/outputs/apk/x64/release/unzen-exelf-1074+X64R.apk
-O: apks
-
-380 :app:alephTasksGraphAssemble
+379 :app:tasksGraphAssemble

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+apply from: 'inspect-files.gradle'
 apply from: 'zen-tasks-graph.gradle'
 apply from: 'zen-build-bundles.gradle'
 

@@ -1,6 +1,6 @@
-import org.gradle.api.internal.tasks.DefaultTaskInputs
+apply from: 'print-path-utils.gradle'
 
-import java.util.regex.Pattern
+import org.gradle.api.internal.tasks.DefaultTaskInputs
 
 def tasksToStrings = new LinkedHashMap<String, String>()
 String genTasksGraphTaskNameAssemble = "tasksGraphAssemble"
@@ -8,37 +8,7 @@ String genTasksGraphTaskNameBundle = "tasksGraphBundle"
 File reportAssemble = file("$rootDir/docs/tasks-graph-assemble.txt")
 File reportBundle = file("$rootDir/docs/tasks-graph-bundle.txt")
 
-ext.rootDirAbsolutePathLength = rootDir.absolutePath.length()
-
 @SuppressWarnings('GrMethodMayBeStatic')
-String beautifyInputOutput(String path) {
-    path = path.substring(rootDirAbsolutePathLength + 1)
-    if (path.startsWith("app/build/")) {
-        path = path.replaceFirst("app/build", "<app>")
-    } else if (path.startsWith("lib-cuscuta/build/")) {
-        path = path.replaceFirst("lib-cuscuta/build", "<lib>")
-    }
-    return path
-}
-
-String beautifyInput(String input) {
-    return beautifyInputOutput(input)
-}
-
-// /path/to/module/build/intermediates/cxx/Release/6h6q3c2l/logs/arm64-v8a
-// /path/to/module/build/intermediates/cxx/Release/6h6q3c2l/obj/local/arm64-v8a
-ext.stabilizePathsPattern = Pattern.compile(
-        "(.+)(/build/intermediates/cxx/)(.+)(/.{8}/)(logs|obj/local)(.+)")
-
-@SuppressWarnings('GrMethodMayBeStatic')
-String beautifyOutput(String output) {
-    if (!output.contains("/build/intermediates/cxx/")) {
-        return beautifyInputOutput(output)
-    }
-    output = output.replaceAll(stabilizePathsPattern, "\$1\$2\$3/<hash>/\$5\$6")
-    return beautifyInputOutput(output)
-}
-
 String taskToString(Task task) {
     String inputIgnore = "org.gradle.api.internal.tasks.DefaultTaskInputs"
     StringBuffer taskInfo = new StringBuffer()

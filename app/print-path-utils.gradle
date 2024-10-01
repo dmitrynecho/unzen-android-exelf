@@ -1,0 +1,37 @@
+import java.util.regex.Pattern
+
+ext.rootDirAbsolutePathLength = rootDir.absolutePath.length()
+
+@SuppressWarnings('GrMethodMayBeStatic')
+String beautifyInternal(String path) {
+    String app = "app/build"
+    String lib = "lib-cuscuta/build"
+    path = path.substring(rootDirAbsolutePathLength + 1)
+    if (path.startsWith("$app/") || path == app) {
+        path = path.replaceFirst(app, "<app>")
+    } else if (path.startsWith("$lib/") || path == lib) {
+        path = path.replaceFirst(lib, "<lib>")
+    }
+    return path
+}
+
+// /path/to/module/build/intermediates/cxx/Release/6h6q3c2l/logs/arm64-v8a
+// /path/to/module/build/intermediates/cxx/Release/6h6q3c2l/obj/local/arm64-v8a
+ext.stabilizePathsPattern = Pattern.compile(
+        "(.+)(/build/intermediates/cxx/)(.+)(/.{8}/)(logs|obj/local)(.+)")
+
+ext.beautifyInputOutput = { String path ->
+    if (!path.contains("/build/intermediates/cxx/")) {
+        return beautifyInternal(path)
+    }
+    path = path.replaceAll(stabilizePathsPattern, "\$1\$2\$3/<hash>/\$5\$6")
+    return beautifyInternal(path)
+}
+
+ext.beautifyInput = { String input ->
+    return beautifyInputOutput(input)
+}
+
+ext.beautifyOutput = { String output ->
+    return beautifyInputOutput(output)
+}

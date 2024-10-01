@@ -1,0 +1,14 @@
+apply from: 'print-path-utils.gradle'
+
+@SuppressWarnings('GrMethodMayBeStatic')
+void processDir(File dir) {
+    println(beautifyInputOutput(dir.absolutePath))
+}
+
+tasks.register("inspectBuildDirs") {
+    group = "aleph"
+    doLast {
+        processDir(file(project.rootDir.absolutePath + "/app/build"))
+        processDir(file(project.rootDir.absolutePath + "/lib-cuscuta/build"))
+    }
+}
