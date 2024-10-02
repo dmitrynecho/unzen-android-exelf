@@ -1,9 +1,14 @@
-String projectName = "lib-cuscuta"
+File getSrcDir() {
+    Project p = project(":$zenPackProjectName")
+    String buildDir = p.getLayout().buildDirectory.asFile.get().absolutePath
+    String pathStart = "$buildDir/intermediates/merged_native_libs"
+    return file("$pathStart/release/mergeReleaseNativeLibs/out/lib")
+}
 
 tasks.register(zenPackBundlesTaskName, Zip) {
     archiveFileName = "symbols.zip"
     destinationDirectory = file("$zenPackReleaseDir")
-    from project(":$projectName").cppSymbolsDir
+    from getSrcDir()
     baseAbis.each { abi ->
         zenPackSosList.each { prog ->
             include "$abi/lib${prog}.so"
@@ -14,23 +19,15 @@ tasks.register(zenPackBundlesTaskName, Zip) {
         delete(file("$zenPackReleaseDir/ndk-stack"))
     }
     doLast {
-        if (rootProject.verboseLogs) {
-            String tag = "zenPackElfs ndk-stack"
-            if (project(":$projectName").hasProperty("cppSymbolsDir")) {
-                println("$tag ${project(":$projectName").cppSymbolsDir}")
-            } else {
-                println("$tag project(:$projectName).cppSymbolsDir null")
-            }
-        }
         baseAbis.each { abi ->
             copy {
-                from project(":$projectName").cppSymbolsDir
+                from getSrcDir()
                 into file("$zenPackReleaseDir/ndk-stack")
                 zenPackSosList.each { prog ->
                     include "$abi/lib${prog}.so"
                 }
                 zenPackElfsList.each { prog ->
-                    include abi + '/' + prog
+                    include "$abi/lib${prog}.so"
                 }
             }
         }

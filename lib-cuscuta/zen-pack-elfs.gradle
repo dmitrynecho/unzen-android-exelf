@@ -52,14 +52,6 @@ void zenPackElfsTask(String variant, String abi) {
     if (srcElfsDir == null) {
         return
     }
-    if (srcElfsDir.startsWith(srcElfsDirPathMatch)) {
-        String path = file(srcElfsDir).getParentFile().absolutePath
-        project.ext.cppSymbolsDir = path
-        if (rootProject.verboseLogs) {
-            println("$copyElfsTaskName project.cppSymbolsDir:" +
-                    " ${beautifyPath(project.cppSymbolsDir)}")
-        }
-    }
     TaskProvider<Copy> copyElfsTask = tasks.register(copyElfsTaskName, Copy) {
         from srcElfsDir
         into getDstElfsDir(variant, abi)

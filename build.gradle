@@ -9,6 +9,7 @@ buildscript {
         exelfNdkVersion = '21.3.6528147'
         zenPackBundlesTaskName = "zenPackBundes"
         zenPackReleaseDir = "$rootDir.absolutePath/release"
+        zenPackProjectName = "lib-cuscuta"
         verboseLogs = true
     }
     repositories {
