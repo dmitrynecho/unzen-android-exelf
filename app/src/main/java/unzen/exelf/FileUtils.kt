@@ -1,131 +1,135 @@
-package unzen.exelf;
+package unzen.exelf
 
-import android.os.Build;
-import android.system.Os;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Paths;
-import java.util.Objects;
-
-import static java.lang.String.format;
+import android.os.Build
+import android.system.Os
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.IOException
+import java.nio.file.Files
+import java.nio.file.LinkOption
+import java.nio.file.Paths
+import java.util.Objects
 
 /**
  * Some methods copied from Apache Commons IO.
  */
-public class FileUtils {
-
-    static public void symlink(String target, String link) throws Exception {
+object FileUtils {
+    @Throws(Exception::class)
+    fun symlink(target: String, link: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Files.createSymbolicLink(Paths.get(link), Paths.get(target));
+            Files.createSymbolicLink(Paths.get(link), Paths.get(target))
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Os.symlink(target, link);
+            Os.symlink(target, link)
         } else {
-            Runtime.getRuntime().exec(new String[] {"ln", "-s", target, link}).waitFor();
+            Runtime.getRuntime().exec(arrayOf("ln", "-s", target, link)).waitFor()
         }
     }
 
-    public static String readSymlink(File symlink) throws IOException {
+    @Throws(IOException::class)
+    fun readSymlink(symlink: File): String {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String target = Files.readSymbolicLink(symlink.toPath()).toString();
+            val target = Files.readSymbolicLink(symlink.toPath()).toString()
             if (symlink.exists()) {
                 // Since getCanonicalPath() and getCanonicalFile() works only for non broken
                 // links, this check has sense only if link is not broken. Broken symlinks
                 // returns false from exists().
-                String compatTarget = symlink.getCanonicalPath();
-                if (!target.equals(compatTarget)) {
-                    throw new IOException(format("!target.equals(compatTarget) [%s] -> [%s][%s]",
-                            symlink, target, compatTarget));
+                val compatTarget = symlink.canonicalPath
+                if (target != compatTarget) {
+                    throw IOException(
+                        String.format(
+                            "!target.equals(compatTarget) [%s] -> [%s][%s]",
+                            symlink, target, compatTarget
+                        )
+                    )
                 }
             }
-            return target;
+            return target
         }
-        String target = symlink.getCanonicalPath();
-        if (target.equals(symlink.getAbsolutePath())) {
-            throw new IOException(format("Not a symlink: %s", symlink));
+        val target = symlink.canonicalPath
+        if (target == symlink.absolutePath) {
+            throw IOException(String.format("Not a symlink: %s", symlink))
         }
-        return target;
+        return target
     }
 
-    public static boolean existsFollowLinks(File file) {
+    fun existsFollowLinks(file: File): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            return Files.exists(file.toPath());
+            return Files.exists(file.toPath())
         }
-        return file.exists();
+        return file.exists()
     }
 
-    public static boolean existsNoFollowLinks(File file) {
+    fun existsNoFollowLinks(file: File): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            return Files.exists(file.toPath(), LinkOption.NOFOLLOW_LINKS);
+            return Files.exists(file.toPath(), LinkOption.NOFOLLOW_LINKS)
         }
-        boolean res = file.exists();
+        val res = file.exists()
         if (res) {
-            return true;
+            return true
         }
-        return fileListedInDir(Objects.requireNonNull(file.getParentFile()), file);
+        return fileListedInDir(Objects.requireNonNull(file.parentFile), file)
     }
 
-    static public boolean fileListedInDir(File dir, File file) {
-        for (File fileInDir : Objects.requireNonNull(dir.listFiles())) {
-            if (fileInDir.getAbsolutePath().equals(file.getAbsolutePath())) {
-                return true;
+    fun fileListedInDir(dir: File, file: File): Boolean {
+        for (fileInDir in Objects.requireNonNull(dir.listFiles())) {
+            if (fileInDir.absolutePath == file.absolutePath) {
+                return true
             }
         }
-        return false;
+        return false
     }
 
     /**
      * Determines whether the specified file is a Symbolic Link rather than an actual file.
-     * <p>
+     *
+     *
      * Will not return true if there is a Symbolic Link anywhere in the path,
      * only if the specific file is.
      * @param file the file to check
      * @return true if the file is a Symbolic Link
      * @throws IOException if an IO error occurs while checking the file
      */
-    public static boolean isSymlink(File file) throws IOException {
+    @Throws(IOException::class)
+    fun isSymlink(file: File?): Boolean {
         if (file == null) {
-            throw new NullPointerException("File must not be null");
+            throw NullPointerException("File must not be null")
         }
         // We dont use here simple getCanonicalPath() equals getAbsolutePath() because they
         // might be not equals when there is symlink in upper path, but the file that
         // we currently checking is not a symlink.
-        File fileInCanonicalDir;
-        if (file.getParent() == null) {
-            fileInCanonicalDir = file;
+        val fileInCanonicalDir: File
+        if (file.parent == null) {
+            fileInCanonicalDir = file
         } else {
-            File canonicalDir = Objects.requireNonNull(file.getParentFile()).getCanonicalFile();
-            fileInCanonicalDir = new File(canonicalDir, file.getName());
+            val canonicalDir = Objects.requireNonNull(file.parentFile).canonicalFile
+            fileInCanonicalDir = File(canonicalDir, file.name)
         }
-        boolean res;
-        if (fileInCanonicalDir.getCanonicalFile().equals(fileInCanonicalDir.getAbsoluteFile())) {
+        val res: Boolean
+        if (fileInCanonicalDir.canonicalFile == fileInCanonicalDir.absoluteFile) {
             // If file exists then if it is a symlink it's not broken.
             if (file.exists()) {
-                res = false;
+                res = false
             } else {
                 // Broken symlink will show up in the list of files of its parent directory.
-                File canon = file.getCanonicalFile();
-                File parentDir = canon.getParentFile();
+                val canon = file.canonicalFile
+                val parentDir = canon.parentFile
                 if (parentDir == null || !parentDir.exists()) {
-                    res = false;
+                    res = false
                 } else {
-                    File[] fileInDir = parentDir.listFiles(aFile -> aFile.equals(canon));
-                    res = fileInDir != null && fileInDir.length > 0;
+                    val fileInDir = parentDir.listFiles { aFile: File -> aFile == canon }
+                    res = fileInDir != null && fileInDir.size > 0
                 }
             }
         } else {
-            res = true;
+            res = true
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            boolean resNormal = Files.isSymbolicLink(file.toPath());
+            val resNormal = Files.isSymbolicLink(file.toPath())
             if (res != resNormal) {
-                throw new IOException(format("%b, %b, %s", resNormal, res, file));
+                throw IOException(String.format("%b, %b, %s", resNormal, res, file))
             }
         }
-        return res;
+        return res
     }
 
     /**
@@ -134,48 +138,50 @@ public class FileUtils {
      * @return The files in the directory, never null.
      * @throws IOException if an I/O error occurs
      */
-    private static File[] verifiedListFiles(File directory) throws IOException {
+    @Throws(IOException::class)
+    private fun verifiedListFiles(directory: File): Array<File> {
         if (!directory.exists()) {
-            final String message = directory + " does not exist";
-            throw new IllegalArgumentException(message);
+            val message = "$directory does not exist"
+            throw IllegalArgumentException(message)
         }
-        if (!directory.isDirectory()) {
-            final String message = directory + " is not a directory";
-            throw new IllegalArgumentException(message);
+        if (!directory.isDirectory) {
+            val message = "$directory is not a directory"
+            throw IllegalArgumentException(message)
         }
-        final File[] files = directory.listFiles();
-        if (files == null) {  // null if security restricted
-            throw new IOException("Failed to list contents of " + directory);
-        }
-        return files;
+        val files = directory.listFiles()
+            ?: // null if security restricted
+            throw IOException("Failed to list contents of $directory")
+        return files
     }
 
     /**
      * Deletes a file. If file is a directory, delete it and all sub-directories.
-     * <p>
-     * The difference between File.delete() and this method are:
-     * <ul>
-     * <li>A directory to be deleted does not have to be empty.</li>
-     * <li>You get exceptions when a file or directory cannot be deleted.
-     * (java.io.File methods returns a boolean)</li>
-     * </ul>
      *
-     * @param file file or directory to delete, must not be {@code null}
-     * @throws NullPointerException  if the directory is {@code null}
+     *
+     * The difference between File.delete() and this method are:
+     *
+     *  * A directory to be deleted does not have to be empty.
+     *  * You get exceptions when a file or directory cannot be deleted.
+     * (java.io.File methods returns a boolean)
+     *
+     *
+     * @param file file or directory to delete, must not be `null`
+     * @throws NullPointerException  if the directory is `null`
      * @throws FileNotFoundException if the file was not found
      * @throws IOException           in case deletion is unsuccessful
      */
-    public static void forceDelete(final File file) throws IOException {
-        if (file.isDirectory()) {
-            deleteDirectory(file);
+    @Throws(IOException::class)
+    fun forceDelete(file: File) {
+        if (file.isDirectory) {
+            deleteDirectory(file)
         } else {
-            final boolean filePresent = file.exists();
+            val filePresent = file.exists()
             if (!file.delete()) {
                 if (!filePresent) {
-                    throw new FileNotFoundException("File does not exist: " + file);
+                    throw FileNotFoundException("File does not exist: $file")
                 }
-                final String message = "Unable to delete file: " + file;
-                throw new IOException(message);
+                val message = "Unable to delete file: $file"
+                throw IOException(message)
             }
         }
     }
@@ -185,20 +191,21 @@ public class FileUtils {
      *
      * @param directory directory to clean
      * @throws IOException              in case cleaning is unsuccessful
-     * @throws IllegalArgumentException if {@code directory} does not exist or is not a directory
+     * @throws IllegalArgumentException if `directory` does not exist or is not a directory
      */
-    public static void cleanDirectory(final File directory) throws IOException {
-        final File[] files = verifiedListFiles(directory);
-        IOException exception = null;
-        for (final File file : files) {
+    @Throws(IOException::class)
+    fun cleanDirectory(directory: File) {
+        val files = verifiedListFiles(directory)
+        var exception: IOException? = null
+        for (file in files) {
             try {
-                forceDelete(file);
-            } catch (final IOException ioe) {
-                exception = ioe;
+                forceDelete(file)
+            } catch (ioe: IOException) {
+                exception = ioe
             }
         }
         if (null != exception) {
-            throw exception;
+            throw exception
         }
     }
 
@@ -207,18 +214,19 @@ public class FileUtils {
      *
      * @param directory directory to delete
      * @throws IOException              in case deletion is unsuccessful
-     * @throws IllegalArgumentException if {@code directory} does not exist or is not a directory
+     * @throws IllegalArgumentException if `directory` does not exist or is not a directory
      */
-    public static void deleteDirectory(final File directory) throws IOException {
+    @Throws(IOException::class)
+    fun deleteDirectory(directory: File) {
         if (!directory.exists()) {
-            return;
+            return
         }
         if (!isSymlink(directory)) {
-            cleanDirectory(directory);
+            cleanDirectory(directory)
         }
         if (!directory.delete()) {
-            final String message = "Unable to delete directory " + directory + ".";
-            throw new IOException(message);
+            val message = "Unable to delete directory $directory."
+            throw IOException(message)
         }
     }
 }

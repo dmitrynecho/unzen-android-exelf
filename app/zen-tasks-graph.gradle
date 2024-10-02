@@ -9,7 +9,20 @@ File reportAssemble = file("$rootDir/docs/tasks-graph-assemble.txt")
 File reportBundle = file("$rootDir/docs/tasks-graph-bundle.txt")
 
 @SuppressWarnings('GrMethodMayBeStatic')
+boolean isKotlinException(String taskName) {
+    if (taskName.startsWith("compile") && taskName.endsWith("Kotlin")) {
+        return true
+    }
+    if (taskName.startsWith("process") && taskName.endsWith("JavaRes")) {
+        return true
+    }
+    return false
+}
+
+@SuppressWarnings('GrMethodMayBeStatic')
 String taskToString(Task task) {
+    String kotlinException = "Querying input of Kotlin tasks" +
+            " before they completed throws exception"
     String inputIgnore = "org.gradle.api.internal.tasks.DefaultTaskInputs"
     StringBuffer taskInfo = new StringBuffer()
     taskInfo << task.path
@@ -24,9 +37,13 @@ String taskToString(Task task) {
         if (it instanceof File) {
             taskInfo << "\nI: ${beautifyInput(it.absolutePath)}"
         } else if (it instanceof DefaultTaskInputs) {
-            ((DefaultTaskInputs) it).sourceFiles.forEach { file ->
-                if (file instanceof File) {
-                    taskInfo << "\nI: ${beautifyInput(file.absolutePath)}"
+            if (isKotlinException(task.name)) {
+                taskInfo << "\nI: $kotlinException"
+            } else {
+                ((DefaultTaskInputs) it).sourceFiles.forEach { file ->
+                    if (file instanceof File) {
+                        taskInfo << "\nI: ${beautifyInput(file.absolutePath)}"
+                    }
                 }
             }
         } else {

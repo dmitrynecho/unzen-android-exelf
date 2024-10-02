@@ -1,351 +1,358 @@
-package unzen.exelf;
+package unzen.exelf
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.widget.TextView;
+import android.app.Activity
+import android.os.Bundle
+import android.text.TextUtils
+import android.widget.TextView
+import unzen.exelf.cuscuta.Cuscuta
+import java.io.File
+import java.io.IOException
+import java.util.Arrays
+import java.util.Objects
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-
-import unzen.exelf.cuscuta.Cuscuta;
-
-import static unzen.exelf.Assert.assertFalse;
-import static unzen.exelf.Assert.assertTrue;
-import static unzen.exelf.FileUtils.fileListedInDir;
-import static unzen.exelf.Utils.executeFromAppFiles;
-import static unzen.exelf.Utils.format;
-import static unzen.exelf.Utils.fullSoName;
-import static unzen.exelf.Utils.getExeOutput;
-import static unzen.exelf.Utils.parseVerFromFile;
-import static unzen.exelf.Utils.parseVerFromOutput;
-
-import androidx.annotation.NonNull;
-
-public class MainActivity extends Activity {
-
-    static private final String FOO_NAME = "jnifoo";
-    static public final String FOO = fullSoName(FOO_NAME);
-    static private final String BAR_NAME = "exebar";
-    static public final String BAR = fullSoName(BAR_NAME);
-    static private final String BAZ_NAME = "exebaz";
-    static public final String BAZ = fullSoName(BAZ_NAME);
-    static private final Set<String> APK_EXES
-            = new HashSet<>(Arrays.asList(FOO, BAR, BAZ));
-
-    static private class Report {
-
-        public final String name;
-        public final Map<String, Integer> abisToVers;
-        public final long totalSize;
-        public final int verFromOutput;
-
-        public boolean versInSync(int version) {
-            for (Integer v : abisToVers.values()) {
+class MainActivity : Activity() {
+    private class Report(
+        val name: String, val abisToVers: Map<String?, Int>,
+        val totalSize: Long, val verFromOutput: Int
+    ) {
+        fun versInSync(version: Int): Boolean {
+            for (v in abisToVers.values) {
                 if (version != v) {
-                    return false;
+                    return false
                 }
             }
-            return true;
+            return true
         }
 
-        public String header() {
-            return format("%s v%d, %d B", name, verFromOutput, totalSize);
+        fun header(): String {
+            return Utils.format("%s v%d, %d B", name, verFromOutput, totalSize)
         }
 
-        public String body() {
-            StringBuilder result = new StringBuilder();
-            for (Map.Entry<String, Integer> entry : abisToVers.entrySet()) {
-                if (result.length() > 0) {
-                    result.append(", ");
+        fun body(): String {
+            val result = StringBuilder()
+            for ((key, value) in abisToVers) {
+                if (result.length > 0) {
+                    result.append(", ")
                 }
-                result.append(entry.getKey());
-                result.append(" ").append("v");
-                result.append(entry.getValue());
+                result.append(key)
+                result.append(" ").append("v")
+                result.append(value)
             }
-            return Utils.shortenAbisNames(result.toString());
+            return Utils.shortenAbisNames(result.toString())
         }
 
-        @Override @NonNull
-        public String toString() {
-            return header() + "\n" + body();
-        }
-
-        private Report(String name, Map<String, Integer> abisToVers,
-                long size, int verFromOutput) {
-            this.name = name;
-            this.abisToVers = abisToVers;
-            this.totalSize = size;
-            this.verFromOutput = verFromOutput;
+        override fun toString(): String {
+            return """
+                ${header()}
+                ${body()}
+                """.trimIndent()
         }
     }
 
-    static private void checkOutput(String elfName, String actualOut) {
-        String expected = format("I'm %s! UNZEN-VERSION-", elfName);
-        String message = format("Expected: %s, actual: %s", expected, actualOut);
-        assertTrue(actualOut.startsWith(expected), message);
-    }
-
-    private Report getJniReport(File apkDir) throws IOException {
-        File apkLibsDir = new File(apkDir, "lib");
-        Map<String, Integer> abisToVers = new HashMap<>();
-        long totalSize = 0;
-        for (File abiDir : Objects.requireNonNull(apkLibsDir.listFiles())) {
-            File foo = new File(abiDir, FOO);
+    @Throws(IOException::class)
+    private fun getJniReport(apkDir: File): Report {
+        val apkLibsDir = File(apkDir, "lib")
+        val abisToVers: MutableMap<String?, Int> = HashMap()
+        var totalSize: Long = 0
+        for (abiDir in Objects.requireNonNull<Array<File>>(apkLibsDir.listFiles())) {
+            val foo = File(abiDir, FOO)
             if (!foo.exists()) {
-                continue;
+                continue
             }
-            abisToVers.put(abiDir.getName(), parseVerFromFile(foo));
-            totalSize += foo.length();
+            abisToVers[abiDir.name] = Utils.parseVerFromFile(foo)
+            totalSize += foo.length()
         }
-        String output = Cuscuta.getStringFromJni();
-        checkOutput(FOO, output);
-        return new Report(FOO, abisToVers, totalSize, parseVerFromOutput(output));
+        val output: String = Cuscuta.stringFromJni!!
+        checkOutput(FOO, output)
+        return Report(FOO, abisToVers, totalSize, Utils.parseVerFromOutput(output))
     }
 
-    private int exesVerFromOutput(File exesDir, boolean fullName, boolean setExec)
-            throws IOException {
-        File barExe = new File(exesDir, fullName ? BAR : BAR_NAME);
-        assertTrue(!setExec || barExe.setExecutable(true));
-        String barOut = getExeOutput(barExe);
-        checkOutput(BAR_NAME, barOut);
-        int barVer = parseVerFromOutput(barOut);
-        File bazExe = new File(exesDir, fullName ? BAZ : BAZ_NAME);
-        assertTrue(!setExec || bazExe.setExecutable(true));
-        String bazOut = getExeOutput(bazExe);
-        checkOutput(BAZ_NAME, bazOut);
-        int bazVer = parseVerFromOutput(barOut);
-        assertTrue(barVer == bazVer, format("VerFromOutput %d != %d", barVer, bazVer));
-        return barVer;
+    @Throws(IOException::class)
+    private fun exesVerFromOutput(exesDir: File, fullName: Boolean, setExec: Boolean): Int {
+        val barExe = File(exesDir, if (fullName) BAR else BAR_NAME)
+        Assert.assertTrue(!setExec || barExe.setExecutable(true))
+        val barOut = Utils.getExeOutput(barExe)
+        checkOutput(BAR_NAME, barOut)
+        val barVer = Utils.parseVerFromOutput(barOut)
+        val bazExe = File(exesDir, if (fullName) BAZ else BAZ_NAME)
+        Assert.assertTrue(!setExec || bazExe.setExecutable(true))
+        val bazOut = Utils.getExeOutput(bazExe)
+        checkOutput(BAZ_NAME, bazOut)
+        val bazVer = Utils.parseVerFromOutput(barOut)
+        Assert.assertTrue(barVer == bazVer, Utils.format("VerFromOutput %d != %d", barVer, bazVer))
+        return barVer
     }
 
-    private int exesVerFromOutputSymlinks(File exesDir) throws Exception {
-        File linksDir = new File(getCacheDir(), "exe-links");
-        assertTrue(linksDir.exists() || linksDir.mkdirs());
-        for (String exe : new String[] {BAR_NAME, BAZ_NAME}) {
-            File target = new File(exesDir, fullSoName(exe));
-            assertTrue(target.exists());
-            File symlink = new File(linksDir, exe);
+    @Throws(Exception::class)
+    private fun exesVerFromOutputSymlinks(exesDir: File): Int {
+        val linksDir = File(cacheDir, "exe-links")
+        Assert.assertTrue(linksDir.exists() || linksDir.mkdirs())
+        for (exe in arrayOf<String>(BAR_NAME, BAZ_NAME)) {
+            val target = File(exesDir, Utils.fullSoName(exe))
+            Assert.assertTrue(target.exists())
+            val symlink = File(linksDir, exe)
             if (symlink.exists()) {
-                assertTrue(symlink.delete());
+                Assert.assertTrue(symlink.delete())
             }
-            assertFalse(symlink.exists());
+            Assert.assertFalse(symlink.exists())
             if (FileUtils.existsNoFollowLinks(symlink)) {
-                assertFalse(FileUtils.existsFollowLinks(symlink));
-                assertTrue(FileUtils.isSymlink(symlink));
-                assertTrue(FileUtils.fileListedInDir(linksDir, symlink));
-                File deadTarget = new File(FileUtils.readSymlink(symlink));
-                assertFalse(deadTarget.exists());
-                assertFalse(target.equals(deadTarget));
-                assertTrue(symlink.delete());
-                assertFalse(FileUtils.existsNoFollowLinks(symlink));
+                Assert.assertFalse(FileUtils.existsFollowLinks(symlink))
+                Assert.assertTrue(FileUtils.isSymlink(symlink))
+                Assert.assertTrue(FileUtils.fileListedInDir(linksDir, symlink))
+                val deadTarget = File(FileUtils.readSymlink(symlink))
+                Assert.assertFalse(deadTarget.exists())
+                Assert.assertFalse(target == deadTarget)
+                Assert.assertTrue(symlink.delete())
+                Assert.assertFalse(FileUtils.existsNoFollowLinks(symlink))
             }
-            assertFalse(fileListedInDir(linksDir, symlink));
-            FileUtils.symlink(target.getAbsolutePath(), symlink.getAbsolutePath());
-            assertTrue(symlink.exists());
+            Assert.assertFalse(FileUtils.fileListedInDir(linksDir, symlink))
+            FileUtils.symlink(target.absolutePath, symlink.absolutePath)
+            Assert.assertTrue(symlink.exists())
         }
-        return exesVerFromOutput(linksDir, false, false);
+        return exesVerFromOutput(linksDir, false, false)
     }
 
-    private Report getExeReport(File apkDir) throws Exception {
-        File apkLibsDir = new File(apkDir, "lib");
-        Map<String, Integer> abisToVers = new HashMap<>();
-        long totalSize = 0;
-        for (File abiDir : Objects.requireNonNull(apkLibsDir.listFiles())) {
-            String[] filesNames = Objects.requireNonNull(abiDir.list());
-            Set<String> names = new HashSet<>(Arrays.asList(filesNames));
+    @Throws(Exception::class)
+    private fun getExeReport(apkDir: File): Report? {
+        val apkLibsDir = File(apkDir, "lib")
+        val abisToVers: MutableMap<String?, Int> = HashMap()
+        var totalSize: Long = 0
+        for (abiDir in Objects.requireNonNull<Array<File>>(apkLibsDir.listFiles())) {
+            val filesNames = Objects.requireNonNull(abiDir.list())
+            val names: Set<String> = HashSet(Arrays.asList(*filesNames))
             if (!names.contains(BAR) && !names.contains(BAZ)) {
-                error("APK missing ELFs.%n%s", names);
-                return null;
+                error("APK missing ELFs.%n%s", names)
+                return null
             }
-            assertTrue(APK_EXES.equals(names), names.toString());
-            File bar = new File(abiDir, BAR);
-            File baz = new File(abiDir, BAZ);
-            int barVer = parseVerFromFile(bar);
-            int bazVer = parseVerFromFile(baz);
-            assertTrue(barVer == bazVer, format("VerFromFile %d != %d", barVer, bazVer));
-            abisToVers.put(abiDir.getName(), barVer);
-            totalSize += bar.length() + baz.length();
+            Assert.assertTrue(APK_EXES == names, names.toString())
+            val bar = File(abiDir, BAR)
+            val baz = File(abiDir, BAZ)
+            val barVer = Utils.parseVerFromFile(bar)
+            val bazVer = Utils.parseVerFromFile(baz)
+            Assert.assertTrue(
+                barVer == bazVer,
+                Utils.format("VerFromFile %d != %d", barVer, bazVer)
+            )
+            abisToVers[abiDir.name] = barVer
+            totalSize += bar.length() + baz.length()
         }
-        File exeDir = new File(getApplicationInfo().nativeLibraryDir);
-        int verFromOutputDirect = exesVerFromOutput(exeDir, true, false);
-        int verFromOutputLinks = exesVerFromOutputSymlinks(exeDir);
-        assertTrue(verFromOutputDirect == verFromOutputLinks);
-        int verFromOutput = verFromOutputLinks;
-        assertFalse(verFromOutput == -1);
-        if (executeFromAppFiles()) {
-            for (String abi : Utils.getSupportedAbis()) {
+        val exeDir = File(applicationInfo.nativeLibraryDir)
+        val verFromOutputDirect = exesVerFromOutput(exeDir, true, false)
+        val verFromOutputLinks = exesVerFromOutputSymlinks(exeDir)
+        Assert.assertTrue(verFromOutputDirect == verFromOutputLinks)
+        val verFromOutput = verFromOutputLinks
+        Assert.assertFalse(verFromOutput == -1)
+        if (Utils.executeFromAppFiles()) {
+            for (abi in Utils.supportedAbis) {
                 if (abisToVers.containsKey(abi)) {
-                    File execDir = new File(apkLibsDir, abi);
-                    int ver = exesVerFromOutput(execDir, true, true);
-                    assertTrue(ver == verFromOutput);
-                    break;
+                    val execDir = File(apkLibsDir, abi)
+                    val ver = exesVerFromOutput(execDir, true, true)
+                    Assert.assertTrue(ver == verFromOutput)
+                    break
                 }
             }
         }
-        return new Report("exebar, exebaz", abisToVers, totalSize, verFromOutput);
+        return Report("exebar, exebaz", abisToVers, totalSize, verFromOutput)
     }
 
-    private final ArrayList<String> messages = new ArrayList<>();
-    private final ArrayList<String> warns = new ArrayList<>();
-    private final ArrayList<String> errors = new ArrayList<>();
+    private val messages = ArrayList<String?>()
+    private val warns = ArrayList<String?>()
+    private val errors = ArrayList<String?>()
 
-    private void message(String m) {
-        messages.add(m);
+    private fun message(m: String) {
+        messages.add(m)
     }
 
-    /** @noinspection unused*/
-    private void message(String format, Object... args) {
-        message(format(format, args));
+    /** @noinspection unused
+     */
+    private fun message(format: String, vararg args: Any) {
+        message(Utils.format(format, *args))
     }
 
-    private void warn(String m) {
-        warns.add(m);
+    private fun warn(m: String) {
+        warns.add(m)
     }
 
-    private void warn(String format, Object... args) {
-        warn(format(format, args));
+    private fun warn(format: String, vararg args: Any) {
+        warn(Utils.format(format, *args))
     }
 
-    private void error(String m) {
-        errors.add(m);
+    private fun error(m: String) {
+        errors.add(m)
     }
 
-    /** @noinspection SameParameterValue*/
-    private void error(String format, Object... args) {
-        error(format(format, args));
+    /** @noinspection SameParameterValue
+     */
+    private fun error(format: String, vararg args: Any) {
+        error(Utils.format(format, *args))
     }
 
-    @SuppressWarnings("ConstantConditions")
-    private void checkJniExeReports(Report jniReport, Report exeReport) {
+    private fun checkJniExeReports(jniReport: Report, exeReport: Report?) {
         if (exeReport == null) {
-            return;
+            return
         }
-        assertTrue(jniReport.abisToVers.equals(exeReport.abisToVers));
-        assertTrue(jniReport.verFromOutput == BuildConfig.BASE_VERSION_CODE);
-        assertTrue(exeReport.verFromOutput == BuildConfig.BASE_VERSION_CODE);
-        if (BuildConfig.FLAVOR.equals("fat")) {
-            assertTrue(BuildConfig.VERSION_CODE == BuildConfig.BASE_VERSION_CODE);
-            assertTrue(Arrays.asList(1, 2, 3, 4).contains(jniReport.abisToVers.size()));
+        Assert.assertTrue(jniReport.abisToVers == exeReport.abisToVers)
+        Assert.assertTrue(jniReport.verFromOutput == BuildConfig.BASE_VERSION_CODE)
+        Assert.assertTrue(exeReport.verFromOutput == BuildConfig.BASE_VERSION_CODE)
+        if (BuildConfig.FLAVOR == "fat") {
+            Assert.assertTrue(BuildConfig.VERSION_CODE == BuildConfig.BASE_VERSION_CODE)
+            Assert.assertTrue(mutableListOf(1, 2, 3, 4).contains(jniReport.abisToVers.size))
         } else {
-            assertTrue(jniReport.abisToVers.size() == 1);
-            if (BuildConfig.FLAVOR.equals("a32")) {
-                assertTrue(BuildConfig.VERSION_CODE == BuildConfig.BASE_VERSION_CODE + 1);
-            } else if (BuildConfig.FLAVOR.equals("a64")) {
-                assertTrue(BuildConfig.VERSION_CODE == BuildConfig.BASE_VERSION_CODE + 2);
-            } else if (BuildConfig.FLAVOR.equals("x32")) {
-                assertTrue(BuildConfig.VERSION_CODE == BuildConfig.BASE_VERSION_CODE + 3);
-            } else if (BuildConfig.FLAVOR.equals("x64")) {
-                assertTrue(BuildConfig.VERSION_CODE == BuildConfig.BASE_VERSION_CODE + 4);
+            Assert.assertTrue(jniReport.abisToVers.size == 1)
+            if (BuildConfig.FLAVOR == "a32") {
+                Assert.assertTrue(BuildConfig.VERSION_CODE == BuildConfig.BASE_VERSION_CODE + 1)
+            } else if (BuildConfig.FLAVOR == "a64") {
+                Assert.assertTrue(BuildConfig.VERSION_CODE == BuildConfig.BASE_VERSION_CODE + 2)
+            } else if (BuildConfig.FLAVOR == "x32") {
+                Assert.assertTrue(BuildConfig.VERSION_CODE == BuildConfig.BASE_VERSION_CODE + 3)
+            } else if (BuildConfig.FLAVOR == "x64") {
+                Assert.assertTrue(BuildConfig.VERSION_CODE == BuildConfig.BASE_VERSION_CODE + 4)
             }
         }
-        String runBuildTypeWarn = "That's may be due to build performed by"
+        val runBuildTypeWarn = ("That's may be due to build performed by"
                 + " Android Studio's \"Run\" action, that makes new build"
                 + " only for ABI of the \"Run\" target's device. May be"
-                + " resolved by \"Build\" -> \"Make Project\".";
+                + " resolved by \"Build\" -> \"Make Project\".")
         if (!jniReport.versInSync(BuildConfig.BASE_VERSION_CODE)) {
-            warn("Versions between ABIs doesn't match. " + runBuildTypeWarn);
+            warn("Versions between ABIs doesn't match. $runBuildTypeWarn")
         }
-        if (BuildConfig.FLAVOR.equals("fat") && jniReport.abisToVers.size() != 4) {
-            warn("Flavor \"fat\" has only %d ABIs, expected 4 ABIs. "
-                            + runBuildTypeWarn, jniReport.abisToVers.size());
+        if (BuildConfig.FLAVOR == "fat" && jniReport.abisToVers.size != 4) {
+            warn(
+                "Flavor \"fat\" has only %d ABIs, expected 4 ABIs. "
+                        + runBuildTypeWarn, jniReport.abisToVers.size
+            )
         }
     }
 
-    private void displayReport(Report jniReport, Report exeReport, TextView textView) {
-        ArrayList<String> header = new ArrayList<>();
-        header.add(format("Java v%s, Cpp v%d",
-                BuildConfig.VERSION_NAME, BuildConfig.BASE_VERSION_CODE));
-        header.add("\n" + jniReport.toString());
+    private fun displayReport(jniReport: Report, exeReport: Report?, textView: TextView) {
+        val header = ArrayList<String?>()
+        header.add(
+            Utils.format(
+                "Java v%s, Cpp v%d",
+                BuildConfig.VERSION_NAME, BuildConfig.BASE_VERSION_CODE
+            )
+        )
+        header.add(
+            """
+    
+    $jniReport
+    """.trimIndent()
+        )
         if (exeReport != null) {
-            header.add("\n" + exeReport);
+            header.add(
+                """
+    
+    $exeReport
+    """.trimIndent()
+            )
         }
         if (!messages.isEmpty()) {
-            header.add("\n");
-            header.addAll(messages);
+            header.add("\n")
+            header.addAll(messages)
         }
-        String text = TextUtils.join("\n", header);
+        var text = TextUtils.join("\n", header)
         if (!warns.isEmpty()) {
-            text = format("%s%n%n%nWARNINGS%n%n%s", text, TextUtils.join("\n\n", warns));
+            text = Utils.format("%s%n%n%nWARNINGS%n%n%s", text, TextUtils.join("\n\n", warns))
         }
         if (!errors.isEmpty()) {
-            text = format("%s%n%n%nERRORS%n%n%s", text, TextUtils.join("\n\n", errors));
+            text = Utils.format("%s%n%n%nERRORS%n%n%s", text, TextUtils.join("\n\n", errors))
         }
 
-        textView.setText(text);
+        textView.text = text
         if (!errors.isEmpty()) {
-            textView.setTextColor(0xffff0000);
+            textView.setTextColor(-0x10000)
         } else if (!warns.isEmpty()) {
-            textView.setTextColor(0xfffc940a);
+            textView.setTextColor(-0x36bf6)
         } else {
-            textView.setTextColor(0xff00ff55);
+            textView.setTextColor(-0xff00ab)
         }
     }
 
-    private boolean isSymlinkInPath(File file) throws IOException {
+    @Throws(IOException::class)
+    private fun isSymlinkInPath(file: File): Boolean {
         if (FileUtils.isSymlink(file)) {
-            return true;
+            return true
         }
-        return !file.getAbsolutePath().equals(file.getCanonicalPath());
+        return file.absolutePath != file.canonicalPath
     }
 
-    private String nativeLibraryDirMessage(File dir, Set<String> elfs)
-            throws IOException {
-        String message = "getApplicationInfo().nativeLibraryDir";
-        message += "\n" + elfs.toString();
-        message += "\n" + getApplicationInfo().nativeLibraryDir;
+    @Throws(IOException::class)
+    private fun nativeLibraryDirMessage(dir: File, elfs: Set<String>): String {
+        var message = "getApplicationInfo().nativeLibraryDir"
+        message += """
+            
+            $elfs
+            """.trimIndent()
+        message += """
+            
+            ${applicationInfo.nativeLibraryDir}
+            """.trimIndent()
         if (isSymlinkInPath(dir)) {
-            message += "\n" + FileUtils.readSymlink(dir);
+            message += """
+                
+                ${FileUtils.readSymlink(dir)}
+                """.trimIndent()
         }
-        return message;
+        return message
     }
 
-    private void nativeLibraryDirReport() throws IOException {
-        File dir = new File(getApplicationInfo().nativeLibraryDir);
-        String[] fileNames = Objects.requireNonNull(dir.list());
-        Set<String> elfs = new HashSet<>(Arrays.asList(fileNames));
-        if (elfs.equals(APK_EXES)) {
+    @Throws(IOException::class)
+    private fun nativeLibraryDirReport() {
+        val dir = File(applicationInfo.nativeLibraryDir)
+        val fileNames = Objects.requireNonNull(dir.list())
+        val elfs: Set<String> = HashSet(Arrays.asList(*fileNames))
+        if (elfs == APK_EXES) {
             if (isSymlinkInPath(dir)) {
-                message(nativeLibraryDirMessage(dir, elfs));
+                message(nativeLibraryDirMessage(dir, elfs))
             }
         } else {
-            warn(nativeLibraryDirMessage(dir, elfs));
+            warn(nativeLibraryDirMessage(dir, elfs))
         }
     }
 
-    private File unpackApk() throws IOException {
-        File apkDir = new File(getCacheDir(), "unzen-apk");
-        FileUtils.deleteDirectory(apkDir);
-        assertTrue(!apkDir.exists() && apkDir.mkdirs());
-        ZipUtils.extract(new File(getPackageResourcePath()), apkDir);
-        File assetsDir = new File(apkDir, "assets");
-        File dummy = new File(assetsDir, "dummy.txt");
-        assertTrue(dummy.exists() && dummy.length() > 0);
-        File dummyLib = new File(assetsDir, "dummy-lib.txt");
-        assertTrue(dummyLib.exists() && dummyLib.length() > 0);
-        return apkDir;
+    @Throws(IOException::class)
+    private fun unpackApk(): File {
+        val apkDir = File(cacheDir, "unzen-apk")
+        FileUtils.deleteDirectory(apkDir)
+        Assert.assertTrue(!apkDir.exists() && apkDir.mkdirs())
+        ZipUtils.extract(File(packageResourcePath), apkDir)
+        val assetsDir = File(apkDir, "assets")
+        val dummy = File(assetsDir, "dummy.txt")
+        Assert.assertTrue(dummy.exists() && dummy.length() > 0)
+        val dummyLib = File(assetsDir, "dummy-lib.txt")
+        Assert.assertTrue(dummyLib.exists() && dummyLib.length() > 0)
+        return apkDir
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
         try {
-            nativeLibraryDirReport();
-            File apkDir = unpackApk();
-            Report jniReport = getJniReport(apkDir);
-            Report exeReport = getExeReport(apkDir);
-            checkJniExeReports(jniReport, exeReport);
-            displayReport(jniReport, exeReport, findViewById(R.id.main_text));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            nativeLibraryDirReport()
+            val apkDir = unpackApk()
+            val jniReport = getJniReport(apkDir)
+            val exeReport = getExeReport(apkDir)
+            checkJniExeReports(jniReport, exeReport)
+            displayReport(jniReport, exeReport, findViewById(R.id.main_text))
+        } catch (e: Exception) {
+            throw RuntimeException(e)
+        }
+    }
+
+    companion object {
+        private const val FOO_NAME = "jnifoo"
+        public val FOO: String = Utils.fullSoName(FOO_NAME)
+        private const val BAR_NAME = "exebar"
+        val BAR: String = Utils.fullSoName(BAR_NAME)
+        private const val BAZ_NAME = "exebaz"
+        val BAZ: String = Utils.fullSoName(BAZ_NAME)
+        private val APK_EXES
+                : Set<String> = HashSet(Arrays.asList(FOO, BAR, BAZ))
+
+        private fun checkOutput(elfName: String, actualOut: String) {
+            val expected = Utils.format("I'm %s! UNZEN-VERSION-", elfName)
+            val message = Utils.format("Expected: %s, actual: %s", expected, actualOut)
+            Assert.assertTrue(actualOut.startsWith(expected), message)
         }
     }
 }

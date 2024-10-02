@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        baseVersion = 1080
+        baseVersion = 1090
         baseAbis = ['armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64']
         zenPackSosList = ['jnifoo']
         zenPackElfsList = ['exebar', 'exebaz']
@@ -11,6 +11,7 @@ buildscript {
         zenPackReleaseDir = "$rootDir.absolutePath/release"
         zenPackProjectName = "lib-cuscuta"
         verboseLogs = true
+        kotlin_version = '2.0.20'
     }
     repositories {
         google()
@@ -18,6 +19,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.6.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 

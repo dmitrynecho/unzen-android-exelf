@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'org.jetbrains.kotlin.android'
 apply from: 'inspect-files.gradle'
 apply from: 'zen-tasks-graph.gradle'
 apply from: 'zen-build-bundles.gradle'
@@ -9,7 +9,7 @@ android {
     ndkVersion exelfNdkVersion
     defaultConfig {
         applicationId "unzen.exelf"
-        minSdkVersion 16
+        minSdkVersion 19
         compileSdk exelfCompileSdkVersion
         targetSdkVersion exelfTargetSdkVersion
         versionCode baseVersion
@@ -107,6 +107,9 @@ android {
             useLegacyPackaging = true
         }
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 android.applicationVariants.configureEach { variant ->
@@ -125,9 +128,8 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':lib-cuscuta')
     implementation 'androidx.annotation:annotation:1.8.2'
+    implementation 'androidx.core:core-ktx:1.13.1'
     testImplementation 'junit:junit:4.13.2'
-    //noinspection GradleDependency - update requires minSdkVersion 19
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    //noinspection GradleDependency - update requires minSdkVersion 19
-    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
 }

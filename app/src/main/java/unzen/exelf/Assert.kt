@@ -1,29 +1,22 @@
-package unzen.exelf;
+package unzen.exelf
 
-public class Assert {
-
-    static public void fail(String message) {
+object Assert {
+    fun fail(message: String?) {
         if (message == null) {
-            throw new AssertionError();
+            throw AssertionError()
         }
-        throw new AssertionError(message);
+        throw AssertionError(message)
     }
 
-    static public void assertTrue(boolean condition, String message) {
+    @JvmOverloads
+    fun assertTrue(condition: Boolean, message: String? = null) {
         if (!condition) {
-            fail(message);
+            fail(message)
         }
     }
 
-    static public void assertTrue(boolean condition) {
-        assertTrue(condition, null);
-    }
-
-    static public void assertFalse(boolean condition, String message) {
-        assertTrue(!condition, message);
-    }
-
-    static public void assertFalse(boolean condition) {
-        assertFalse(condition, null);
+    @JvmOverloads
+    fun assertFalse(condition: Boolean, message: String? = null) {
+        assertTrue(!condition, message)
     }
 }

@@ -1,11 +1,12 @@
 apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
 apply from: 'zen-pack-elfs.gradle'
 
 android {
     namespace 'unzen.exelf.cuscuta'
     ndkVersion exelfNdkVersion
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 19
         compileSdk exelfCompileSdkVersion
         targetSdkVersion exelfTargetSdkVersion
         externalNativeBuild {
@@ -35,6 +36,13 @@ android {
             path "src/main/cpp/Android.mk"
         }
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.13.1'
 }
 
 tasks.register('cppVersions') {
