@@ -117,7 +117,7 @@ object FileUtils {
                     res = false
                 } else {
                     val fileInDir = parentDir.listFiles { aFile: File -> aFile == canon }
-                    res = fileInDir != null && fileInDir.size > 0
+                    res = fileInDir != null && fileInDir.isNotEmpty()
                 }
             }
         } else {

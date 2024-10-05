@@ -76,7 +76,7 @@ object Utils {
             val reader = BufferedReader(InputStreamReader(stream))
             var line: String?
             while ((reader.readLine().also { line = it }) != null) {
-                if (sb.length > 0) {
+                if (sb.isNotEmpty()) {
                     sb.append("\n")
                 }
                 sb.append(line)

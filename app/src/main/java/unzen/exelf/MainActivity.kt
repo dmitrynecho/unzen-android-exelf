@@ -87,7 +87,7 @@ class MainActivity : Activity() {
     private fun exesVerFromOutputSymlinks(exesDir: File): Int {
         val linksDir = File(cacheDir, "exe-links")
         Assert.assertTrue(linksDir.exists() || linksDir.mkdirs())
-        for (exe in arrayOf<String>(BAR_NAME, BAZ_NAME)) {
+        for (exe in arrayOf(BAR_NAME, BAZ_NAME)) {
             val target = File(exesDir, Utils.fullSoName(exe))
             Assert.assertTrue(target.exists())
             val symlink = File(linksDir, exe)
@@ -119,7 +119,7 @@ class MainActivity : Activity() {
         var totalSize: Long = 0
         for (abiDir in Objects.requireNonNull<Array<File>>(apkLibsDir.listFiles())) {
             val filesNames = Objects.requireNonNull(abiDir.list())
-            val names: Set<String> = HashSet(Arrays.asList(*filesNames))
+            val names: Set<String> = HashSet(listOf(*filesNames))
             if (!names.contains(BAR) && !names.contains(BAZ)) {
                 error("APK missing ELFs.%n%s", names)
                 return null
@@ -163,8 +163,6 @@ class MainActivity : Activity() {
         messages.add(m)
     }
 
-    /** @noinspection unused
-     */
     private fun message(format: String, vararg args: Any) {
         message(Utils.format(format, *args))
     }
@@ -173,6 +171,7 @@ class MainActivity : Activity() {
         warns.add(m)
     }
 
+    @Suppress("SameParameterValue")
     private fun warn(format: String, vararg args: Any) {
         warn(Utils.format(format, *args))
     }
@@ -181,8 +180,7 @@ class MainActivity : Activity() {
         errors.add(m)
     }
 
-    /** @noinspection SameParameterValue
-     */
+    @Suppress("SameParameterValue")
     private fun error(format: String, vararg args: Any) {
         error(Utils.format(format, *args))
     }
@@ -194,6 +192,7 @@ class MainActivity : Activity() {
         Assert.assertTrue(jniReport.abisToVers == exeReport.abisToVers)
         Assert.assertTrue(jniReport.verFromOutput == BuildConfig.BASE_VERSION_CODE)
         Assert.assertTrue(exeReport.verFromOutput == BuildConfig.BASE_VERSION_CODE)
+        @Suppress("KotlinConstantConditions")
         if (BuildConfig.FLAVOR == "fat") {
             Assert.assertTrue(BuildConfig.VERSION_CODE == BuildConfig.BASE_VERSION_CODE)
             Assert.assertTrue(mutableListOf(1, 2, 3, 4).contains(jniReport.abisToVers.size))
@@ -216,6 +215,7 @@ class MainActivity : Activity() {
         if (!jniReport.versInSync(BuildConfig.BASE_VERSION_CODE)) {
             warn("Versions between ABIs doesn't match. $runBuildTypeWarn")
         }
+        @Suppress("KotlinConstantConditions")
         if (BuildConfig.FLAVOR == "fat" && jniReport.abisToVers.size != 4) {
             warn(
                 "Flavor \"fat\" has only %d ABIs, expected 4 ABIs. "

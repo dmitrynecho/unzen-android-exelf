@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        baseVersion = 1090
+        baseVersion = 1100
         baseAbis = ['armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64']
         zenPackSosList = ['jnifoo']
         zenPackElfsList = ['exebar', 'exebaz']
@@ -18,7 +18,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.6.1'
+        classpath 'com.android.tools.build:gradle:8.7.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
