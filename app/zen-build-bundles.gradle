@@ -35,3 +35,42 @@ tasks.register(zenPackBundlesTaskName, Zip) {
     dependsOn tasks.named("bundle")
     outputs.upToDateWhen { false }
 }
+
+ext.getBundletool = {
+    String error = "\"bundletool\" search in $it"
+    String bundletool
+    zenPackBundletoolDir.eachFileMatch(~"bundletool.+\\.jar", {
+        if (bundletool) {
+            String m = "$error: multiple matches, leave only one."
+            throw new GradleException(m)
+        }
+        bundletool = it.absolutePath
+    })
+    if (!bundletool) {
+        String m = "$error: zero matches, add \"bundletool\"."
+        throw new GradleException(m)
+    }
+    return bundletool
+}
+
+ext.runApk = { String app, String activity ->
+    String target = "$app/$activity"
+    def outBytes = new ByteArrayOutputStream()
+    def errBytes = new ByteArrayOutputStream()
+    exec {
+        ignoreExitValue true
+        commandLine android.getAdbExe().absolutePath, 'shell', "am start -n $target"
+        standardOutput = outBytes
+        errorOutput = errBytes
+    }
+    String out = outBytes.toString().trim()
+    String err = errBytes.toString().trim()
+    String outType1 = "Starting: Intent { cmp=$target }"
+    String[] activitySplit = activity.split('\\.')
+    String activityName = activitySplit[activitySplit.length -1]
+    String outType2 = "Starting: Intent { cmp=$app/.$activityName }"
+    boolean outValid = out == outType1 || out == outType2
+    if (!outValid || !err.isEmpty()) {
+        throw new GradleException("run failed, out: $out, err: $err")
+    }
+}

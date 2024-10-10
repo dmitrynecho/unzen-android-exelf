@@ -6,7 +6,7 @@ android {
     namespace 'unzen.exelf.cuscuta'
     ndkVersion exelfNdkVersion
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion exelfMinSdkVersion
         compileSdk exelfCompileSdkVersion
         targetSdkVersion exelfTargetSdkVersion
         externalNativeBuild {

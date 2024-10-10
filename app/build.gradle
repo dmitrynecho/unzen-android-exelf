@@ -9,7 +9,7 @@ android {
     ndkVersion exelfNdkVersion
     defaultConfig {
         applicationId "unzen.exelf"
-        minSdkVersion 19
+        minSdkVersion exelfMinSdkVersion
         compileSdk exelfCompileSdkVersion
         targetSdkVersion exelfTargetSdkVersion
         versionCode baseVersion
@@ -97,6 +97,22 @@ android {
         if (variant.buildType.name != "release" && !names.contains("fat")) {
             setIgnore(true)
         }
+        if (releaseBundle) {
+            if (!names.contains("fat")) {
+                setIgnore(true)
+            }
+            List<String> variants = releaseBundleVariants
+            Boolean found = false
+            variants.forEach { String bt ->
+                if (names.contains(bt)) {
+                    found = true
+                }
+            }
+            found = found || variants.contains(variant.buildType.name)
+            if (!found) {
+                setIgnore(true)
+            }
+        }
     }
     packagingOptions {
         jniLibs {
@@ -114,10 +130,78 @@ android.applicationVariants.configureEach { variant ->
     }
 }
 
+ext.generateMultiapk = { File aab, boolean local ->
+    String apksName = aab.name.replace('.aab', '.apks')
+    def execBytes = new ByteArrayOutputStream()
+    exec {
+        commandLine "java", "-jar", getBundletool(),
+                "build-apks",
+                local ? "--local-testing" : "",
+                "--bundle=${aab}",
+                "--output=${aab.parent}/${apksName}"
+        standardOutput = execBytes
+    }
+    if (execBytes.size() != 0) {
+        println("generateMultiapk bundletool: " + execBytes.toString().trim())
+    }
+}
+
+ext.generateMultiapks = { String path, boolean localTesting ->
+    File pathFile = file(path)
+    if (pathFile.directory) {
+        fileTree(dir: path, includes: ['*.aab']).each { File aab ->
+            generateMultiapk(aab, localTesting)
+        }
+    } else if (path.endsWith(".aab")) {
+        generateMultiapk(pathFile, localTesting)
+    } else {
+        throw new GradleException("generateMultiapks invalid path: $path")
+    }
+}
+
+ext.installMultiapk = { String path ->
+    def outBytes = new ByteArrayOutputStream()
+    def errBytes = new ByteArrayOutputStream()
+    exec {
+        ignoreExitValue true
+        commandLine 'java', '-jar', getBundletool(),
+                'install-apks',
+                "--apks=$path"
+        standardOutput = outBytes
+        errorOutput = errBytes
+    }
+    String out = outBytes.toString().trim()
+    String err = errBytes.toString().trim()
+    println("installMultiapk $path: [$out], [$err]")
+}
+
 tasks.register("releaseBundles") {
     group = "aleph"
     description = "Public App Bundles build."
+    doLast {
+        file("build/outputs/bundle").listFiles().each { File dir ->
+            copy {
+                from dir
+                include "*.aab"
+                into zenPackReleaseDir
+            }
+        }
+        file(zenPackReleaseDir).listFiles().each { File aab ->
+            if (!aab.name.endsWith(".aab")) return
+            String path = aab.absolutePath
+            File apksFile = file(path.replace(".aab", ".apks"))
+            apksFile.delete()
+            generateMultiapks(path, false)
+            installMultiapk(apksFile.absolutePath)
+        }
+        runApk("unzen.exelf", "unzen.exelf.MainActivity")
+    }
     dependsOn tasks.named(zenPackBundlesTaskName)
+}
+
+tasks.register("uninstallApp") {
+    group = "aleph"
+    dependsOn tasks.named("uninstallAll")
 }
 
 dependencies {

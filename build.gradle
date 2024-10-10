@@ -1,16 +1,20 @@
 buildscript {
     ext {
+        releaseBundle = true
+        releaseBundleVariants = ['debug']
         baseVersion = 1100
         baseAbis = ['armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64']
         zenPackSosList = ['jnifoo']
         zenPackElfsList = ['exebar', 'exebaz']
         exelfTargetSdkVersion = 34
         exelfCompileSdkVersion = 34
+        exelfMinSdkVersion = 19
         exelfNdkVersion = '21.3.6528147'
         zenPackBundlesTaskName = "zenPackBundes"
         zenPackReleaseDir = "$rootDir.absolutePath/release"
         zenPackProjectName = "lib-cuscuta"
-        verboseLogs = true
+        zenPackBundletoolDir = file("$rootDir/bundletool")
+        verboseLogs = false
         kotlin_version = '2.0.20'
     }
     repositories {
