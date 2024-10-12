@@ -65,7 +65,7 @@ class FileSymlinkTest {
         Assert.assertTrue(normalFile.createNewFile())
         testSymlink(normalFile, normalDir, link)
         val systemDir = File(context.applicationInfo.nativeLibraryDir)
-        val soFile = File(systemDir, MainActivity.FOO)
+        val soFile = File(systemDir, ExesNames.FOO)
         Assert.assertTrue(soFile.exists())
         testSymlink(soFile, normalDir, link)
     }

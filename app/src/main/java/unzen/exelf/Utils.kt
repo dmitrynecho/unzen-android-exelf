@@ -1,5 +1,6 @@
 package unzen.exelf
 
+import android.content.Context
 import android.os.Build
 import java.io.BufferedReader
 import java.io.File
@@ -22,6 +23,50 @@ object Utils {
             .replace("armeabi-v7a", "a32").replace("arm64-v8a", "a64")
     }
 
+    fun apkUnpackDir(c: Context): File {
+        return File(c.cacheDir, "unzen-apk")
+    }
+
+    fun findApkLibsDir(c: Context): File {
+        val apkDir = apkUnpackDir(c)
+        @Suppress("ConstantConditionIf") if (true) {
+            apkDir.walk().forEach {
+                if (it.isDirectory) {
+                    println("findApkLibsDir 1: $it")
+                }
+            }
+            File(c.packageResourcePath).parentFile!!.walk().forEach {
+                println("findApkLibsDir 2: $it")
+            }
+            File(c.applicationInfo.nativeLibraryDir).walk().forEach {
+                println("findApkLibsDir 3: $it")
+            }
+        }
+        val apkLibsDirNormal = File(apkDir, "lib")
+        return if (apkLibsDirNormal.exists()) {
+            println("findApkLibsDir standalone case: $apkLibsDirNormal")
+            apkLibsDirNormal
+        } else {
+            val res = File(c.applicationInfo.nativeLibraryDir).parentFile
+            println("findApkLibsDir split case: $res")
+            res!!
+        }
+    }
+
+    @Throws(IOException::class)
+    fun unpackApk(c: Context): File {
+        val apkDir = apkUnpackDir(c)
+        FileUtils.deleteDirectory(apkDir)
+        Assert.assertTrue(!apkDir.exists() && apkDir.mkdirs())
+        ZipUtils.extract(File(c.packageResourcePath), apkDir)
+        val assetsDir = File(apkDir, "assets")
+        val dummy = File(assetsDir, "dummy.txt")
+        Assert.assertTrue(dummy.exists() && dummy.length() > 0)
+        val dummyLib = File(assetsDir, "dummy-lib.txt")
+        Assert.assertTrue(dummyLib.exists() && dummyLib.length() > 0)
+        return apkDir
+    }
+
     @get:Suppress("deprecation")
     val supportedAbis: Array<String>
         // Suppress warnings for Gradle build output
@@ -39,16 +84,17 @@ object Utils {
     fun parseVerFromFile(file: File?): Int {
         FileInputStream(file).use { stream ->
             val reader = BufferedReader(InputStreamReader(stream))
-            // Search for string UNZEN-VERSION-XXXX in ELF file
-            val buf = CharArray(17)
+            // Search for string "UNZEN-VERSION-XXXX" in ELF file.
+            val bufSize = "NZEN-VERSION-XXXX".length
+            val buf = CharArray(bufSize)
             var c: Int
             while ((reader.read().also { c = it }) != -1) {
                 if (c == 'U'.code) {
-                    reader.mark(17)
+                    reader.mark(bufSize)
                     val readed = reader.read(buf)
                     if (readed == -1) {
                         break
-                    } else if (readed == 17) {
+                    } else if (readed == bufSize) {
                         val ver = String(buf)
                         if (ver.startsWith("NZEN-VERSION-")) {
                             return ver.substring(ver.lastIndexOf("-") + 1).toInt()
@@ -83,5 +129,42 @@ object Utils {
             }
         }
         return sb.toString()
+    }
+
+    private fun getApksList(c: Context): String {
+        val sb = StringBuilder()
+        File(c.packageResourcePath).parentFile!!.walk().forEach {
+            if (it.extension == "apk") {
+                if (sb.isNotEmpty()) sb.append("\n")
+                val info = ApkInfo(it)
+                sb.append(info.fileName)
+                    .append(" ")
+                    .append(info.fileSize).append(" B")
+                    .append(" ")
+                    .append(info.signsMagicsCount)
+            }
+        }
+        return sb.toString()
+    }
+
+    fun getApksReport(c: Context): String {
+        val isSplitInstall = !File(apkUnpackDir(c), "lib").exists()
+        val installType = if (isSplitInstall) "split" else "standalone"
+        val sb = StringBuilder()
+        sb.append("Install type ").append(installType).append(".").appendLine()
+        sb.append(getApksList(c))
+        return sb.toString()
+    }
+
+    private val bytesToHexArray: CharArray = "0123456789abcdef".toCharArray()
+
+    fun bytesToHex(bytes: ByteArray): String {
+        val hexChars = CharArray(bytes.size * 2)
+        for (j in bytes.indices) {
+            val v = bytes[j].toInt() and 0xFF
+            hexChars[j * 2] = bytesToHexArray[v ushr 4]
+            hexChars[j * 2 + 1] = bytesToHexArray[v and 0x0F]
+        }
+        return String(hexChars)
     }
 }

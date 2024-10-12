@@ -2,18 +2,79 @@ package unzen.exelf
 
 import android.os.Build
 import android.system.Os
+import java.io.BufferedReader
 import java.io.File
+import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
 import java.nio.file.Files
 import java.nio.file.LinkOption
 import java.nio.file.Paths
+import java.security.MessageDigest
 import java.util.Objects
 
 /**
  * Some methods copied from Apache Commons IO.
  */
 object FileUtils {
+
+    fun countStringMatches(f: File, s: String): Int {
+        var count = 0
+        FileInputStream(f).use { stream ->
+            val reader = BufferedReader(InputStreamReader(stream))
+            val searchTerm = s.toCharArray()
+            val firstChar = searchTerm[0]
+            val searchTermBody = searchTerm.copyOfRange(1, searchTerm.size)
+            //println("Body: ${String(searchTermBody)}")
+            val bufSize = searchTermBody.size
+            val buf = CharArray(bufSize)
+            var c: Int
+            while ((reader.read().also { c = it }) != -1) {
+                if (c == firstChar.code) {
+                    reader.mark(bufSize)
+                    val readed = reader.read(buf)
+                    if (readed == -1) {
+                        break
+                    } else if (readed == bufSize) {
+                        if (searchTermBody.contentEquals(buf)) {
+                            //println("Found ${c.toChar()}${String(buf)}")
+                            count += 1
+                        }
+                    }
+                    reader.reset()
+                }
+            }
+        }
+        return count
+    }
+
+    const val ZERO_SHA1: String = "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+
+    private val sDigestSha1 = MessageDigest.getInstance("SHA-1")
+
+    fun sha1(f: File): String {
+        FileInputStream(f).use { stream ->
+            return sha1(stream)
+        }
+    }
+
+    fun sha1(`in`: InputStream): String {
+        val buf = ByteArray(65536)
+        var len: Int
+        while (true) {
+            len = `in`.read(buf)
+            if (len <= 0) {
+                break
+            }
+            sDigestSha1.update(buf, 0, len)
+        }
+        `in`.close()
+        val hash = sDigestSha1.digest()
+        return Utils.bytesToHex(hash)
+    }
+
     @Throws(Exception::class)
     fun symlink(target: String, link: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -229,4 +290,5 @@ object FileUtils {
             throw IOException(message)
         }
     }
+
 }
