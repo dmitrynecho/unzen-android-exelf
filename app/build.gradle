@@ -17,6 +17,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.debug
         buildConfigField("int", "BASE_VERSION_CODE", "$baseVersion")
+        resConfigs "en"
     }
     buildTypes {
         debug {
@@ -122,6 +123,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    bundle.language.enableSplit = false
 }
 
 android.applicationVariants.configureEach { variant ->

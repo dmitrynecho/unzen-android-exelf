@@ -6,6 +6,7 @@ import android.text.TextUtils
 import android.widget.TextView
 import unzen.exelf.Assert.assertTrue
 import unzen.exelf.BuildConfig.BASE_VERSION_CODE
+import unzen.exelf.BuildConfig.VERSION_CODE
 import unzen.exelf.BuildConfig.VERSION_NAME
 import unzen.exelf.ExesNames.APK_EXES
 import unzen.exelf.ExesNames.BAR
@@ -19,7 +20,7 @@ import java.io.IOException
 import java.util.Objects
 
 class MainActivity : Activity() {
-    private class Report(
+    class Report(
         val name: String, val abisToVers: Map<String, Int>,
         val totalSize: Long, val verFromOutput: Int
     ) {
@@ -201,63 +202,68 @@ class MainActivity : Activity() {
         error(Utils.format(format, *args))
     }
 
-    private fun checkMainReports(jniReport: Report, exeReport: Report?) {
-        if (exeReport == null) {
+    private fun checkReports(info: ApksInfo) {
+        if (info.exeReport == null) {
             return
         }
+        val jniReport = info.jniReport
+        val exeReport = info.exeReport
+        val abisCount = jniReport.abisToVers.size
         assertTrue(jniReport.abisToVers == exeReport.abisToVers)
         assertTrue(jniReport.verFromOutput == BASE_VERSION_CODE)
         assertTrue(exeReport.verFromOutput == BASE_VERSION_CODE)
         @Suppress("KotlinConstantConditions")
         if (BuildConfig.FLAVOR == "fat") {
-            assertTrue(BuildConfig.VERSION_CODE == BASE_VERSION_CODE)
-            assertTrue(mutableListOf(1, 2, 3, 4).contains(jniReport.abisToVers.size))
+            assertTrue(VERSION_CODE == BASE_VERSION_CODE)
+            assertTrue(mutableListOf(1, 2, 3, 4).contains(abisCount))
         } else {
-            assertTrue(jniReport.abisToVers.size == 1)
+            assertTrue(abisCount == 1)
             when (BuildConfig.FLAVOR) {
                 "a32" -> {
-                    assertTrue(BuildConfig.VERSION_CODE == BASE_VERSION_CODE + 1)
+                    assertTrue(VERSION_CODE == BASE_VERSION_CODE + 1)
                 }
                 "a64" -> {
-                    assertTrue(BuildConfig.VERSION_CODE == BASE_VERSION_CODE + 2)
+                    assertTrue(VERSION_CODE == BASE_VERSION_CODE + 2)
                 }
                 "x32" -> {
-                    assertTrue(BuildConfig.VERSION_CODE == BASE_VERSION_CODE + 3)
+                    assertTrue(VERSION_CODE == BASE_VERSION_CODE + 3)
                 }
                 "x64" -> {
-                    assertTrue(BuildConfig.VERSION_CODE == BASE_VERSION_CODE + 4)
+                    assertTrue(VERSION_CODE == BASE_VERSION_CODE + 4)
                 }
             }
         }
-        val runBuildTypeWarn = ("That's may be due to build performed by"
-                + " Android Studio's \"Run\" action, that makes new build"
-                + " only for ABI of the \"Run\" target's device. May be"
-                + " resolved by \"Build\" -> \"Make Project\".")
         if (!jniReport.versInSync(BASE_VERSION_CODE)) {
-            warn("Versions between ABIs doesn't match. $runBuildTypeWarn")
+            throw IllegalStateException("Versions between ABIs doesn't match.")
         }
         @Suppress("KotlinConstantConditions")
-        if (BuildConfig.FLAVOR == "fat" && jniReport.abisToVers.size != 4) {
-            warn(
-                "Flavor \"fat\" has only %d ABIs, expected 4 ABIs. "
-                        + runBuildTypeWarn, jniReport.abisToVers.size
-            )
+        if (BuildConfig.FLAVOR == "fat" && abisCount != 4) {
+            if (abisCount != 1) {
+                throw IllegalStateException("Flavor fat, but ABIs count $abisCount")
+            }
+            if (!info.isSplitInstall) {
+                val runBuildTypeWarn = ("That's may be due to build performed by"
+                        + " Android Studio's \"Run\" action, that makes new build"
+                        + " only for ABI of the \"Run\" target's device.")
+                warn("Flavor \"fat\" has only %d ABIs, expected 4 ABIs. "
+                        + runBuildTypeWarn, abisCount)
+            }
         }
     }
 
-    private fun displayReport(jniReport: Report, exeReport: Report?, tv: TextView) {
+    private fun displayReport(info: ApksInfo, tv: TextView) {
         val header = ArrayList<String>()
         header.add(
             Utils.format("Java v%s, Cpp v%d.",
                 VERSION_NAME, BASE_VERSION_CODE)
         )
-        header.add("\n$jniReport")
+        header.add("\n${info.jniReport}")
 
-        if (exeReport != null) {
-            header.add("\n$exeReport")
+        if (info.exeReport != null) {
+            header.add("\n${info.exeReport}")
         }
 
-        header.add("\n${Utils.getApksReport(this)}")
+        header.add("\n${info}")
 
         if (messages.isNotEmpty()) {
             header.add("\n")
@@ -333,8 +339,9 @@ class MainActivity : Activity() {
             Utils.unpackApk(this)
             val jniReport = getJniReport()
             val exeReport = getExeReport()
-            checkMainReports(jniReport, exeReport)
-            displayReport(jniReport, exeReport, findViewById(R.id.main_text))
+            val info = ApksInfo(this, jniReport, exeReport)
+            checkReports(info)
+            displayReport(info, findViewById(R.id.main_text))
         } catch (e: Exception) {
             throw RuntimeException(e)
         }

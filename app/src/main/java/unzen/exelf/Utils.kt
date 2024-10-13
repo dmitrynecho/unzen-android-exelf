@@ -131,31 +131,6 @@ object Utils {
         return sb.toString()
     }
 
-    private fun getApksList(c: Context): String {
-        val sb = StringBuilder()
-        File(c.packageResourcePath).parentFile!!.walk().forEach {
-            if (it.extension == "apk") {
-                if (sb.isNotEmpty()) sb.append("\n")
-                val info = ApkInfo(it)
-                sb.append(info.fileName)
-                    .append(" ")
-                    .append(info.fileSize).append(" B")
-                    .append(" ")
-                    .append(info.signsMagicsCount)
-            }
-        }
-        return sb.toString()
-    }
-
-    fun getApksReport(c: Context): String {
-        val isSplitInstall = !File(apkUnpackDir(c), "lib").exists()
-        val installType = if (isSplitInstall) "split" else "standalone"
-        val sb = StringBuilder()
-        sb.append("Install type ").append(installType).append(".").appendLine()
-        sb.append(getApksList(c))
-        return sb.toString()
-    }
-
     private val bytesToHexArray: CharArray = "0123456789abcdef".toCharArray()
 
     fun bytesToHex(bytes: ByteArray): String {
