@@ -1,4 +1,4 @@
-package unzen.exelf
+package droid.elfexec
 
 import android.os.Build
 import android.system.Os

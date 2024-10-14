@@ -3,7 +3,7 @@ apply plugin: 'org.jetbrains.kotlin.android'
 apply from: 'zen-pack-elfs.gradle'
 
 android {
-    namespace 'unzen.exelf.cuscuta'
+    namespace 'droid.elfexec.cuscuta'
     ndkVersion exelfNdkVersion
     defaultConfig {
         minSdkVersion exelfMinSdkVersion

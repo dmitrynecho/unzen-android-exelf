@@ -1,16 +1,16 @@
-package unzen.exelf
+package droid.elfexec
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import unzen.exelf.FileUtils.existsFollowLinks
-import unzen.exelf.FileUtils.existsNoFollowLinks
-import unzen.exelf.FileUtils.fileListedInDir
-import unzen.exelf.FileUtils.isSymlink
-import unzen.exelf.FileUtils.readSymlink
-import unzen.exelf.FileUtils.symlink
+import droid.elfexec.FileUtils.existsFollowLinks
+import droid.elfexec.FileUtils.existsNoFollowLinks
+import droid.elfexec.FileUtils.fileListedInDir
+import droid.elfexec.FileUtils.isSymlink
+import droid.elfexec.FileUtils.readSymlink
+import droid.elfexec.FileUtils.symlink
 import java.io.File
 
 @RunWith(AndroidJUnit4::class)

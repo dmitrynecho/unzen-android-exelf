@@ -1,4 +1,4 @@
-package unzen.exelf
+package droid.elfexec
 
 object Assert {
     fun fail(message: String?) {

@@ -1,4 +1,4 @@
-package unzen.exelf
+package droid.elfexec
 
 object ExesNames {
     const val FOO_NAME = "jnifoo"

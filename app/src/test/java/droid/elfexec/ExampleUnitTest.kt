@@ -1,15 +1,11 @@
-package unzen.exelf
+package droid.elfexec
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.nio.charset.Charset
 import java.nio.file.Files
 import java.nio.file.Path
-import java.util.TreeMap
-import kotlin.io.path.absolutePathString
 import kotlin.io.path.extension
 import kotlin.io.path.isDirectory
-import kotlin.io.path.name
 import kotlin.io.path.pathString
 import kotlin.io.path.readText
 
@@ -22,7 +18,7 @@ import kotlin.io.path.readText
  * @see [Testing documentation](http://d.android.com/tools/testing)
  */
 class ExampleUnitTest {
-    val resDir = Path.of("src/test/res")
+    private val resDir: Path = Path.of("src/test/res")
     @Test
     fun addition_isCorrect() {
         assertEquals(4, (2 + 2).toLong())

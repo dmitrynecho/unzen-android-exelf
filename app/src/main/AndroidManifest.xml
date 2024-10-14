@@ -12,7 +12,7 @@ X permission if installed on external storage. -->
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="unzen.exelf.MainActivity"
+        <activity android:name="droid.elfexec.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

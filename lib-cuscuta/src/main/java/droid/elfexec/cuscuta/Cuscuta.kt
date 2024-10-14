@@ -1,4 +1,4 @@
-package unzen.exelf.cuscuta
+package droid.elfexec.cuscuta
 
 object Cuscuta {
     init {

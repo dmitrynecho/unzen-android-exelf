@@ -1,4 +1,4 @@
-package unzen.exelf
+package droid.elfexec
 
 import android.os.Build
 import android.system.Os
@@ -7,7 +7,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import unzen.exelf.FileUtils.fileListedInDir
+import droid.elfexec.FileUtils.fileListedInDir
 import java.io.File
 import java.io.IOException
 import java.nio.file.Files

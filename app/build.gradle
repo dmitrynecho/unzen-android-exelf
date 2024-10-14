@@ -6,10 +6,10 @@ apply from: 'zen-build-utils.gradle'
 apply from: 'zen-build-bundles.gradle'
 
 android {
-    namespace 'unzen.exelf'
+    namespace 'droid.elfexec'
     ndkVersion exelfNdkVersion
     defaultConfig {
-        applicationId "unzen.exelf"
+        applicationId "droid.elfexec"
         minSdkVersion exelfMinSdkVersion
         compileSdk exelfCompileSdkVersion
         targetSdkVersion exelfTargetSdkVersion
@@ -195,7 +195,7 @@ tasks.register("releaseBundles") {
             splitApksFromBundles(path, false)
             installSplitApks(apksFile.absolutePath)
         }
-        runApk("unzen.exelf", "unzen.exelf.MainActivity")
+        runApk("droid.elfexec", "droid.elfexec.MainActivity")
     }
     dependsOn tasks.named(zenPackBundlesTaskName)
 }
