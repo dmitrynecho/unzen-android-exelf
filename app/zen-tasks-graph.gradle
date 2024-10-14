@@ -1,4 +1,4 @@
-apply from: 'print-path-utils.gradle'
+apply from: 'zen-log-utils.gradle'
 
 import org.gradle.api.internal.tasks.DefaultTaskInputs
 

@@ -287,6 +287,7 @@ class MainActivity : Activity() {
         } else {
             tv.setTextColor(-0xff00ab)
         }
+        println(info.toStringVerbose())
     }
 
     @Throws(IOException::class)

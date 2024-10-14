@@ -70,9 +70,13 @@ object FileUtils {
             }
             sDigestSha1.update(buf, 0, len)
         }
-        `in`.close()
-        val hash = sDigestSha1.digest()
-        return Utils.bytesToHex(hash)
+        return Utils.bytesToHex(sDigestSha1.digest())
+    }
+
+    fun sha1(text: String): String {
+        val buf = text.toByteArray(charset("UTF-8"))
+        sDigestSha1.update(buf, 0, buf.size)
+        return Utils.bytesToHex(sDigestSha1.digest())
     }
 
     @Throws(Exception::class)

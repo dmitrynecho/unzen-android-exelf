@@ -24,14 +24,18 @@ class ApksInfo(c: Context, val jniReport: Report, val exeReport: Report?) {
         val sb = StringBuilder()
         sb.append("Install type ").append(installType).append(".").appendLine()
         apksInfos.forEachIndexed { index, apkInfo ->
-            if (index != 0) sb.append("\n")
-            sb.append(apkInfo.fileName)
-                .append(" ")
-                .append(apkInfo.fileSize).append(" B")
-                .append(" L")
-                .append(apkInfo.signsMagicsLowercaseCount)
-                .append(" U")
-                .append(apkInfo.signsMagicsUppercaseCount)
+            if (index != 0) sb.appendLine()
+            sb.append(apkInfo.toString())
+        }
+        return sb.toString()
+    }
+
+    fun toStringVerbose(): String {
+        val sb = StringBuilder()
+        sb.append("Install type ").append(installType).append(".").appendLine()
+        apksInfos.forEachIndexed { index, apkInfo ->
+            if (index != 0) sb.appendLine()
+            sb.append(apkInfo.toStringVerbose())
         }
         return sb.toString()
     }

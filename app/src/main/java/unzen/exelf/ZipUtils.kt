@@ -8,6 +8,8 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
+import java.util.SortedMap
+import java.util.TreeMap
 
 /**
  * Using Apache Commons Compress instead of system ZIP because system ZIP
@@ -66,5 +68,22 @@ object ZipUtils {
                 entry = nextEntry(zis)
             }
         }
+    }
+
+    fun entriesSha1s(f: File): SortedMap<String, String> {
+        val map = sortedMapOf<String, String>()
+        ZipArchiveInputStream(FileInputStream(f)).use { zis ->
+            var entry = nextEntry(zis)
+            while (entry != null) {
+                // println("ZIP entry: ${entry.name}")
+                if (entry.isDirectory) {
+                    map[entry.name] = FileUtils.ZERO_SHA1
+                } else {
+                    map[entry.name] = FileUtils.sha1(zis)
+                }
+                entry = nextEntry(zis)
+            }
+        }
+        return map
     }
 }

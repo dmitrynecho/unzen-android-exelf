@@ -1,6 +1,5 @@
 import static groovy.io.FileType.FILES
-
-apply from: 'print-path-utils.gradle'
+apply from: 'zen-log-utils.gradle'
 
 @SuppressWarnings('GrMethodMayBeStatic')
 TreeSet<String> processDir(File dir) {
