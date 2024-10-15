@@ -14,7 +14,8 @@ class ApksInfo(c: Context, val jniReport: Report, val exeReport: Report?) {
     init {
         File(c.packageResourcePath).parentFile!!.walk().forEach {
             if (it.extension == "apk") {
-                apksInfos.add(ApkInfo(it))
+                apksInfos.add(ApkInfo(it,
+                    hashesEnabled = false, signEnabled = false))
             }
         }
         if (isSplitInstall && apksInfos.size == 1) throw IllegalStateException()

@@ -18,7 +18,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.debug
         buildConfigField("int", "BASE_VERSION_CODE", "$baseVersion")
-        resConfigs "en"
+        resourceConfigurations += ['en']
     }
     buildTypes {
         debug {

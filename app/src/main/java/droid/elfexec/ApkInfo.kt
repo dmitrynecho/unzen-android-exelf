@@ -2,14 +2,11 @@ package droid.elfexec
 
 import java.io.File
 
-class ApkInfo(val file: File) {
-    val fileName: String = file.name
-    val fileSize = file.length()
-    val signsMagicsUppercaseCount = FileUtils.countStringMatches(file, "APK Sig Block 42")
-    val signsMagicsLowercaseCount = FileUtils.countStringMatches(file, "APK Sig block 42")
-    val sha1 = FileUtils.sha1(file)
-    val entriesSha1sMap = ZipUtils.entriesSha1s(file)
-    val entriesSha1 = FileUtils.sha1(entriesSha1sMap.toString())
+class ApkInfo(val apk: File, val hashesEnabled: Boolean, val signEnabled: Boolean) {
+    val fileName: String = apk.name
+    val fileSize = apk.length()
+    val hashes = if (hashesEnabled) ApkInfoHashes(apk) else null
+    val sign = if (signEnabled) ApkInfoSign(apk) else null
 
     override fun toString(): String {
         val sb = StringBuilder()
@@ -24,12 +21,16 @@ class ApkInfo(val file: File) {
         sb.append(fileName)
             .append(" ")
             .append(fileSize).append(" B")
-            .append(" L")
-            .append(signsMagicsLowercaseCount)
-            .append(" U")
-            .append(signsMagicsUppercaseCount)
-            .appendLine().append("APK: ").append(sha1)
-            .appendLine().append("APK: ").append(entriesSha1)
+        if (sign != null) {
+            sb.append(" L")
+                .append(sign.signsMagicsLowercaseCount)
+                .append(" U")
+                .append(sign.signsMagicsUppercaseCount)
+        }
+        if (hashes != null) {
+            sb.appendLine().append("APK: ").append(hashes.sha1)
+                .appendLine().append("APK: ").append(hashes.entriesSha1)
+        }
         return sb.toString()
     }
 }

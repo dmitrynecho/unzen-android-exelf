@@ -22,6 +22,20 @@ find . -iname "libjnifoo.so"
 
 * * *
 
+TAG6. Java compiler version 21 has deprecated support for compiling with source/target version 8.
+Try one of the following options:
+    1. [Recommended] Use Java toolchain with a lower language version
+    2. Set a higher source/target version
+    3. Use a lower version of the JDK running the build (if you're not using Java toolchain)
+For more details on how to configure these settings, see https://developer.android.com/build/jdks.
+To suppress this warning, set android.javaCompile.suppressSourceTargetDeprecationWarning=true in gradle.properties.
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+
+* * *
+
 TAG5. Tasks graph instability. Tasks graph differs depending on whether we executed Android Studio "Build" action after last clean or not. Android Studio "Build" action may be a next list of tasks:
 - :app:assembleFatDebug,
 - :app:assembleFatDebugUnitTest,

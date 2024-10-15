@@ -66,7 +66,8 @@ class ExampleUnitTest {
         Files.walk(tempDir).forEach { path: Path ->
             if (path == tempDir) return@forEach
             if (path.extension ==  "apk") {
-                val info = ApkInfo(path.toFile())
+                val info = ApkInfo(path.toFile(),
+                    hashesEnabled = false, signEnabled = false)
                 println(info.toStringVerbose())
             }
         }
