@@ -24,7 +24,7 @@ object Utils {
     }
 
     fun apkUnpackDir(c: Context): File {
-        return File(c.cacheDir, "unzen-apk")
+        return File(c.cacheDir, "droid-elfexec-apk")
     }
 
     fun findApkLibsDir(c: Context): File {
