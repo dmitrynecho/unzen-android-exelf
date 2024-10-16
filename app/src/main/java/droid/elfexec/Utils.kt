@@ -53,20 +53,6 @@ object Utils {
         }
     }
 
-    @Throws(IOException::class)
-    fun unpackApk(c: Context): File {
-        val apkDir = apkUnpackDir(c)
-        FileUtils.deleteDirectory(apkDir)
-        Assert.assertTrue(!apkDir.exists() && apkDir.mkdirs())
-        ZipUtils.extract(File(c.packageResourcePath), apkDir)
-        val assetsDir = File(apkDir, "assets")
-        val dummy = File(assetsDir, "dummy.txt")
-        Assert.assertTrue(dummy.exists() && dummy.length() > 0)
-        val dummyLib = File(assetsDir, "dummy-lib.txt")
-        Assert.assertTrue(dummyLib.exists() && dummyLib.length() > 0)
-        return apkDir
-    }
-
     @get:Suppress("deprecation")
     val supportedAbis: Array<String>
         // Suppress warnings for Gradle build output

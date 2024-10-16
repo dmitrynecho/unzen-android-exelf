@@ -41,10 +41,6 @@ android {
     }
 }
 
-dependencies {
-    implementation 'androidx.core:core-ktx:1.13.1'
-}
-
 tasks.register('cppVersions') {
     String template = "#ifndef %s%n#define %s%n%n#define %s \"%s\"%n%n#endif // %s"
     File header = file('src/main/cpp/global_version.h')

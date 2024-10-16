@@ -1,3 +1,6 @@
+Thumbs.db
+.directory
+
 *.iml
 .gradle
 /local.properties
@@ -7,9 +10,6 @@
 .externalNativeBuild
 .cxx
 local.properties
-
-Thumbs.db
-.directory
 
 # IntelliJ IDEA
 .idea/

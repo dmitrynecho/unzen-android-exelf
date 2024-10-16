@@ -14,6 +14,7 @@ import droid.elfexec.ExesNames.BAR_NAME
 import droid.elfexec.ExesNames.BAZ
 import droid.elfexec.ExesNames.BAZ_NAME
 import droid.elfexec.ExesNames.FOO
+import droid.elfexec.Utils.apkUnpackDir
 import droid.elfexec.cuscuta.Cuscuta
 import java.io.File
 import java.io.IOException
@@ -251,7 +252,7 @@ class MainActivity : Activity() {
         }
     }
 
-    private fun displayReport(info: ApksInfo, tv: TextView) {
+    private fun displayText(info: ApksInfo):String {
         val header = ArrayList<String>()
         header.add(
             Utils.format("Java v%s, Cpp v%d.",
@@ -278,16 +279,7 @@ class MainActivity : Activity() {
             text = Utils.format("%s%n%n%nERRORS%n%n%s",
                 text, TextUtils.join("\n\n", errors))
         }
-
-        tv.text = text
-        if (errors.isNotEmpty()) {
-            tv.setTextColor(-0x10000)
-        } else if (warns.isNotEmpty()) {
-            tv.setTextColor(-0x36bf6)
-        } else {
-            tv.setTextColor(-0xff00ab)
-        }
-        println(info.toStringVerbose())
+        return text
     }
 
     @Throws(IOException::class)
@@ -332,17 +324,41 @@ class MainActivity : Activity() {
         }
     }
 
+    @Throws(IOException::class)
+    fun unpackApk(): File {
+        val apkDir = apkUnpackDir(this)
+        FileUtils.deleteDirectory(apkDir)
+        assertTrue(!apkDir.exists() && apkDir.mkdirs())
+        ZipUtils.extract(File(packageResourcePath), apkDir)
+        val assetsDir = File(apkDir, "assets")
+        val dummy = File(assetsDir, "dummy.txt")
+        assertTrue(dummy.exists() && dummy.length() > 0)
+        val dummyLib = File(assetsDir, "dummy-lib.txt")
+        assertTrue(dummyLib.exists() && dummyLib.length() > 0)
+        return apkDir
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         try {
             nativeLibraryDirReport()
-            Utils.unpackApk(this)
+            unpackApk()
             val jniReport = getJniReport()
             val exeReport = getExeReport()
             val info = ApksInfo(this, jniReport, exeReport)
             checkReports(info)
-            displayReport(info, findViewById(R.id.main_text))
+            val text = displayText(info)
+            val tv: TextView = findViewById(R.id.main_text)
+            tv.text = text
+            if (errors.isNotEmpty()) {
+                tv.setTextColor(-0x10000)
+            } else if (warns.isNotEmpty()) {
+                tv.setTextColor(-0x36bf6)
+            } else {
+                tv.setTextColor(-0xff00ab)
+            }
+            println(info.toStringVerbose())
         } catch (e: Exception) {
             throw RuntimeException(e)
         }
