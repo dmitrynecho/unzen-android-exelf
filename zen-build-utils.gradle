@@ -1,0 +1,106 @@
+ext.projectBuildPath = { Project p, String path ->
+    DirectoryProperty buildDir = p.getLayout().getBuildDirectory()
+    return buildDir.file(path).get().asFile.absolutePath
+}
+
+ext.runApk = { Project p, String appId, String activity ->
+    String target = "$appId/$activity"
+    def outBytes = new ByteArrayOutputStream()
+    def errBytes = new ByteArrayOutputStream()
+    exec {
+        ignoreExitValue true
+        commandLine p.android.getAdbExe().absolutePath, 'shell', "am start -n $target"
+        standardOutput = outBytes
+        errorOutput = errBytes
+    }
+    String out = outBytes.toString().trim()
+    String err = errBytes.toString().trim()
+    String outType1 = "Starting: Intent { cmp=$target }"
+    String[] activitySplit = activity.split('\\.')
+    String activityName = activitySplit[activitySplit.length -1]
+    String outType2 = "Starting: Intent { cmp=$appId/.$activityName }"
+    boolean outValid = out == outType1 || out == outType2
+    if (!outValid || !err.isEmpty()) {
+        throw new GradleException("run failed, out: $out, err: $err")
+    }
+}
+
+ext.getBundletool = {
+    String error = "\"bundletool\" search in $it"
+    String bundletool
+    zenPackBundletoolDir.eachFileMatch(~"bundletool.+\\.jar", {
+        if (bundletool) {
+            String m = "$error: multiple matches, leave only one."
+            throw new GradleException(m)
+        }
+        bundletool = it.absolutePath
+    })
+    if (!bundletool) {
+        String m = "$error: zero matches, add \"bundletool\"."
+        throw new GradleException(m)
+    }
+    return bundletool
+}
+
+ext.installApk = { Project p, String path, boolean allowDonwgrade ->
+    def outBytes = new ByteArrayOutputStream()
+    def errBytes = new ByteArrayOutputStream()
+    exec {
+        ignoreExitValue true
+        if (allowDonwgrade) {
+            commandLine p.android.getAdbExe().absolutePath, 'install', '-r', path
+        } else {
+            commandLine p.android.getAdbExe().absolutePath, 'install', '-r', '-d', path
+        }
+        standardOutput = outBytes
+        errorOutput = errBytes
+    }
+    String out = outBytes.toString().trim()
+    String err = errBytes.toString().trim()
+    String outType1 = "Performing Streamed Install\nSuccess"
+    String outType2 = "Performing Push Install"
+    boolean outValid = out == outType1 || out.startsWith(outType2)
+    if (!outValid || !err.isEmpty()) {
+        throw new GradleException("installApk fail $path: [$out], [$err]")
+    }
+    println("installApk success $path")
+}
+
+ext.installSplitApks = { String path ->
+    def outBytes = new ByteArrayOutputStream()
+    def errBytes = new ByteArrayOutputStream()
+    exec {
+        ignoreExitValue true
+        // java -jar <path>/bundletool-all-<version>.jar
+        //     install-apks --apks=<path>/<name>.apks
+        commandLine 'java', '-jar', getBundletool(),
+                'install-apks',
+                "--apks=$path"
+        standardOutput = outBytes
+        errorOutput = errBytes
+    }
+    String out = outBytes.toString().trim()
+    String err = errBytes.toString().trim()
+    if (!err.isEmpty()) {
+        // Looks like "bundletool" writes normal output into error output.
+        // throw new GradleException("installSplitApks fail $path: [$out], [$err]")
+    }
+    println("installSplitApks success $path")
+}
+
+ext.installSplitApksAll = { String path ->
+    fileTree(dir: path, includes: ['*.apks']).each { File apks ->
+        installSplitApks(apks.absolutePath)
+    }
+}
+
+ext.addUninstallAllShortcut = { Project p ->
+    String zenUninstallAllTaskName = "zenUninstallAll"
+    //noinspection ConfigurationAvoidance
+    if (p.tasks.findByName(zenUninstallAllTaskName) == null) {
+        p.tasks.register(zenUninstallAllTaskName) {
+            group = "aleph"
+            dependsOn p.tasks.named("uninstallAll")
+        }
+    }
+}

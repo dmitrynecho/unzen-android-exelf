@@ -20,13 +20,8 @@ String getSrcElfsDir(String variant, String abi, ArrayList<String> elfs) {
     }
 }
 
-String buildPath(String path) {
-    DirectoryProperty buildDir = project.getLayout().getBuildDirectory()
-    return buildDir.file(path).get().asFile.absolutePath
-}
-
 String getDstElfsDir(String variant, String abi) {
-    String intermediatesPath = buildPath("intermediates")
+    String intermediatesPath = projectBuildPath(project, "intermediates")
     GString merged = "$intermediatesPath/merged_native_libs/${variant.toLowerCase()}"
     return "${merged}/merge${variant}NativeLibs/out/lib/${abi}"
 }
@@ -39,7 +34,7 @@ String beautifyPath(String path) {
     return path.substring(rootDirAbsolutePathLength + 1)
 }
 
-ext.srcElfsDirPathMatch = buildPath("intermediates/cxx/Release")
+ext.srcElfsDirPathMatch = projectBuildPath(project, "intermediates/cxx/Release")
 
 void zenPackElfsTask(String variant, String abi) {
     String copyElfsTaskName = "zenPackElfs$variant[$abi]"

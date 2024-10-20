@@ -1,5 +1,3 @@
-zenPackApksTaskName = "zenPackBundes"
-
 String alephCopyApksTaskName = "alephCopyApks"
 tasks.register(alephCopyApksTaskName, Copy) {
     group = "aleph"

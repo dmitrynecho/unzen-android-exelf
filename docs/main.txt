@@ -22,6 +22,12 @@ find . -iname "libjnifoo.so"
 
 * * *
 
+https://stackoverflow.com/questions/45753733/ext-in-buildscript-can-not-be-recognised-by-gradle-kotlin-dsl
+https://medium.com/@nicosnicolaou/migration-from-groovy-to-kotlin-dsl-gradle-part-1-c065fe19fcb4
+https://stackoverflow.com/questions/25600621/android-gradle-build-how-to-set-global-variables
+
+* * *
+
 TAG6. Java compiler version 21 has deprecated support for compiling with source/target version 8.
 Try one of the following options:
     1. [Recommended] Use Java toolchain with a lower language version

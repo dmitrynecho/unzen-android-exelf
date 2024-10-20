@@ -1,9 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.android'
 apply from: 'inspect-files.gradle'
-apply from: 'zen-tasks-graph.gradle'
-apply from: 'zen-build-utils.gradle'
-apply from: 'zen-build-bundles.gradle'
+apply from: 'tasks-graph.gradle'
+apply from: 'zen-pack-elfs-app.gradle'
 
 android {
     namespace 'droid.elfexec'
@@ -126,6 +125,8 @@ android {
     }
 }
 
+addUninstallAllShortcut(project)
+
 android.applicationVariants.configureEach { variant ->
     variant.outputs.configureEach { output ->
         outputFileName = "droid-elfexec-${variant.versionName}.apk"
@@ -195,7 +196,7 @@ tasks.register("releaseBundles") {
             splitApksFromBundles(path, false)
             installSplitApks(apksFile.absolutePath)
         }
-        runApk("droid.elfexec", "droid.elfexec.MainActivity")
+        runApk(project, "droid.elfexec", "droid.elfexec.MainActivity")
     }
     dependsOn tasks.named(zenPackBundlesTaskName)
 }

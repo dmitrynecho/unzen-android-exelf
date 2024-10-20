@@ -35,38 +35,3 @@ tasks.register(zenPackBundlesTaskName, Zip) {
     dependsOn tasks.named("bundle")
     outputs.upToDateWhen { false }
 }
-
-ext.getBundletool = {
-    String error = "\"bundletool\" search in $it"
-    String bundletool
-    zenPackBundletoolDir.eachFileMatch(~"bundletool.+\\.jar", {
-        if (bundletool) {
-            String m = "$error: multiple matches, leave only one."
-            throw new GradleException(m)
-        }
-        bundletool = it.absolutePath
-    })
-    if (!bundletool) {
-        String m = "$error: zero matches, add \"bundletool\"."
-        throw new GradleException(m)
-    }
-    return bundletool
-}
-
-ext.installSplitApks = { String path ->
-    def outBytes = new ByteArrayOutputStream()
-    def errBytes = new ByteArrayOutputStream()
-    exec {
-        ignoreExitValue true
-        // java -jar <path>/bundletool-all-<version>.jar
-        //     install-apks --apks=<path>/<name>.apks
-        commandLine 'java', '-jar', getBundletool(),
-                'install-apks',
-                "--apks=$path"
-        standardOutput = outBytes
-        errorOutput = errBytes
-    }
-    String out = outBytes.toString().trim()
-    String err = errBytes.toString().trim()
-    println("installMultiapk $path: [$out], [$err]")
-}

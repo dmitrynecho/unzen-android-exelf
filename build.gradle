@@ -4,18 +4,18 @@ buildscript {
         releaseBundleVariants = ['debug']
         baseVersion = 1110
         baseAbis = ['armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64']
-        zenPackSosList = ['jnifoo']
-        zenPackElfsList = ['exebar', 'exebaz']
         exelfTargetSdkVersion = 34
         exelfCompileSdkVersion = 34
         exelfMinSdkVersion = 19
         exelfNdkVersion = '21.3.6528147'
+        kotlin_version = '2.0.20'
+        zenPackSosList = ['jnifoo']
+        zenPackElfsList = ['exebar', 'exebaz']
+        zenPackProjectName = "lib-cuscuta"
         zenPackBundlesTaskName = "zenPackBundes"
         zenPackReleaseDir = "$rootDir.absolutePath/release"
-        zenPackProjectName = "lib-cuscuta"
         zenPackBundletoolDir = file("$rootDir/bundletool")
         verboseLogs = false
-        kotlin_version = '2.0.20'
     }
     repositories {
         google()
@@ -26,10 +26,11 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
-
 allprojects {
     repositories {
         google()
         mavenCentral()
     }
 }
+apply from: 'zen-log-utils.gradle'
+apply from: 'zen-build-utils.gradle'

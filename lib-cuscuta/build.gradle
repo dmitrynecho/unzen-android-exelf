@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'org.jetbrains.kotlin.android'
-apply from: 'zen-pack-elfs.gradle'
+apply from: 'zen-pack-elfs-lib.gradle'
 
 android {
     namespace 'droid.elfexec.cuscuta'
