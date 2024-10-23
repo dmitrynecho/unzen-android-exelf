@@ -1,5 +1,7 @@
 package droid.elfexec
 
+import droid.utils.Utils
+
 object ExesNames {
     const val FOO_NAME = "jnifoo"
     val FOO: String = Utils.fullSoName(FOO_NAME)

@@ -1,4 +1,4 @@
-package droid.elfexec
+package droid.utils
 
 object Assert {
     fun fail(message: String?) {

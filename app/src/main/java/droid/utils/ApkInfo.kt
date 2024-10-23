@@ -1,4 +1,4 @@
-package droid.elfexec
+package droid.utils
 
 import java.io.File
 import java.text.NumberFormat
@@ -25,10 +25,7 @@ class ApkInfo(val apk: File, val hashesEnabled: Boolean, val signEnabled: Boolea
             .append(" ")
             .append(nf.format(fileSize)).append(" B")
         if (sign != null) {
-            sb.append(" L")
-                .append(sign.signsMagicsLowercaseCount)
-                .append(" U")
-                .append(sign.signsMagicsUppercaseCount)
+            sb.appendLine().append(sign)
         }
         if (hashes != null) {
             sb.appendLine().append("APK: ").append(hashes.sha1)

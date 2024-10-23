@@ -1,4 +1,4 @@
-package droid.elfexec
+package droid.utils
 
 import android.util.Log
 import org.apache.commons.compress.archivers.ArchiveEntry
@@ -9,7 +9,6 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.SortedMap
-import java.util.TreeMap
 
 /**
  * Using Apache Commons Compress instead of system ZIP because system ZIP

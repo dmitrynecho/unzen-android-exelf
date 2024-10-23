@@ -1,5 +1,8 @@
 package droid.elfexec
 
+import droid.utils.ApkInfo
+import droid.utils.FileUtils
+import droid.utils.ZipUtils
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.nio.file.Files
@@ -56,7 +59,8 @@ class ExampleUnitTest {
         val expected = resDir.resolve("zip/expected.txt").readText()
         assertEquals(expected, zipFileMap.toString())
         assertEquals(expected, zipDirMap.toString())
-        assertEquals(FileUtils.sha1(zipFileMap.toString()),
+        assertEquals(
+            FileUtils.sha1(zipFileMap.toString()),
             FileUtils.sha1(zipDirMap.toString()))
     }
     @Test

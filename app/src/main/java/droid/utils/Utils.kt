@@ -1,4 +1,4 @@
-package droid.elfexec
+package droid.utils
 
 import android.content.Context
 import android.os.Build
@@ -24,7 +24,7 @@ object Utils {
     }
 
     fun apkUnpackDir(c: Context): File {
-        return File(c.cacheDir, "droid-elfexec-apk")
+        return File(c.cacheDir, "${c.packageName}-apk")
     }
 
     fun findApkLibsDir(c: Context): File {
@@ -55,7 +55,6 @@ object Utils {
 
     @get:Suppress("deprecation")
     val supportedAbis: Array<String>
-        // Suppress warnings for Gradle build output
         get() = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             Build.SUPPORTED_ABIS
         } else {

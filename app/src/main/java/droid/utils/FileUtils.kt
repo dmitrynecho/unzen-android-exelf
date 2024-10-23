@@ -1,4 +1,4 @@
-package droid.elfexec
+package droid.utils
 
 import android.os.Build
 import android.system.Os
@@ -95,9 +95,9 @@ object FileUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val target = Files.readSymbolicLink(symlink.toPath()).toString()
             if (symlink.exists()) {
-                // Since getCanonicalPath() and getCanonicalFile() works only for non broken
-                // links, this check has sense only if link is not broken. Broken symlinks
-                // returns false from exists().
+                // Since getCanonicalPath() and getCanonicalFile() works only for non
+                // broken links, this check has sense only if link is not broken. Broken
+                // symlinks returns false from exists().
                 val compatTarget = symlink.canonicalPath
                 if (target != compatTarget) {
                     throw IOException(
@@ -145,10 +145,8 @@ object FileUtils {
     }
 
     /**
-     * Determines whether the specified file is a Symbolic Link rather than an actual file.
-     *
-     *
-     * Will not return true if there is a Symbolic Link anywhere in the path,
+     * Determines whether the specified file is a Symbolic Link rather than an actual
+     * file. Will not return true if there is a Symbolic Link anywhere in the path,
      * only if the specific file is.
      * @param file the file to check
      * @return true if the file is a Symbolic Link
@@ -159,8 +157,8 @@ object FileUtils {
         if (file == null) {
             throw NullPointerException("File must not be null")
         }
-        // We dont use here simple getCanonicalPath() equals getAbsolutePath() because they
-        // might be not equals when there is symlink in upper path, but the file that
+        // We dont use here simple getCanonicalPath() equals getAbsolutePath() because
+        // they might be not equals when there is symlink in upper path, but the file that
         // we currently checking is not a symlink.
         val fileInCanonicalDir: File
         if (file.parent == null) {
@@ -175,7 +173,8 @@ object FileUtils {
             if (file.exists()) {
                 res = false
             } else {
-                // Broken symlink will show up in the list of files of its parent directory.
+                // Broken symlink will show up in the list of files of its parent
+                // directory.
                 val canon = file.canonicalFile
                 val parentDir = canon.parentFile
                 if (parentDir == null || !parentDir.exists()) {
@@ -198,7 +197,8 @@ object FileUtils {
     }
 
     /**
-     * Lists files in a directory, asserting that the supplied directory satisfies exists and is a directory
+     * Lists files in a directory, asserting that the supplied directory satisfies exists
+     * and is a directory.
      * @param directory The directory to list
      * @return The files in the directory, never null.
      * @throws IOException if an I/O error occurs
@@ -256,7 +256,8 @@ object FileUtils {
      *
      * @param directory directory to clean
      * @throws IOException              in case cleaning is unsuccessful
-     * @throws IllegalArgumentException if `directory` does not exist or is not a directory
+     * @throws IllegalArgumentException if `directory` does not exist or is not a
+     * directory.
      */
     @Throws(IOException::class)
     fun cleanDirectory(directory: File) {
@@ -279,7 +280,8 @@ object FileUtils {
      *
      * @param directory directory to delete
      * @throws IOException              in case deletion is unsuccessful
-     * @throws IllegalArgumentException if `directory` does not exist or is not a directory
+     * @throws IllegalArgumentException if `directory` does not exist or is not a
+     * directory.
      */
     @Throws(IOException::class)
     fun deleteDirectory(directory: File) {

@@ -5,12 +5,12 @@ import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import droid.elfexec.FileUtils.existsFollowLinks
-import droid.elfexec.FileUtils.existsNoFollowLinks
-import droid.elfexec.FileUtils.fileListedInDir
-import droid.elfexec.FileUtils.isSymlink
-import droid.elfexec.FileUtils.readSymlink
-import droid.elfexec.FileUtils.symlink
+import droid.utils.FileUtils.existsFollowLinks
+import droid.utils.FileUtils.existsNoFollowLinks
+import droid.utils.FileUtils.fileListedInDir
+import droid.utils.FileUtils.isSymlink
+import droid.utils.FileUtils.readSymlink
+import droid.utils.FileUtils.symlink
 import java.io.File
 
 @RunWith(AndroidJUnit4::class)

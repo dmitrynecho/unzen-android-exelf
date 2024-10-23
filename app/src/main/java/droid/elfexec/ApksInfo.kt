@@ -2,7 +2,8 @@ package droid.elfexec
 
 import android.content.Context
 import droid.elfexec.MainActivity.Report
-import droid.elfexec.Utils.apkUnpackDir
+import droid.utils.Utils.apkUnpackDir
+import droid.utils.ApkInfo
 import java.io.File
 
 class ApksInfo(c: Context, val jniReport: Report, val exeReport: Report?) {
