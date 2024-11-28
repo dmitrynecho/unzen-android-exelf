@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "droid.lib.cho"
+    namespace = "droid.libcho"
     compileSdk = 34
 
     defaultConfig {

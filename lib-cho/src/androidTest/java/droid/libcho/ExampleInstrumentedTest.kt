@@ -1,4 +1,4 @@
-package droid.lib.cho
+package droid.libcho
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("droid.lib.cho.test", appContext.packageName)
+        assertEquals("droid.libcho.test", appContext.packageName)
     }
 }

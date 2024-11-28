@@ -1,3 +1,3 @@
-package droid.lib.cho
+package droid.libcho
 
 class SignatureNotFoundException(m: String) : Throwable()

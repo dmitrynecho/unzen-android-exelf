@@ -1,4 +1,4 @@
-package droid.lib.cho
+package droid.libcho
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

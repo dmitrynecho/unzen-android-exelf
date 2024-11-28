@@ -32,5 +32,5 @@ allprojects {
         mavenCentral()
     }
 }
-apply from: 'zen-log-utils.gradle'
-apply from: 'zen-build-utils.gradle'
+apply from: 'lib-cho/zen-log-utils.gradle'
+apply from: 'lib-cho/zen-build-utils.gradle'

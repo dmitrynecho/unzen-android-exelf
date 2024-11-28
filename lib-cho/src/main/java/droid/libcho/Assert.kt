@@ -1,4 +1,4 @@
-package droid.lib.cho
+package droid.libcho
 
 object Assert {
     fun fail(message: String?) {
