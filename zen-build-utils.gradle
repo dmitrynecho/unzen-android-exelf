@@ -81,9 +81,9 @@ ext.installSplitApks = { String path ->
     }
     String out = outBytes.toString().trim()
     String err = errBytes.toString().trim()
-    if (!err.isEmpty()) {
-        // Looks like "bundletool" writes normal output into error output.
-        // throw new GradleException("installSplitApks fail $path: [$out], [$err]")
+    // Looks like "bundletool" writes normal output into error output.
+    if (!err.startsWith("The APKs have been extracted in the directory")) {
+        throw new GradleException("installSplitApks fail $path: [$out], [$err]")
     }
     println("installSplitApks success $path")
 }

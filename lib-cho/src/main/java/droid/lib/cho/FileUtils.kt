@@ -1,4 +1,4 @@
-package droid.utils
+package droid.lib.cho
 
 import android.os.Build
 import android.system.Os

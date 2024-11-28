@@ -4,7 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.TextView
-import droid.utils.Assert.assertTrue
+import droid.lib.cho.Assert.assertTrue
 import droid.elfexec.BuildConfig.BASE_VERSION_CODE
 import droid.elfexec.BuildConfig.VERSION_CODE
 import droid.elfexec.BuildConfig.VERSION_NAME
@@ -14,12 +14,12 @@ import droid.elfexec.ExesNames.BAR_NAME
 import droid.elfexec.ExesNames.BAZ
 import droid.elfexec.ExesNames.BAZ_NAME
 import droid.elfexec.ExesNames.FOO
-import droid.utils.Utils.apkUnpackDir
+import droid.lib.cho.Utils.apkUnpackDir
 import droid.elfexec.cuscuta.Cuscuta
-import droid.utils.Assert
-import droid.utils.FileUtils
-import droid.utils.Utils
-import droid.utils.ZipUtils
+import droid.lib.cho.Assert
+import droid.lib.cho.FileUtils
+import droid.lib.cho.Utils
+import droid.lib.cho.ZipUtils
 import java.io.File
 import java.io.IOException
 import java.util.Objects

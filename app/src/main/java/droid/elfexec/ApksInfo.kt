@@ -2,8 +2,8 @@ package droid.elfexec
 
 import android.content.Context
 import droid.elfexec.MainActivity.Report
-import droid.utils.Utils.apkUnpackDir
-import droid.utils.ApkInfo
+import droid.lib.cho.Utils.apkUnpackDir
+import droid.lib.cho.ApkInfo
 import java.io.File
 
 class ApksInfo(c: Context, val jniReport: Report, val exeReport: Report?) {
@@ -15,8 +15,7 @@ class ApksInfo(c: Context, val jniReport: Report, val exeReport: Report?) {
     init {
         File(c.packageResourcePath).parentFile!!.walk().forEach {
             if (it.extension == "apk") {
-                apksInfos.add(ApkInfo(it,
-                    hashesEnabled = false, signEnabled = false))
+                apksInfos.add(ApkInfo(it, hashesEnabled = false, signEnabled = false))
             }
         }
         if (isSplitInstall && apksInfos.size == 1) throw IllegalStateException()

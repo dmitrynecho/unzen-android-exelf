@@ -1,4 +1,4 @@
-package droid.utils
+package droid.lib.cho
 
 import java.io.IOException
 import java.nio.BufferUnderflowException
@@ -18,6 +18,12 @@ internal object ApkUtil {
     const val APK_SIG_BLOCK_MAGIC_HI: Long = 0x3234206b636f6c42L // LITTLE_ENDIAN, High
     const val APK_SIG_BLOCK_MAGIC_LO: Long = 0x20676953204b5041L // LITTLE_ENDIAN, Low
     private const val APK_SIG_BLOCK_MIN_SIZE = 32
+    // APK Sig Block 42
+    val magicUppercase = String(intArrayOf(65, 80, 75, 32, 83, 105, 103, 32, 66, 108,
+        111, 99, 107, 32, 52, 50).map { it.toChar() }.toCharArray())
+    // APK Sig block 42
+    val magicLowercase = String(intArrayOf(65, 80, 75, 32, 83, 105, 103, 32, 98, 108,
+        111, 99, 107, 32, 52, 50).map { it.toChar() }.toCharArray())
 
     /*
      The v2 signature of the APK is stored as an ID-value pair with ID 0x7109871a

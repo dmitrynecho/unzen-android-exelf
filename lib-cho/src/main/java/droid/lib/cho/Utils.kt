@@ -1,4 +1,4 @@
-package droid.utils
+package droid.lib.cho
 
 import android.content.Context
 import android.os.Build

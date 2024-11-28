@@ -7,7 +7,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import droid.utils.FileUtils.fileListedInDir
+import droid.lib.cho.FileUtils.fileListedInDir
 import java.io.File
 import java.io.IOException
 import java.nio.file.Files

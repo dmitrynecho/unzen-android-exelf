@@ -1,6 +1,6 @@
 package droid.elfexec
 
-import droid.utils.Utils
+import droid.lib.cho.Utils
 
 object ExesNames {
     const val FOO_NAME = "jnifoo"

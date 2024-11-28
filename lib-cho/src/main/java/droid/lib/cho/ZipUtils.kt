@@ -1,4 +1,4 @@
-package droid.utils
+package droid.lib.cho
 
 import android.util.Log
 import org.apache.commons.compress.archivers.ArchiveEntry
@@ -76,9 +76,9 @@ object ZipUtils {
             while (entry != null) {
                 // println("ZIP entry: ${entry.name}")
                 if (entry.isDirectory) {
-                    map[entry.name] = FileUtils.ZERO_SHA1
+                    map[entry.name] = droid.lib.cho.FileUtils.ZERO_SHA1
                 } else {
-                    map[entry.name] = FileUtils.sha1(zis)
+                    map[entry.name] = droid.lib.cho.FileUtils.sha1(zis)
                 }
                 entry = nextEntry(zis)
             }
