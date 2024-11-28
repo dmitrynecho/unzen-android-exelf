@@ -19,7 +19,7 @@ TreeSet<String> processDir(File dir) {
     return found
 }
 
-tasks.register("inspectBuildDirs") {
+tasks.register("inspectBuildDirsMain") {
     group = "aleph"
     doLast {
         String rootPath = project.rootDir.absolutePath

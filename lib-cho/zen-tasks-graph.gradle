@@ -1,10 +1,10 @@
 import org.gradle.api.internal.tasks.DefaultTaskInputs
 
 def tasksToStrings = new LinkedHashMap<String, String>()
-String genTasksGraphTaskNameAssemble = "tasksGraphAssemble"
-String genTasksGraphTaskNameBundle = "tasksGraphBundle"
-File reportAssemble = file("$rootDir/docs/tasks-graph-assemble.txt")
-File reportBundle = file("$rootDir/docs/tasks-graph-bundle.txt")
+String genTasksGraphTaskNameAssemble = "tasksGraphMakeApk"
+String genTasksGraphTaskNameBundle = "tasksGraphMakeBun"
+File reportAssemble = file("$rootDir/docs/tasks-graph-apk.txt")
+File reportBundle = file("$rootDir/docs/tasks-graph-bun.txt")
 
 @SuppressWarnings('GrMethodMayBeStatic')
 boolean isKotlinException(String taskName) {
@@ -71,7 +71,7 @@ afterEvaluate { Project project ->
         }
         if (reportFile != null) {
             if (!reportFile.exists()) {
-                throw new GradleException()
+                reportFile.createNewFile()
             }
             StringBuilder report = new StringBuilder()
             tasksToStrings.values().eachWithIndex { String task, int i ->

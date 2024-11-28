@@ -1,5 +1,11 @@
-1727814249200 56908 <lib>/intermediates/cxx/Release/<hash>/obj/local/x86/libjnifoo.so
-1727814249539 56908 <lib>/intermediates/library_jni/release/copyReleaseJniLibsProjectOnly/jni/x86/libjnifoo.so
-1727814249539 56908 <lib>/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib/x86/libjnifoo.so
-1727814249583 56908 <app>/intermediates/merged_native_libs/fatRelease/mergeFatReleaseNativeLibs/out/lib/x86/libjnifoo.so
-1727814249617 5564 <app>/intermediates/stripped_native_libs/fatRelease/stripFatReleaseDebugSymbols/out/lib/x86/libjnifoo.so
+1728917587587 58344 <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86/libjnifoo.so
+1728977465098 5564 <lib>/intermediates/library_and_local_jars_jni/debug/copyDebugJniLibsProjectAndLocalJars/jni/x86/libjnifoo.so
+1728977465098 5564 <lib>/intermediates/stripped_native_libs/debug/stripDebugDebugSymbols/out/lib/x86/libjnifoo.so
+1728977482061 5564 <lib>/intermediates/stripped_native_libs/debugAndroidTest/stripDebugAndroidTestDebugSymbols/out/lib/x86/libjnifoo.so
+1729413972010 58344 <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86/libjnifoo.so
+1729414141565 58344 <lib>/intermediates/merged_native_libs/debugAndroidTest/mergeDebugAndroidTestNativeLibs/out/lib/x86/libjnifoo.so
+1732785032363 58232 <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86/libjnifoo.so
+1732785032474 58232 <lib>/intermediates/library_jni/debug/copyDebugJniLibsProjectOnly/jni/x86/libjnifoo.so
+1732785032474 58232 <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/x86/libjnifoo.so
+1732785032634 58232 <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/x86/libjnifoo.so
+1732785032735 5564 <app>/intermediates/stripped_native_libs/fatDebug/stripFatDebugDebugSymbols/out/lib/x86/libjnifoo.so

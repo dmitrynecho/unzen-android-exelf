@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.android'
 apply from: 'inspect-files.gradle'
-apply from: 'tasks-graph.gradle'
+apply from: '../lib-cho/zen-tasks-graph.gradle'
 apply from: 'zen-pack-elfs-app.gradle'
 
 android {

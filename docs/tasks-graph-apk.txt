@@ -12,216 +12,303 @@ O: <app>/outputs/native-debug-symbols/fatDebug/native-debug-symbols.zip
 5 :app:generateFatDebugBuildConfig
 O: <app>/generated/source/buildConfig/fat/debug
 
-6 :lib-cuscuta:cppVersions
+6 :lib-cho:preBuild
+
+7 :lib-cho:preDebugBuild
+
+8 :lib-cho:writeDebugAarMetadata
+O: lib-cho/build/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
+
+9 :lib-cuscuta:cppVersions
 O: lib-cuscuta/src/main/cpp/global_version.h
 
-7 :lib-cuscuta:preBuild
+10 :lib-cuscuta:preBuild
 
-8 :lib-cuscuta:preDebugBuild
+11 :lib-cuscuta:preDebugBuild
 
-9 :lib-cuscuta:writeDebugAarMetadata
+12 :lib-cuscuta:writeDebugAarMetadata
 O: <lib>/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
 
-10 :app:checkFatDebugAarMetadata
+13 :app:checkFatDebugAarMetadata
 O: <app>/intermediates/aar_metadata_check/fatDebug/checkFatDebugAarMetadata
 
-11 :app:generateFatDebugResValues
+14 :app:generateFatDebugResValues
 O: <app>/generated/res/resValues/fat/debug
 
-12 :lib-cuscuta:generateDebugResValues
+15 :lib-cho:generateDebugResValues
+O: lib-cho/build/generated/res/resValues/debug
+
+16 :lib-cho:generateDebugResources
+O: lib-cho/build/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+
+17 :lib-cho:packageDebugResources
+O: lib-cho/build/intermediates/data_binding_layout_info_type_package/debug/packageDebugResources/out
+O: lib-cho/build/generated/res/pngs/debug
+O: lib-cho/build/intermediates/incremental/debug/packageDebugResources
+O: lib-cho/build/intermediates/packaged_res/debug/packageDebugResources
+O: lib-cho/build/intermediates/public_res/debug/packageDebugResources/public.txt
+
+18 :lib-cuscuta:generateDebugResValues
 O: <lib>/generated/res/resValues/debug
 
-13 :lib-cuscuta:generateDebugResources
+19 :lib-cuscuta:generateDebugResources
 O: <lib>/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
 
-14 :lib-cuscuta:packageDebugResources
+20 :lib-cuscuta:packageDebugResources
 O: <lib>/intermediates/data_binding_layout_info_type_package/debug/packageDebugResources/out
 O: <lib>/generated/res/pngs/debug
 O: <lib>/intermediates/incremental/debug/packageDebugResources
 O: <lib>/intermediates/packaged_res/debug/packageDebugResources
 O: <lib>/intermediates/public_res/debug/packageDebugResources/public.txt
 
-15 :app:mapFatDebugSourceSetPaths
+21 :app:mapFatDebugSourceSetPaths
 O: <app>/intermediates/source_set_path_map/fatDebug/mapFatDebugSourceSetPaths/file-map.txt
 
-16 :app:generateFatDebugResources
+22 :app:generateFatDebugResources
 O: <app>/intermediates/nested_resources_validation_report/fatDebug/generateFatDebugResources/nestedResourcesValidationReport.txt
 
-17 :app:mergeFatDebugResources
+23 :app:mergeFatDebugResources
 O: <app>/intermediates/merged_res_blame_folder/fatDebug/mergeFatDebugResources/out
 O: <app>/intermediates/data_binding_layout_info_type_merge/fatDebug/mergeFatDebugResources/out
 O: <app>/generated/res/pngs/fat/debug
 O: <app>/intermediates/incremental/fatDebug/mergeFatDebugResources
 O: <app>/intermediates/merged_res/fatDebug/mergeFatDebugResources
 
-18 :app:createFatDebugCompatibleScreenManifests
+24 :app:createFatDebugCompatibleScreenManifests
 O: <app>/intermediates/compatible_screen_manifest/fatDebug/createFatDebugCompatibleScreenManifests
 
-19 :app:extractDeepLinksFatDebug
+25 :app:extractDeepLinksFatDebug
 O: <app>/intermediates/navigation_json/fatDebug/extractDeepLinksFatDebug/navigation.json
 
-20 :lib-cuscuta:extractDeepLinksDebug
+26 :lib-cho:extractDeepLinksDebug
+O: lib-cho/build/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+
+27 :lib-cho:processDebugManifest
+O: lib-cho/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt
+O: lib-cho/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
+O: lib-cho/build/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
+O: lib-cho/build/outputs/logs/manifest-merger-debug-report.txt
+
+28 :lib-cuscuta:extractDeepLinksDebug
 O: <lib>/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
 
-21 :lib-cuscuta:processDebugManifest
+29 :lib-cuscuta:processDebugManifest
 O: <lib>/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt
 O: <lib>/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
 O: <lib>/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
 O: <lib>/outputs/logs/manifest-merger-debug-report.txt
 
-22 :app:processFatDebugMainManifest
+30 :app:processFatDebugMainManifest
 O: <app>/intermediates/manifest_merge_blame_file/fatDebug/processFatDebugMainManifest/manifest-merger-blame-fat-debug-report.txt
 O: <app>/intermediates/merged_manifest/fatDebug/processFatDebugMainManifest/AndroidManifest.xml
 O: <app>/outputs/logs/manifest-merger-fat-debug-report.txt
 
-23 :app:processFatDebugManifest
+31 :app:processFatDebugManifest
 O: <app>/intermediates/merged_manifests/fatDebug/processFatDebugManifest
 
-24 :app:processFatDebugManifestForPackage
+32 :app:processFatDebugManifestForPackage
 O: <app>/intermediates/packaged_manifests/fatDebug/processFatDebugManifestForPackage
 
-25 :lib-cuscuta:compileDebugLibraryResources
+33 :lib-cho:compileDebugLibraryResources
+O: lib-cho/build/intermediates/compiled_local_resources/debug/compileDebugLibraryResources/out
+
+34 :lib-cho:parseDebugLocalResources
+O: lib-cho/build/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+
+35 :lib-cho:generateDebugRFile
+O: lib-cho/build/intermediates/compile_r_class_jar/debug/generateDebugRFile/R.jar
+O: lib-cho/build/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+O: lib-cho/build/intermediates/compile_symbol_list/debug/generateDebugRFile/R.txt
+
+36 :lib-cuscuta:compileDebugLibraryResources
 O: <lib>/intermediates/compiled_local_resources/debug/compileDebugLibraryResources/out
 
-26 :lib-cuscuta:parseDebugLocalResources
+37 :lib-cuscuta:parseDebugLocalResources
 O: <lib>/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
 
-27 :lib-cuscuta:generateDebugRFile
+38 :lib-cuscuta:generateDebugRFile
 O: <lib>/intermediates/compile_r_class_jar/debug/generateDebugRFile/R.jar
 O: <lib>/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
 O: <lib>/intermediates/compile_symbol_list/debug/generateDebugRFile/R.txt
 
-28 :app:processFatDebugResources
+39 :app:processFatDebugResources
 O: <app>/intermediates/compile_and_runtime_not_namespaced_r_class_jar/fatDebug/processFatDebugResources/R.jar
 O: <app>/intermediates/linked_resources_binary_format/fatDebug/processFatDebugResources
 O: <app>/intermediates/stable_resource_ids_file/fatDebug/processFatDebugResources/stableIds.txt
 O: <app>/intermediates/symbol_list_with_package_name/fatDebug/processFatDebugResources/package-aware-r.txt
 O: <app>/intermediates/runtime_symbol_list/fatDebug/processFatDebugResources/R.txt
 
-29 :lib-cuscuta:checkKotlinGradlePluginConfigurationErrors
+40 :lib-cho:checkKotlinGradlePluginConfigurationErrors
 
-30 :lib-cuscuta:compileDebugKotlin
+41 :lib-cho:compileDebugKotlin
+I: Querying input of Kotlin tasks before they completed throws exception
+O: lib-cho/build/kotlin/compileDebugKotlin/classpath-snapshot
+O: lib-cho/build/tmp/kotlin-classes/debug
+O: lib-cho/build/kotlin/compileDebugKotlin/cacheable
+
+42 :lib-cho:javaPreCompileDebug
+O: lib-cho/build/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+
+43 :lib-cho:compileDebugJavaWithJavac
+O: lib-cho/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes
+O: lib-cho/build/generated/ap_generated_sources/debug/out
+O: lib-cho/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin
+
+44 :lib-cho:bundleLibCompileToJarDebug
+O: lib-cho/build/intermediates/compile_library_classes_jar/debug/bundleLibCompileToJarDebug/classes.jar
+
+45 :lib-cuscuta:checkKotlinGradlePluginConfigurationErrors
+
+46 :lib-cuscuta:compileDebugKotlin
 I: Querying input of Kotlin tasks before they completed throws exception
 O: <lib>/kotlin/compileDebugKotlin/classpath-snapshot
 O: <lib>/tmp/kotlin-classes/debug
 O: <lib>/kotlin/compileDebugKotlin/cacheable
 
-31 :lib-cuscuta:javaPreCompileDebug
+47 :lib-cuscuta:javaPreCompileDebug
 O: <lib>/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
 
-32 :lib-cuscuta:compileDebugJavaWithJavac
+48 :lib-cuscuta:compileDebugJavaWithJavac
 O: <lib>/intermediates/javac/debug/compileDebugJavaWithJavac/classes
 O: <lib>/generated/ap_generated_sources/debug/out
 O: <lib>/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin
 
-33 :lib-cuscuta:bundleLibCompileToJarDebug
+49 :lib-cuscuta:bundleLibCompileToJarDebug
 O: <lib>/intermediates/compile_library_classes_jar/debug/bundleLibCompileToJarDebug/classes.jar
 
-34 :app:compileFatDebugKotlin
+50 :app:compileFatDebugKotlin
 I: Querying input of Kotlin tasks before they completed throws exception
 O: <app>/kotlin/compileFatDebugKotlin/classpath-snapshot
 O: <app>/tmp/kotlin-classes/fatDebug
 O: <app>/kotlin/compileFatDebugKotlin/cacheable
 
-35 :app:javaPreCompileFatDebug
+51 :app:javaPreCompileFatDebug
 O: <app>/intermediates/annotation_processor_list/fatDebug/javaPreCompileFatDebug/annotationProcessors.json
 
-36 :app:compileFatDebugJavaWithJavac
+52 :app:compileFatDebugJavaWithJavac
 I: <app>/generated/source/buildConfig/fat/debug/droid/elfexec/BuildConfig.java
 O: <app>/intermediates/javac/fatDebug/compileFatDebugJavaWithJavac/classes
 O: <app>/generated/ap_generated_sources/fatDebug/out
 O: <app>/tmp/compileFatDebugJavaWithJavac/previous-compilation-data.bin
 
-37 :app:mergeFatDebugShaders
+53 :app:mergeFatDebugShaders
 O: <app>/intermediates/merged_shaders/fatDebug/mergeFatDebugShaders/out
 
-38 :app:compileFatDebugShaders
+54 :app:compileFatDebugShaders
 O: <app>/intermediates/shader_assets/fatDebug/compileFatDebugShaders/out
 
-39 :app:generateFatDebugAssets
+55 :app:generateFatDebugAssets
 
-40 :lib-cuscuta:mergeDebugShaders
+56 :lib-cho:mergeDebugShaders
+O: lib-cho/build/intermediates/merged_shaders/debug/mergeDebugShaders/out
+
+57 :lib-cho:compileDebugShaders
+O: lib-cho/build/intermediates/shader_assets/debug/compileDebugShaders/out
+
+58 :lib-cho:generateDebugAssets
+
+59 :lib-cho:packageDebugAssets
+O: lib-cho/build/intermediates/library_assets/debug/packageDebugAssets/out
+
+60 :lib-cuscuta:mergeDebugShaders
 O: <lib>/intermediates/merged_shaders/debug/mergeDebugShaders/out
 
-41 :lib-cuscuta:compileDebugShaders
+61 :lib-cuscuta:compileDebugShaders
 O: <lib>/intermediates/shader_assets/debug/compileDebugShaders/out
 
-42 :lib-cuscuta:generateDebugAssets
+62 :lib-cuscuta:generateDebugAssets
 
-43 :lib-cuscuta:packageDebugAssets
+63 :lib-cuscuta:packageDebugAssets
 O: <lib>/intermediates/library_assets/debug/packageDebugAssets/out
 
-44 :app:mergeFatDebugAssets
+64 :app:mergeFatDebugAssets
 O: <app>/intermediates/assets/fatDebug/mergeFatDebugAssets
 
-45 :app:compressFatDebugAssets
+65 :app:compressFatDebugAssets
 O: <app>/intermediates/compressed_assets/fatDebug/compressFatDebugAssets/out
 
-46 :lib-cuscuta:bundleLibRuntimeToJarDebug
+66 :lib-cuscuta:bundleLibRuntimeToJarDebug
 O: <lib>/intermediates/runtime_library_classes_jar/debug/bundleLibRuntimeToJarDebug/classes.jar
 
-47 :app:checkFatDebugDuplicateClasses
+67 :lib-cho:bundleLibRuntimeToJarDebug
+O: lib-cho/build/intermediates/runtime_library_classes_jar/debug/bundleLibRuntimeToJarDebug/classes.jar
+
+68 :app:checkFatDebugDuplicateClasses
 O: <app>/intermediates/duplicate_classes_check/fatDebug/checkFatDebugDuplicateClasses
 
-48 :app:dexBuilderFatDebug
+69 :app:dexBuilderFatDebug
 O: <app>/intermediates/external_libs_dex_archive_with_artifact_transforms/fatDebug/dexBuilderFatDebug/out
 O: <app>/intermediates/external_libs_dex_archive/fatDebug/dexBuilderFatDebug/out
 O: <app>/intermediates/mixed_scope_dex_archive/fatDebug/dexBuilderFatDebug/out
 O: <app>/intermediates/project_dex_archive/fatDebug/dexBuilderFatDebug/out
 O: <app>/intermediates/sub_project_dex_archive/fatDebug/dexBuilderFatDebug/out
 
-49 :app:desugarFatDebugFileDependencies
+70 :app:desugarFatDebugFileDependencies
 O: <app>/intermediates/external_file_lib_dex_archives/fatDebug/desugarFatDebugFileDependencies
 
-50 :app:mergeExtDexFatDebug
+71 :app:mergeExtDexFatDebug
 O: <app>/intermediates/external_libs_dex/fatDebug/mergeExtDexFatDebug
 
-51 :app:mergeDexFatDebug
+72 :app:mergeDexFatDebug
 O: <app>/intermediates/dex/fatDebug/mergeDexFatDebug
 
-52 :app:processFatDebugJavaRes
+73 :app:processFatDebugJavaRes
 I: Querying input of Kotlin tasks before they completed throws exception
 O: <app>/intermediates/java_res/fatDebug/processFatDebugJavaRes/out
 
-53 :lib-cuscuta:processDebugJavaRes
+74 :lib-cho:processDebugJavaRes
+I: Querying input of Kotlin tasks before they completed throws exception
+O: lib-cho/build/intermediates/java_res/debug/processDebugJavaRes/out
+
+75 :lib-cuscuta:processDebugJavaRes
 I: Querying input of Kotlin tasks before they completed throws exception
 O: <lib>/intermediates/java_res/debug/processDebugJavaRes/out
 
-54 :app:mergeFatDebugJavaResource
+76 :app:mergeFatDebugJavaResource
 O: <app>/intermediates/incremental/fatDebug-mergeJavaRes/zip-cache
 O: <app>/intermediates/merged_java_res/fatDebug/mergeFatDebugJavaResource/base.jar
 
-55 :app:mergeFatDebugJniLibFolders
+77 :app:mergeFatDebugJniLibFolders
 O: <app>/intermediates/merged_jni_libs/fatDebug/mergeFatDebugJniLibFolders/out
 
-56 :lib-cuscuta:configureNdkBuildDebug[arm64-v8a]
+78 :lib-cho:mergeDebugJniLibFolders
+O: lib-cho/build/intermediates/merged_jni_libs/debug/mergeDebugJniLibFolders/out
+
+79 :lib-cho:mergeDebugNativeLibs
+O: lib-cho/build/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out
+O: lib-cho/build/intermediates/merged_test_only_native_libs/debug/mergeDebugNativeLibs/out
+
+80 :lib-cho:copyDebugJniLibsProjectOnly
+O: lib-cho/build/intermediates/library_jni/debug/copyDebugJniLibsProjectOnly/jni
+
+81 :lib-cuscuta:configureNdkBuildDebug[arm64-v8a]
 O: <lib>/intermediates/cxx/Debug/<hash>/logs/arm64-v8a
 
-57 :lib-cuscuta:buildNdkBuildDebug[arm64-v8a][exebar,exebaz,etc]
+82 :lib-cuscuta:buildNdkBuildDebug[arm64-v8a][exebar,exebaz,etc]
 O: <lib>/intermediates/cxx/Debug/<hash>/obj/local/arm64-v8a
 
-58 :lib-cuscuta:configureNdkBuildDebug[armeabi-v7a]
+83 :lib-cuscuta:configureNdkBuildDebug[armeabi-v7a]
 O: <lib>/intermediates/cxx/Debug/<hash>/logs/armeabi-v7a
 
-59 :lib-cuscuta:buildNdkBuildDebug[armeabi-v7a][exebar,exebaz,etc]
+84 :lib-cuscuta:buildNdkBuildDebug[armeabi-v7a][exebar,exebaz,etc]
 O: <lib>/intermediates/cxx/Debug/<hash>/obj/local/armeabi-v7a
 
-60 :lib-cuscuta:configureNdkBuildDebug[x86]
+85 :lib-cuscuta:configureNdkBuildDebug[x86]
 O: <lib>/intermediates/cxx/Debug/<hash>/logs/x86
 
-61 :lib-cuscuta:buildNdkBuildDebug[x86][exebar,exebaz,etc]
+86 :lib-cuscuta:buildNdkBuildDebug[x86][exebar,exebaz,etc]
 O: <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86
 
-62 :lib-cuscuta:configureNdkBuildDebug[x86_64]
+87 :lib-cuscuta:configureNdkBuildDebug[x86_64]
 O: <lib>/intermediates/cxx/Debug/<hash>/logs/x86_64
 
-63 :lib-cuscuta:buildNdkBuildDebug[x86_64][exebar,exebaz,etc]
+88 :lib-cuscuta:buildNdkBuildDebug[x86_64][exebar,exebaz,etc]
 O: <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86_64
 
-64 :lib-cuscuta:mergeDebugJniLibFolders
+89 :lib-cuscuta:mergeDebugJniLibFolders
 O: <lib>/intermediates/merged_jni_libs/debug/mergeDebugJniLibFolders/out
 
-65 :lib-cuscuta:mergeDebugNativeLibs
+90 :lib-cuscuta:mergeDebugNativeLibs
 I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/armeabi-v7a/libjnifoo.so
 I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/arm64-v8a/libjnifoo.so
 I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86/libjnifoo.so
@@ -229,72 +316,72 @@ I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86_64/libjnifoo.so
 O: <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out
 O: <lib>/intermediates/merged_test_only_native_libs/debug/mergeDebugNativeLibs/out
 
-66 :lib-cuscuta:zenPackElfsDebug[arm64-v8a]
+91 :lib-cuscuta:zenPackElfsDebug[arm64-v8a]
 I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/arm64-v8a/exebar
 I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/arm64-v8a/exebaz
 O: <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/arm64-v8a
 
-67 :lib-cuscuta:zenPackElfsDebug[armeabi-v7a]
+92 :lib-cuscuta:zenPackElfsDebug[armeabi-v7a]
 I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/armeabi-v7a/exebar
 I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/armeabi-v7a/exebaz
 O: <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/armeabi-v7a
 
-68 :lib-cuscuta:zenPackElfsDebug[x86]
+93 :lib-cuscuta:zenPackElfsDebug[x86]
 I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86/exebar
 I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86/exebaz
 O: <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/x86
 
-69 :lib-cuscuta:zenPackElfsDebug[x86_64]
+94 :lib-cuscuta:zenPackElfsDebug[x86_64]
 I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86_64/exebar
 I: <lib>/intermediates/cxx/Debug/<hash>/obj/local/x86_64/exebaz
 O: <lib>/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/x86_64
 
-70 :lib-cuscuta:copyDebugJniLibsProjectOnly
+95 :lib-cuscuta:copyDebugJniLibsProjectOnly
 O: <lib>/intermediates/library_jni/debug/copyDebugJniLibsProjectOnly/jni
 
-71 :app:mergeFatDebugNativeLibs
+96 :app:mergeFatDebugNativeLibs
 I: <lib>/intermediates/library_jni/debug/copyDebugJniLibsProjectOnly/jni
 O: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out
 O: <app>/intermediates/merged_test_only_native_libs/fatDebug/mergeFatDebugNativeLibs/out
 
-72 :app:stripFatDebugDebugSymbols
-I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/arm64-v8a/libexebar.so
+97 :app:stripFatDebugDebugSymbols
 I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/arm64-v8a/libexebaz.so
 I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/arm64-v8a/libjnifoo.so
-I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/x86/libexebar.so
-I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/x86/libexebaz.so
-I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/x86/libjnifoo.so
-I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/x86_64/libexebar.so
-I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/x86_64/libexebaz.so
-I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/x86_64/libjnifoo.so
-I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/armeabi-v7a/libexebar.so
+I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/arm64-v8a/libexebar.so
 I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/armeabi-v7a/libexebaz.so
 I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/armeabi-v7a/libjnifoo.so
+I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/armeabi-v7a/libexebar.so
+I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/x86/libexebaz.so
+I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/x86/libjnifoo.so
+I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/x86/libexebar.so
+I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/x86_64/libexebaz.so
+I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/x86_64/libjnifoo.so
+I: <app>/intermediates/merged_native_libs/fatDebug/mergeFatDebugNativeLibs/out/lib/x86_64/libexebar.so
 O: <app>/intermediates/stripped_native_libs/fatDebug/stripFatDebugDebugSymbols/out
 
-73 :app:validateSigningFatDebug
+98 :app:validateSigningFatDebug
 O: <app>/intermediates/validate_signing_config/fatDebug/validateSigningFatDebug
 
-74 :app:writeFatDebugAppMetadata
+99 :app:writeFatDebugAppMetadata
 O: <app>/intermediates/app_metadata/fatDebug/writeFatDebugAppMetadata/app-metadata.properties
 
-75 :app:writeFatDebugSigningConfigVersions
+100 :app:writeFatDebugSigningConfigVersions
 O: <app>/intermediates/signing_config_versions/fatDebug/writeFatDebugSigningConfigVersions/signing-config-versions.json
 
-76 :app:packageFatDebug
+101 :app:packageFatDebug
 O: <app>/outputs/apk/fat/debug/output-metadata.json
 O: <app>/intermediates/incremental/packageFatDebug/tmp
 O: <app>/outputs/apk/fat/debug
 
-77 :app:createFatDebugApkListingFileRedirect
+102 :app:createFatDebugApkListingFileRedirect
 O: <app>/intermediates/apk_ide_redirect_file/fatDebug/createFatDebugApkListingFileRedirect/redirect.txt
 
-78 :app:assembleFatDebug
+103 :app:assembleFatDebug
 
-79 :app:assembleDebug
+104 :app:assembleDebug
 
-80 :app:assembleFat
+105 :app:assembleFat
 
-81 :app:assemble
+106 :app:assemble
 
-82 :app:tasksGraphAssemble
+107 :app:tasksGraphMakeApk
