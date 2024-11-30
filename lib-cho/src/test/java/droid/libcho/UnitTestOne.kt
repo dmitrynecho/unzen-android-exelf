@@ -18,8 +18,12 @@ import kotlin.io.path.readText
  * Example local unit test, which will execute on the development machine (host).
  * @see [Testing documentation](http://d.android.com/tools/testing)
  */
-class ExampleUnitTest {
+class UnitTestOne {
+    private val projectDir: Path = Path.of("src").toAbsolutePath().parent.parent
+    private val releaseDir = projectDir.resolve("release")
+    private val tempDir = projectDir.resolve("temp")
     private val resDir: Path = Path.of("src/test/res")
+
     @Test
     fun searchInFile() {
         val file1 = Path.of("src/test/res/search-in-file.txt").toFile()
@@ -31,9 +35,9 @@ class ExampleUnitTest {
     @Test
     fun sha1() {
         val file1 = Path.of("src/test/res/sha1-normal.txt").toFile()
-        assertEquals("5a87b8667aa3809252a74f6ba7cc698ed2e87ddf", FileUtils.sha1(file1))
+        assertEquals("5a87b8667aa3809252a74f6ba7cc698ed2e87ddf", HashUtils.sha1(file1))
         val file2 = Path.of("src/test/res/sha1-empty.txt").toFile()
-        assertEquals(FileUtils.ZERO_SHA1, FileUtils.sha1(file2))
+        assertEquals(HashUtils.ZERO_SHA1, HashUtils.sha1(file2))
     }
     @Test
     fun zip() {
@@ -44,23 +48,20 @@ class ExampleUnitTest {
         Files.walk(zipDirPath).forEach { path: Path ->
             val name = zipDirPath.parent.relativize(path).pathString
             if (path.isDirectory()) {
-                zipDirMap["$name/"] = FileUtils.ZERO_SHA1
+                zipDirMap["$name/"] = HashUtils.ZERO_SHA1
             } else {
-                zipDirMap[name] = FileUtils.sha1(path.toFile())
+                zipDirMap[name] = HashUtils.sha1(path.toFile())
             }
         }
         val expected = resDir.resolve("zip/expected.txt").readText()
         assertEquals(expected, zipFileMap.toString())
         assertEquals(expected, zipDirMap.toString())
         assertEquals(
-            FileUtils.sha1(zipFileMap.toString()),
-            FileUtils.sha1(zipDirMap.toString()))
+            HashUtils.sha1(zipFileMap.toString()),
+            HashUtils.sha1(zipDirMap.toString()))
     }
     @Test
     fun apks() {
-        val projectDir = Path.of("src").toAbsolutePath().parent.parent
-        val releaseDir = projectDir.resolve("release")
-        val tempDir = projectDir.resolve("temp")
         Files.walk(releaseDir).forEach { path: Path ->
             if (path == releaseDir) return@forEach
             if (path.extension ==  "apks") {

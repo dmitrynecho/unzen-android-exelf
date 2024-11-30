@@ -94,6 +94,45 @@ ext.installSplitApksAll = { String path ->
     }
 }
 
+ext.bundlesToApks = { String path, Properties ksp, boolean universal, boolean local ->
+    File pathFile = file(path)
+    ArrayList<File> aabs = new ArrayList<>()
+    if (pathFile.directory) {
+        fileTree(dir: path, includes: ['*.aab']).each { File aab -> aabs.add(aab) }
+    } else if (path.endsWith(".aab")) {
+        aabs.add(pathFile)
+    } else {
+        throw new GradleException("splitApksFromBundles invalid path: $path")
+    }
+    aabs.forEach { File aab ->
+        // In case "universal = true" single universal APK still packed into ZIP with TOC file.
+        String apksName = aab.name.replace('.aab', '.apks')
+        def commands = ["java", "-jar", getBundletool(), "build-apks"]
+        if (universal) {
+            commands.add("--mode=universal")
+        }
+        if (local) {
+            commands.add("--local-testing")
+        }
+        commands.add("--bundle=${aab}")
+        commands.add("--output=${aab.parent}/${apksName}")
+        if (ksp != null) {
+            commands.add("--ks=${ksp['storePath']}")
+            commands.add("--ks-pass=pass:${ksp['storePassword']}")
+            commands.add("--ks-key-alias=${ksp['keyAlias']}")
+            commands.add("--key-pass=pass:${ksp['keyPassword']}")
+        }
+        def execBytes = new ByteArrayOutputStream()
+        exec {
+            commandLine (*commands)
+            standardOutput = execBytes
+        }
+        if (execBytes.size() != 0) {
+            println("bundleToApks bundletool: " + execBytes.toString().trim())
+        }
+    }
+}
+
 ext.addUninstallAllShortcut = { Project p ->
     String zenUninstallAllTaskName = "zenUninstallAll"
     //noinspection ConfigurationAvoidance

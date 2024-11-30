@@ -87,3 +87,7 @@ In AGP 7.3.1, when project contains modules, stripping performed only once in ap
 * * *
 
 Option "ndk.debugSymbolLevel" has no effect in library's "build.gradle", works only in application's "build.gradle".
+
+* * *
+
+Android APK types: universal, standalones, splits.

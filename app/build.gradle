@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.android'
 apply from: 'inspect-files.gradle'
-apply from: '../lib-cho/zen-tasks-graph.gradle'
 apply from: 'zen-pack-elfs-app.gradle'
+apply from: '../lib-cho/zen-tasks-graph.gradle'
 
 android {
     namespace 'droid.elfexec'
@@ -140,35 +140,6 @@ tasks.register('prebuildCleanup') {
 }
 preBuild.dependsOn prebuildCleanup
 
-ext.splitApksFromBundle = { File aab, boolean local ->
-    String apksName = aab.name.replace('.aab', '.apks')
-    def execBytes = new ByteArrayOutputStream()
-    exec {
-        commandLine "java", "-jar", getBundletool(),
-                "build-apks",
-                local ? "--local-testing" : "",
-                "--bundle=${aab}",
-                "--output=${aab.parent}/${apksName}"
-        standardOutput = execBytes
-    }
-    if (execBytes.size() != 0) {
-        println("splitApksFromBundle bundletool: " + execBytes.toString().trim())
-    }
-}
-
-ext.splitApksFromBundles = { String path, boolean localTesting ->
-    File pathFile = file(path)
-    if (pathFile.directory) {
-        fileTree(dir: path, includes: ['*.aab']).each { File aab ->
-            splitApksFromBundle(aab, localTesting)
-        }
-    } else if (path.endsWith(".aab")) {
-        splitApksFromBundle(pathFile, localTesting)
-    } else {
-        throw new GradleException("splitApksFromBundles invalid path: $path")
-    }
-}
-
 tasks.register("releaseBundles") {
     group = "aleph"
     description = "Public App Bundles build."
@@ -193,7 +164,7 @@ tasks.register("releaseBundles") {
             String path = aab.absolutePath
             File apksFile = file(path.replace(".aab", ".apks"))
             apksFile.delete()
-            splitApksFromBundles(path, false)
+            bundlesToApks(path, null, false, false)
             installSplitApks(apksFile.absolutePath)
         }
         runApk(project, "droid.elfexec", "droid.elfexec.MainActivity")

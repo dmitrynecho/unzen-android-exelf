@@ -76,9 +76,9 @@ object ZipUtils {
             while (entry != null) {
                 // println("ZIP entry: ${entry.name}")
                 if (entry.isDirectory) {
-                    map[entry.name] = droid.libcho.FileUtils.ZERO_SHA1
+                    map[entry.name] = HashUtils.ZERO_SHA1
                 } else {
-                    map[entry.name] = droid.libcho.FileUtils.sha1(zis)
+                    map[entry.name] = HashUtils.sha1(zis)
                 }
                 entry = nextEntry(zis)
             }
