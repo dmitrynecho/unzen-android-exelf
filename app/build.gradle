@@ -171,6 +171,37 @@ tasks.register("releaseBundles") {
     }
     dependsOn tasks.named(zenPackBundlesTaskName)
 }
+tasks.register("inspectBundles") {
+    group = "aleph-test"
+    doLast {
+        String path = "build/outputs/bundle"
+        fileTree(path).each { File aab ->
+            if (!aab.name.endsWith(".aab")) return
+            bundlesToApks(aab.absolutePath, null, true, false)
+            String apksPath = aab.absolutePath.replace('.aab', '.apks')
+            copy {
+                from zipTree(apksPath)
+                include "*.apk"
+                into aab.parent
+            }
+            file(apksPath).delete()
+            bundlesToApks(aab.absolutePath, null, false, false)
+            copy {
+                from zipTree(apksPath)
+                into aab.parent
+            }
+            file(apksPath).delete()
+        }
+        fileTree(path).each { File f ->
+            if (!f.name.endsWith(".apk") && !f.name.endsWith("aab")) f.delete()
+        }
+        Integer count = 0
+        fileTree(path).each { File f ->
+            if (!f.isDirectory()) count++
+        }
+        println("Files count $count.")
+    }
+}
 
 dependencies {
     implementation project(':lib-cuscuta')
