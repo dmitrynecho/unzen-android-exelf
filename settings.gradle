@@ -1,2 +1,3 @@
+rootProject.name = "elfexec"
 include ':app', ':lib-cuscuta'
 include ':lib-cho'

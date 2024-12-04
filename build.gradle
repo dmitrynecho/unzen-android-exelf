@@ -8,7 +8,6 @@ buildscript {
         exelfCompileSdkVersion = 34
         exelfMinSdkVersion = 19
         exelfNdkVersion = '21.3.6528147'
-        kotlin_version = '2.0.20'
         zenPackSosList = ['jnifoo']
         zenPackElfsList = ['exebar', 'exebaz']
         zenPackProjectName = "lib-cuscuta"
@@ -22,8 +21,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.7.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:8.7.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.20"
     }
 }
 allprojects {

@@ -1,14 +1,14 @@
 package droid.libcho
 
 import android.util.Log
-import org.apache.commons.compress.archivers.ArchiveEntry
-import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.SortedMap
+import java.util.zip.ZipEntry
+import java.util.zip.ZipInputStream
 
 /**
  * Using Apache Commons Compress instead of system ZIP because system ZIP
@@ -19,7 +19,7 @@ object ZipUtils {
     private const val TAG = "ZipUtils"
 
     @Throws(IOException::class)
-    private fun extractEntry(src: ZipArchiveInputStream, dst: File, e: ArchiveEntry) {
+    private fun extractEntry(src: ZipInputStream, dst: File, e: ZipEntry) {
         val f = File(dst, e.name)
         if (e.isDirectory) {
             if (!f.mkdirs()) {
@@ -46,7 +46,7 @@ object ZipUtils {
     }
 
     @Throws(IOException::class)
-    private fun nextEntry(zis: ZipArchiveInputStream): ArchiveEntry? {
+    private fun nextEntry(zis: ZipInputStream): ZipEntry? {
         val e = zis.nextEntry
         if (e != null && "" == e.name) {
             // Skip special stuff in Android APK.
@@ -60,7 +60,7 @@ object ZipUtils {
 
     @Throws(IOException::class)
     fun extract(src: File, dst: File) {
-        ZipArchiveInputStream(FileInputStream(src)).use { zis ->
+        ZipInputStream(FileInputStream(src)).use { zis ->
             var entry = nextEntry(zis)
             while (entry != null) {
                 extractEntry(zis, dst, entry)
@@ -71,7 +71,7 @@ object ZipUtils {
 
     fun entriesSha1s(f: File): SortedMap<String, String> {
         val map = sortedMapOf<String, String>()
-        ZipArchiveInputStream(FileInputStream(f)).use { zis ->
+        ZipInputStream(FileInputStream(f)).use { zis ->
             var entry = nextEntry(zis)
             while (entry != null) {
                 // println("ZIP entry: ${entry.name}")

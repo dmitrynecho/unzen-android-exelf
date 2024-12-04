@@ -1,6 +1,10 @@
 package droid.libcho
 
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileInputStream
 import java.io.IOException
+import java.io.InputStreamReader
 import java.nio.BufferUnderflowException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -48,6 +52,39 @@ internal object ApkUtil {
     private const val ZIP_EOCD_REC_SIG = 0x06054b50
     private const val UINT16_MAX_VALUE = 0xffff
     private const val ZIP_EOCD_COMMENT_LENGTH_FIELD_OFFSET = 20
+
+    fun stringMatchesOffsetsStream(f: File, s: String): List<Long> {
+        val result = mutableListOf<Long>()
+        FileInputStream(f).use { stream ->
+            val reader = BufferedReader(InputStreamReader(stream))
+            val searchTerm = s.toCharArray()
+            val firstChar = searchTerm[0]
+            val searchTermBody = searchTerm.copyOfRange(1, searchTerm.size)
+            //println("Body: ${String(searchTermBody)}")
+            val bufSize = searchTermBody.size
+            val buf = CharArray(bufSize)
+            var p: Long = 0
+            var c: Int
+            while ((reader.read().also { c = it }) != -1) {
+                p++
+                if (c == firstChar.code) {
+                    reader.mark(bufSize)
+                    val readed = reader.read(buf)
+                    if (readed == -1) {
+                        break
+                    } else if (readed == bufSize) {
+                        if (searchTermBody.contentEquals(buf)) {
+                            //println("Found ${c.toChar()}${String(buf)}")
+                            //result.add(stream.channel.position() - (searchTerm.size * 8))
+                            result.add(p - 1)
+                        }
+                    }
+                    reader.reset()
+                }
+            }
+        }
+        return result
+    }
 
     @Throws(IOException::class)
     fun getCommentLength(fileChannel: FileChannel): Long {
@@ -140,19 +177,17 @@ internal object ApkUtil {
     }
 
     @Throws(IOException::class, SignatureNotFoundException::class)
-    fun findApkSigningBlock(
-        fileChannel: FileChannel
-    ): Pair<ByteBuffer?, Long?> {
+    fun findApkSigningBlock(fileChannel: FileChannel): Pair<ByteBuffer?, Long?> {
         val centralDirOffset = findCentralDirStartOffset(fileChannel)
         return findApkSigningBlock(fileChannel, centralDirOffset)
     }
 
     @Throws(IOException::class, SignatureNotFoundException::class)
     fun findApkSigningBlock(
-        fileChannel: FileChannel, centralDirOffset: Long
+        fileChannel: FileChannel,
+        centralDirOffset: Long
     ): Pair<ByteBuffer, Long> {
         // Find the APK Signing Block. The block immediately precedes the Central Directory.
-
         // FORMAT:
         // OFFSET       DATA TYPE  DESCRIPTION
         // * @+0  bytes uint64:    size in bytes (excluding this field)
@@ -176,9 +211,7 @@ internal object ApkUtil {
         if ((footer.getLong(8) != APK_SIG_BLOCK_MAGIC_LO)
             || (footer.getLong(16) != APK_SIG_BLOCK_MAGIC_HI)
         ) {
-            throw SignatureNotFoundException(
-                "No APK Signing Block before ZIP Central Directory"
-            )
+            throw SignatureNotFoundException("No APK Signing Block before ZIP Central Directory")
         }
         // Read and compare size fields
         val apkSigBlockSizeInFooter = footer.getLong(0)
