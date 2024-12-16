@@ -1,4 +1,6 @@
-String getSrcElfsDir(String variant, String abi, ArrayList<String> elfs) {
+ext.zenPackIsLib = android.hasProperty('libraryVariants')
+
+ext.zenPackGetSrcElfsDir = { String variant, String abi, ArrayList<String> elfs ->
     // 204 :lib:buildNdkBuildDebug[<abi>][elfbar,elfbaz,etc]
     // O: <lib>/intermediates/cxx/Debug/<hash>/obj/local/<abi>
     elfs = elfs.sort()
@@ -15,15 +17,17 @@ String getSrcElfsDir(String variant, String abi, ArrayList<String> elfs) {
         TaskProvider<Task> provider = tasks.named(taskName)
         return provider.get().outputs.files.getSingleFile().absolutePath
     } catch (UnknownTaskException ignored) {
-        // Task not found.
+        if (verboseLogs) {
+            println("zenPackGetSrcElfsDir: task buildNdkBuild$variant[$abi][$namePart] not found.")
+        }
         return null
     }
 }
 
-String getDstElfsDir(String variant, String abi) {
+ext.zenPackGetDstElfsDir = { String variant, String abi ->
     String intermediatesPath = projectBuildPath(project, "intermediates")
     GString merged = "$intermediatesPath/merged_native_libs/${variant.toLowerCase()}"
-    return "${merged}/merge${variant}NativeLibs/out/lib/${abi}"
+    return "${merged}/merge${variant}NativeLibs/out/lib/$abi"
 }
 
 ext.rootDirAbsolutePathLength = rootDir.absolutePath.length()
@@ -40,7 +44,7 @@ void zenPackElfsTask(String variant, String abi) {
     String copyElfsTaskName = "zenPackElfs$variant[$abi]"
     ArrayList<String> elfs = zenPackElfsList
     ArrayList<String> sos = zenPackSosList
-    String srcElfsDir = getSrcElfsDir(variant, abi, elfs + sos)
+    String srcElfsDir = zenPackGetSrcElfsDir(variant, abi, elfs + sos)
     if (rootProject.verboseLogs) {
         println("$copyElfsTaskName srcElfsDir: ${beautifyPath(srcElfsDir)}")
     }
@@ -49,7 +53,7 @@ void zenPackElfsTask(String variant, String abi) {
     }
     TaskProvider<Copy> copyElfsTask = tasks.register(copyElfsTaskName, Copy) {
         from srcElfsDir
-        into getDstElfsDir(variant, abi)
+        into zenPackGetDstElfsDir(variant, abi)
         // AGP is ignoring subdirs inside ABI dirs, don't use them.
         elfs.each { elf ->
             include elf
@@ -63,16 +67,26 @@ void zenPackElfsTask(String variant, String abi) {
     tasks.named("merge${variant}NativeLibs") {
         finalizedBy(copyElfsTask)
     }
-    tasks.named("copy${variant}JniLibsProjectOnly") {
-        dependsOn(copyElfsTask)
+    if (zenPackIsLib) {
+        tasks.named("copy${variant}JniLibsProjectOnly") {
+            dependsOn(copyElfsTask)
+        }
     }
     tasks.named("strip${variant}DebugSymbols") {
         dependsOn(copyElfsTask)
     }
 }
 
-android.libraryVariants.configureEach { variant ->
-    baseAbis.each { abi ->
-        zenPackElfsTask(variant.name.capitalize(), abi)
+if (zenPackIsLib) {
+    android.libraryVariants.configureEach { variant ->
+        baseAbis.each { abi ->
+            zenPackElfsTask(variant.name.capitalize(), abi)
+        }
+    }
+} else {
+    android.applicationVariants.configureEach { variant ->
+        baseAbis.each { abi ->
+            zenPackElfsTask(variant.name.capitalize(), abi)
+        }
     }
 }

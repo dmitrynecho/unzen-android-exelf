@@ -71,8 +71,7 @@ ext.installSplitApks = { String path ->
     def errBytes = new ByteArrayOutputStream()
     exec {
         ignoreExitValue true
-        // java -jar <path>/bundletool-all-<version>.jar
-        //     install-apks --apks=<path>/<name>.apks
+        // java -jar <path>/bundletool-all-<version>.jar install-apks --apks=<path>/<name>.apks
         commandLine 'java', '-jar', getBundletool(),
                 'install-apks',
                 "--apks=$path"
