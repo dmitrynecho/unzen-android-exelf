@@ -2,7 +2,7 @@ buildscript {
     ext {
         releaseBundle = true
         releaseBundleVariants = ['debug']
-        baseVersion = 1110
+        versionBase = 1206
         baseAbis = ['armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64']
         exelfTargetSdkVersion = 34
         exelfCompileSdkVersion = 34
@@ -16,20 +16,10 @@ buildscript {
         zenPackBundletoolDir = file("$rootDir/bundletool")
         verboseLogs = false
     }
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.7.3'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.20"
-    }
 }
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
 }
 apply from: 'lib-cho/zen-log-utils.gradle'
 apply from: 'lib-cho/zen-build-utils.gradle'

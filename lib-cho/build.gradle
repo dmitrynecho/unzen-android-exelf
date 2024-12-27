@@ -1,0 +1,26 @@
+plugins {
+    id 'com.android.library'
+    alias(libs.plugins.kotlin.android)
+}
+android {
+    namespace 'droid.libcho'
+    defaultConfig {
+        minSdkVersion exelfMinSdkVersion
+        compileSdk exelfCompileSdkVersion
+        targetSdkVersion exelfTargetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+dependencies {
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+}

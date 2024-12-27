@@ -4,21 +4,18 @@ import android.app.Activity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.TextView
-import droid.libcho.Assert.assertTrue
-import droid.elfexec.BuildConfig.BASE_VERSION_CODE
-import droid.elfexec.BuildConfig.VERSION_CODE
-import droid.elfexec.BuildConfig.VERSION_NAME
 import droid.elfexec.ExesNames.APK_EXES
 import droid.elfexec.ExesNames.BAR
 import droid.elfexec.ExesNames.BAR_NAME
 import droid.elfexec.ExesNames.BAZ
 import droid.elfexec.ExesNames.BAZ_NAME
 import droid.elfexec.ExesNames.FOO
-import droid.libcho.Utils.apkUnpackDir
 import droid.elfexec.cuscuta.Cuscuta
 import droid.libcho.Assert
+import droid.libcho.Assert.assertTrue
 import droid.libcho.FileUtils
 import droid.libcho.Utils
+import droid.libcho.Utils.apkUnpackDir
 import droid.libcho.ZipUtils
 import java.io.File
 import java.io.IOException
@@ -63,8 +60,13 @@ class MainActivity : Activity() {
         }
     }
 
+    var versionBase = 0
+    var versionCode = 0
+    var versionName = ""
+    var flavorName = ""
+
     private fun checkOutput(elfName: String, actualOut: String) {
-        val expected = Utils.format("I'm %s! UNZEN-VERSION-", elfName)
+        val expected = Utils.format("I'm %s! ELFEXEC-VERSION-", elfName)
         val message = Utils.format("Expected: %s, actual: %s", expected, actualOut)
         assertTrue(actualOut.startsWith(expected), message)
     }
@@ -207,6 +209,13 @@ class MainActivity : Activity() {
         error(Utils.format(format, *args))
     }
 
+    private fun buildVersions(): String {
+        return "VERSION_BASE=$versionBase" +
+                " VERSION_CODE=$versionCode" +
+                " VERSION_NAME=$versionName" +
+                " build_time=${getString(R.string.build_time)}"
+    }
+
     private fun checkReports(info: ApksInfo) {
         if (info.exeReport == null) {
             return
@@ -215,34 +224,41 @@ class MainActivity : Activity() {
         val exeReport = info.exeReport
         val abisCount = jniReport.abisToVers.size
         assertTrue(jniReport.abisToVers == exeReport.abisToVers)
-        assertTrue(jniReport.verFromOutput == BASE_VERSION_CODE)
-        assertTrue(exeReport.verFromOutput == BASE_VERSION_CODE)
-        @Suppress("KotlinConstantConditions")
-        if (BuildConfig.FLAVOR == "fat") {
-            assertTrue(VERSION_CODE == BASE_VERSION_CODE)
+        assertTrue(
+            jniReport.verFromOutput == versionBase,
+            "\njniReport $jniReport \nbuildVersions ${buildVersions()}"
+        )
+        assertTrue(
+            exeReport.verFromOutput == versionBase,
+            "\nexeReport $exeReport \nbuildVersions ${buildVersions()}"
+        )
+        if (flavorName == "fat") {
+            assertTrue(versionCode == versionBase)
             assertTrue(mutableListOf(1, 2, 3, 4).contains(abisCount))
         } else {
             assertTrue(abisCount == 1)
-            when (BuildConfig.FLAVOR) {
+            when (flavorName) {
                 "a32" -> {
-                    assertTrue(VERSION_CODE == BASE_VERSION_CODE + 1)
+                    assertTrue(versionCode == versionBase + 1)
                 }
                 "a64" -> {
-                    assertTrue(VERSION_CODE == BASE_VERSION_CODE + 2)
+                    assertTrue(versionCode == versionBase + 2)
                 }
                 "x32" -> {
-                    assertTrue(VERSION_CODE == BASE_VERSION_CODE + 3)
+                    assertTrue(versionCode == versionBase + 3)
                 }
                 "x64" -> {
-                    assertTrue(VERSION_CODE == BASE_VERSION_CODE + 4)
+                    assertTrue(versionCode == versionBase + 4)
                 }
             }
         }
-        if (!jniReport.versInSync(BASE_VERSION_CODE)) {
-            throw IllegalStateException("Versions between ABIs doesn't match.")
+        if (!jniReport.versInSync(versionBase)) {
+            throw IllegalStateException(
+                "Versions between ABIs doesn't match:" +
+                        " $versionBase - $jniReport"
+            )
         }
-        @Suppress("KotlinConstantConditions")
-        if (BuildConfig.FLAVOR == "fat" && abisCount != 4) {
+        if (flavorName == "fat" && abisCount != 4) {
             if (abisCount != 1) {
                 throw IllegalStateException("Flavor fat, but ABIs count $abisCount")
             }
@@ -260,7 +276,8 @@ class MainActivity : Activity() {
         val header = ArrayList<String>()
         header.add(
             Utils.format("Java v%s, Cpp v%d.",
-                VERSION_NAME, BASE_VERSION_CODE)
+                versionName, versionBase
+            )
         )
         header.add("\n${info.jniReport}")
 
@@ -345,6 +362,10 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        versionBase = Integer.parseInt(getString(R.string.version_base))
+        versionCode = Integer.parseInt(getString(R.string.version_code))
+        versionName = getString(R.string.version_name)
+        flavorName = getString(R.string.flavor_name)
         try {
             nativeLibraryDirReport()
             unpackApk()

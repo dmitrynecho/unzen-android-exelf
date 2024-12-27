@@ -1,3 +1,5 @@
+ext.signaturesExceptionMessage = { return "SIGNATURES" }
+
 ext.projectBuildPath = { Project p, String path ->
     DirectoryProperty buildDir = p.getLayout().getBuildDirectory()
     return buildDir.file(path).get().asFile.absolutePath
@@ -67,11 +69,13 @@ ext.installApk = { Project p, String path, boolean allowDonwgrade ->
 }
 
 ext.installSplitApks = { String path ->
+    println("installSplitApks GO $path")
     def outBytes = new ByteArrayOutputStream()
     def errBytes = new ByteArrayOutputStream()
     exec {
         ignoreExitValue true
-        // java -jar <path>/bundletool-all-<version>.jar install-apks --apks=<path>/<name>.apks
+        // java -jar <path>/bundletool-all-<version>.jar
+        //     install-apks --apks=<path>/<name>.apks
         commandLine 'java', '-jar', getBundletool(),
                 'install-apks',
                 "--apks=$path"
@@ -80,11 +84,16 @@ ext.installSplitApks = { String path ->
     }
     String out = outBytes.toString().trim()
     String err = errBytes.toString().trim()
+    if (err.contains("signatures do not match newer version")) {
+        throw new GradleException(signaturesExceptionMessage())
+    }
     // Looks like "bundletool" writes normal output into error output.
-    if (!err.startsWith("The APKs have been extracted in the directory")) {
+    if (!err.startsWith("The APKs have been extracted in the directory") || !out.isEmpty()) {
         throw new GradleException("installSplitApks fail $path: [$out], [$err]")
     }
-    println("installSplitApks success $path")
+    //println("Output: [$out]")
+    //println("Error: [$err]")
+    println("installSplitApks OK")
 }
 
 ext.installSplitApksAll = { String path ->

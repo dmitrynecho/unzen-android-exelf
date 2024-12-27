@@ -3,6 +3,6 @@
 
 int main(int argc, char *argv[])
 {
-    printf("I'm exebaz! %s", GLOBAL_VERSION);
+    printf("I'm exebaz! %s", CUSCUTA_GLOBAL_VERSION);
     return 0;
 }

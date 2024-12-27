@@ -88,3 +88,7 @@ Option "ndk.debugSymbolLevel" has no effect in library's "build.gradle", works o
 * * *
 
 Android APK types: universal, standalones, splits.
+
+* * *
+
+2024-12-27. Using "buildConfigField" and "BuildConfig" causes issues, values not updated without clean build, using "resValue" instead of "buildConfigField" solves problem.

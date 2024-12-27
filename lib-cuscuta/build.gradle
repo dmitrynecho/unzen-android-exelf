@@ -1,5 +1,7 @@
-apply plugin: 'com.android.library'
-apply plugin: 'org.jetbrains.kotlin.android'
+plugins {
+    id 'com.android.library'
+    alias(libs.plugins.kotlin.android)
+}
 apply from: 'zen-pack-elfs-lib.gradle'
 
 android {
@@ -44,12 +46,12 @@ android {
 tasks.register('cppVersions') {
     String template = "#ifndef %s%n#define %s%n%n#define %s \"%s\"%n%n#endif // %s"
     File header = file('src/main/cpp/global_version.h')
-    inputs.property('globalVersion', baseVersion)
+    inputs.property('globalVersion', versionBase)
     outputs.file header
     doLast {
-        String name = "GLOBAL_VERSION"
-        String guard = "_GLOBAL_VERSION_H_"
-        String version = 'UNZEN-VERSION-' + baseVersion
+        String name = "CUSCUTA_GLOBAL_VERSION"
+        String guard = "CUSCUTA_GLOBAL_VERSION_H_"
+        String version = 'ELFEXEC-VERSION-' + versionBase
         header.write(String.format(template, guard, guard, name, version, guard))
     }
 }

@@ -1,5 +1,7 @@
-apply plugin: 'com.android.application'
-apply plugin: 'org.jetbrains.kotlin.android'
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+}
 apply from: 'inspect-files.gradle'
 apply from: 'zen-pack-elfs-app.gradle'
 apply from: '../lib-cho/zen-tasks-graph.gradle'
@@ -12,11 +14,12 @@ android {
         minSdkVersion exelfMinSdkVersion
         compileSdk exelfCompileSdkVersion
         targetSdkVersion exelfTargetSdkVersion
-        versionCode baseVersion
-        versionName "$baseVersion"
+        versionCode versionBase
+        versionName "$versionBase"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.debug
-        buildConfigField("int", "BASE_VERSION_CODE", "$baseVersion")
+        resValue("string", "version_base", "${versionBase}")
+        resValue("string", "build_time", "${LocalDateTime.now()}")
         resourceConfigurations += ['en']
     }
     buildTypes {
@@ -30,7 +33,6 @@ android {
             ndk.debugSymbolLevel = 'none'
         }
     }
-    buildFeatures.buildConfig = true
 
     //noinspection GrDeprecatedAPIUsage TAG3
     flavorDimensions "abi"
@@ -131,6 +133,9 @@ android.applicationVariants.configureEach { variant ->
     variant.outputs.configureEach { output ->
         outputFileName = "droid-elfexec-${variant.versionName}.apk"
     }
+    variant.resValue("string", "version_code", "${variant.versionCode}")
+    variant.resValue("string", "version_name", "${variant.versionName}")
+    variant.resValue("string", "flavor_name", "${variant.flavorName}")
 }
 
 tasks.register('prebuildCleanup') {
@@ -171,7 +176,6 @@ tasks.register("makeBundlesMakeSplitApksInstallRun") {
     }
     dependsOn tasks.named(zenPackBundlesTaskName)
 }
-
 tasks.register("makeAllApksUnzipped") {
     group = "aleph-test"
     doLast {
@@ -206,11 +210,9 @@ tasks.register("makeAllApksUnzipped") {
         }
     }
 }
-
 dependencies {
     implementation project(':lib-cuscuta')
     implementation project(':lib-cho')
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test:runner:1.6.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
 }

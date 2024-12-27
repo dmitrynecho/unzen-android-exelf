@@ -69,19 +69,19 @@ object Utils {
     fun parseVerFromFile(file: File?): Int {
         FileInputStream(file).use { stream ->
             val reader = BufferedReader(InputStreamReader(stream))
-            // Search for string "UNZEN-VERSION-XXXX" in ELF file.
-            val bufSize = "NZEN-VERSION-XXXX".length
+            // Search for string "ELFEXEC-VERSION-XXXX" in ELF file.
+            val bufSize = "LFEXEC-VERSION-XXXX".length
             val buf = CharArray(bufSize)
             var c: Int
             while ((reader.read().also { c = it }) != -1) {
-                if (c == 'U'.code) {
+                if (c == 'E'.code) {
                     reader.mark(bufSize)
                     val readed = reader.read(buf)
                     if (readed == -1) {
                         break
                     } else if (readed == bufSize) {
                         val ver = String(buf)
-                        if (ver.startsWith("NZEN-VERSION-")) {
+                        if (ver.startsWith("LFEXEC-VERSION-")) {
                             return ver.substring(ver.lastIndexOf("-") + 1).toInt()
                         }
                     }
